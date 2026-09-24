@@ -17,7 +17,6 @@ using namespace DirectX;
 
 #include "DirectXTex.h"
 
-#pragma comment(lib, "DirectXTex_Release.lib")
 #if _DEBUG
 #pragma comment(lib, "DirectXTex_Debug.lib")
 
