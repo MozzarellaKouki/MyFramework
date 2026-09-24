@@ -12,6 +12,7 @@
 void Manager::Init()
 {
 	Renderer::Init();
+	Renderer::SetPosterizeLevels(16.0f);
 
 	Audio::InitMaster();
 	AudioManager::Init();

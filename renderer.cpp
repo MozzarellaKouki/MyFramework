@@ -20,6 +20,7 @@ ID3D11Buffer*			Renderer::m_ProjectionBuffer{};
 ID3D11Buffer*			Renderer::m_MaterialBuffer{};
 ID3D11Buffer*			Renderer::m_LightBuffer{};
 ID3D11Buffer*           Renderer::m_SpriteAnimationBuffer{};
+ID3D11Buffer*           Renderer::m_PosterizeBuffer{};
 
 
 ID3D11DepthStencilState* Renderer::m_DepthStateEnable{};
@@ -28,6 +29,7 @@ ID3D11DepthStencilState* Renderer::m_DepthStateDisable{};
 
 ID3D11BlendState*		Renderer::m_BlendState{};
 ID3D11BlendState*		Renderer::m_BlendStateATC{};
+
 
 
 
@@ -234,6 +236,23 @@ void Renderer::Init()
 	m_DeviceContext->VSSetConstantBuffers(6, 1, &m_SpriteAnimationBuffer);
 
 
+	bufferDesc.ByteWidth = sizeof(POSTERIZE);
+
+	m_Device->CreateBuffer(
+		&bufferDesc,
+		NULL,
+		&m_PosterizeBuffer
+	);
+
+	m_DeviceContext->PSSetConstantBuffers(
+		7,
+		1,
+		&m_PosterizeBuffer
+	);
+
+
+
+
 	// ƒ‰ƒCƒg‰Šú‰»
 	LIGHT light{};
 	light.Enable = true;
@@ -415,6 +434,23 @@ void Renderer::SetSpriteAnimation( SPRITE_ANIMATION animation )
 	m_DeviceContext->UpdateSubresource(m_SpriteAnimationBuffer, 0, NULL, &animation, 0, 0);
 }
 
+
+void Renderer::SetPosterizeLevels(float levels)
+{
+
+	POSTERIZE data{};
+
+	data.Levels = levels;
+
+	m_DeviceContext->UpdateSubresource(
+		m_PosterizeBuffer,
+		0,
+		nullptr,
+		&data,
+		0,
+		0
+	);
+}
 
 
 

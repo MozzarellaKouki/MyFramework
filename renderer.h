@@ -49,6 +49,12 @@ struct SPRITE_ANIMATION
 };
 
 
+struct POSTERIZE
+{
+	float Levels;
+	float Dummy[3];
+};
+
 //===============================
 // ブレンドステートクラス
 //===============================
@@ -71,12 +77,15 @@ private:
 	static ID3D11RenderTargetView* m_RenderTargetView;
 	static ID3D11DepthStencilView* m_DepthStencilView;
 
+
 	static ID3D11Buffer*			m_WorldBuffer;
 	static ID3D11Buffer*			m_ViewBuffer;
 	static ID3D11Buffer*			m_ProjectionBuffer;
 	static ID3D11Buffer*			m_MaterialBuffer;
 	static ID3D11Buffer*			m_LightBuffer;
 	static ID3D11Buffer*            m_SpriteAnimationBuffer;
+	static ID3D11Buffer*            m_PosterizeBuffer;
+
 
 
 	static ID3D11DepthStencilState* m_DepthStateEnable;
@@ -104,6 +113,7 @@ public:
 	static void SetMaterial(MATERIAL Material);
 	static void SetLight(LIGHT Light);
 	static void SetSpriteAnimation(SPRITE_ANIMATION animation);
+	static void SetPosterizeLevels(float levels);
 
 	static void Set2D();
 	static void Set3D();

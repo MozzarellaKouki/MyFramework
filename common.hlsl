@@ -27,6 +27,11 @@ cbuffer SpriteAnimationBuffer : register(b6)
 	int Dummy;
 }
 
+cbuffer PosterizeBuffer : register(b7)
+{
+	float PosterizeLevels;
+	float3 PosterizeDummy;
+}
 
 
 
@@ -82,3 +87,4 @@ struct PS_IN
 	float4 Diffuse		: COLOR0;
 	float2 TexCoord		: TEXCOORD0;
 };
+

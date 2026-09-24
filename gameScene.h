@@ -29,6 +29,7 @@ private:
     //Test
     int m_Score = 0;
     int m_NextEnemyScore = 2000;
+    float m_PosterizeLevels = 16.0f;
 
     NumberRenderer m_NumberRenderer;
     Audio m_TestSE;
