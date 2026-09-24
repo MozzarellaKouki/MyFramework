@@ -1,0 +1,19 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# ビルド生成物
+x64/
+Debug/
+Release/
+bin/
+obj/
+
+# Visual Studio 一時ファイル
+*.VC.db
+*.VC.opendb
+
+# Windows
+Thumbs.db
+.DS_Store
