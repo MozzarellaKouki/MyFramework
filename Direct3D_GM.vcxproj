@@ -156,8 +156,11 @@
     <ClInclude Include="audio.h" />
     <ClInclude Include="audioComponent.h" />
     <ClInclude Include="audioManager.h" />
+    <ClInclude Include="boxColliderComponent.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="cameraManager.h" />
+    <ClInclude Include="colliderComponent.h" />
+    <ClInclude Include="collisionManager.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="debugUtils.h" />
     <ClInclude Include="DirectXTex.h" />
@@ -216,8 +219,10 @@
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="audioComponent.cpp" />
     <ClCompile Include="audioManager.cpp" />
+    <ClCompile Include="boxColliderComponent.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cameraManager.cpp" />
+    <ClCompile Include="collisionManager.cpp" />
     <ClCompile Include="enemy3D.cpp" />
     <ClCompile Include="explosion.cpp" />
     <ClCompile Include="fadeObject.cpp" />

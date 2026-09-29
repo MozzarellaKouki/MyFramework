@@ -4,6 +4,8 @@
 #include "GameoverScene.h"
 #include "particleTemperSettings.h"
 #include "scoreManager.h"
+#include "boxcolliderComponent.h"
+#include "collisionManager.h"
 
 void Enemy3D::Init()
 {
@@ -26,6 +28,10 @@ void Enemy3D::Init()
     m_Emitter = AddComponent<ParticleEmitterComponent>();
     m_Emitter->Configure(ParticleTemperSettings::ShockWave());
     m_Emitter->SetBillboardType(BillboardType::Horizontal);
+
+
+    auto* enemyCollider = AddComponent<BoxColliderComponent>();
+    enemyCollider->SetSize({ 1.0f, 1.0f, 1.0f });
 }
 
 void Enemy3D::Uninit()
@@ -72,6 +78,11 @@ void Enemy3D::Update(float deltaTime)
             m_Emitter->Play(3.0f);
         }
     }
+
+    CollisionManager::CheckCollision(
+        this,
+        m_Player
+    );
 }
 
 void Enemy3D::Draw()
@@ -143,10 +154,10 @@ void Enemy3D::ChasePlayer(float deltaTime)
     m_transform->SetPosition(enemyPosition);
 
 
-    if (distance < 4.0f)
+   /* if (distance < 4.0f)
     {
         SceneManager::ChangeSceneRed( std::make_unique<GameOverScene>());
 
         return;
-    }
+    }*/
 }

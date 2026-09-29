@@ -22,7 +22,7 @@ void Player3D::Init()
     m_physics = AddComponent<PhysicsComponent>();
     m_renderer = AddComponent<MeshRendererComponent>();
 
-    m_transform->SetPosition({ 0,30,0 });
+    m_transform->SetPosition({ 0,0,0 });
     m_transform->SetRotation({ 0,0,0 });
     m_transform->SetScale({ 1,1,1 });
     

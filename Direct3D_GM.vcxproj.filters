@@ -43,6 +43,9 @@
     <Filter Include="AudioObject">
       <UniqueIdentifier>{9e9ff760-ad44-4e9e-8ed3-9df09af30d0c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Collider">
+      <UniqueIdentifier>{c2a0596e-7538-4d2f-9f1c-bd1246db78b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.hlsl" />
@@ -62,9 +65,6 @@
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="sprite3DComponent.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="component.h">
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="textureManager.h">
@@ -204,6 +204,18 @@
     </ClInclude>
     <ClInclude Include="gameOverField.h">
       <Filter>Temporary</Filter>
+    </ClInclude>
+    <ClInclude Include="boxColliderComponent.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="component.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="colliderComponent.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="collisionManager.h">
+      <Filter>Component\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -347,6 +359,12 @@
     </ClCompile>
     <ClCompile Include="gameOverField.cpp">
       <Filter>Temporary</Filter>
+    </ClCompile>
+    <ClCompile Include="boxColliderComponent.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionManager.cpp">
+      <Filter>Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

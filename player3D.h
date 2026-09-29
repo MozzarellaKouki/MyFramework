@@ -29,6 +29,7 @@ private:
 	TransformComponent* m_transform;
 	PhysicsComponent* m_physics;
 	MeshRendererComponent* m_renderer;
+
 	Player3DState m_State;
 
 	bool m_Boost = false;

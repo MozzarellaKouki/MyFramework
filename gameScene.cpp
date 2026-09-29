@@ -16,6 +16,9 @@
 #include "gameObjectFactory.h"
 #include "audioManager.h"
 
+#include "boxColliderComponent.h"
+
+
 
 
 #include "testMotion.h"
@@ -55,6 +58,13 @@ void GameScene::Init()
 
 	CameraManager::GetInstance().SetCamera(m_Camera);
 	m_Camera->SetTarget(m_Player);
+
+
+
+
+	auto* playerCollider = m_Player->AddComponent<BoxColliderComponent>();
+	playerCollider->SetSize({ 1.0f, 2.0f, 1.0f });
+
 
 }
 
@@ -126,10 +136,12 @@ void GameScene::Update()
 
 
 
+
+
 	//デバッグ用
 	if (Keyboard_IsKeyDownTrigger(KK_B))
 	{
-		//SceneManager::ChangeScene(std::make_unique<ResultScene>());
+		SceneManager::ChangeScene(std::make_unique<ResultScene>());
 	}
 
 	if (Keyboard_IsKeyDownTrigger(KK_V))

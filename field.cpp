@@ -12,28 +12,27 @@
 void Field::Init()
 {
 	m_Vertices.clear();
+	const float fieldSize = 2.0f;
 
-	const float fieldSize = 60.0f;
-
-	for (int z = 0; z < GRID_SIZE; z++)
+	for (int z = 0; z < m_GridSize; z++)
 	{
-		for (int x = 0; x < GRID_SIZE; x++)
+		for (int x = 0; x < m_GridSize; x++)
 		{
 			float x0 =
 				-fieldSize / 2.0f +
-				fieldSize * x / GRID_SIZE;
+				fieldSize * x / m_GridSize;
 
 			float x1 =
 				-fieldSize / 2.0f +
-				fieldSize * (x + 1) / GRID_SIZE;
+				fieldSize * (x + 1) / m_GridSize;
 
 			float z0 =
 				fieldSize / 2.0f -
-				fieldSize * z / GRID_SIZE;
+				fieldSize * z / m_GridSize;
 
 			float z1 =
 				fieldSize / 2.0f -
-				fieldSize * (z + 1) / GRID_SIZE;
+				fieldSize * (z + 1) / m_GridSize;
 
 
 			// 左上
@@ -42,8 +41,8 @@ void Field::Init()
 			v0.Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
 			v0.Diffuse = XMFLOAT4(1, 1, 1, 1);
 			v0.TexCoord = XMFLOAT2(
-				(float)x / GRID_SIZE,
-				(float)z / GRID_SIZE
+				(float)x / m_GridSize,
+				(float)z / m_GridSize
 			);
 
 			// 右上
@@ -52,8 +51,8 @@ void Field::Init()
 			v1.Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
 			v1.Diffuse = XMFLOAT4(1, 1, 1, 1);
 			v1.TexCoord = XMFLOAT2(
-				(float)(x + 1) / GRID_SIZE,
-				(float)z / GRID_SIZE
+				(float)(x + 1) / m_GridSize,
+				(float)z / m_GridSize
 			);
 
 			// 左下
@@ -62,8 +61,8 @@ void Field::Init()
 			v2.Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
 			v2.Diffuse = XMFLOAT4(1, 1, 1, 1);
 			v2.TexCoord = XMFLOAT2(
-				(float)x / GRID_SIZE,
-				(float)(z + 1) / GRID_SIZE
+				(float)x / m_GridSize,
+				(float)(z + 1) / m_GridSize
 			);
 
 			// 右下
@@ -72,8 +71,8 @@ void Field::Init()
 			v3.Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
 			v3.Diffuse = XMFLOAT4(1, 1, 1, 1);
 			v3.TexCoord = XMFLOAT2(
-				(float)(x + 1) / GRID_SIZE,
-				(float)(z + 1) / GRID_SIZE
+				(float)(x + 1) / m_GridSize,
+				(float)(z + 1) / m_GridSize
 			);
 
 
@@ -124,7 +123,7 @@ void Field::Init()
 	m_Texture =
 		TextureManager::Load
 		(
-			L"Asset/texture/LavaSurface.png"
+			L"Asset/texture/MoonSurface.png"
 		);
 
 	// トランスフォーム設定
@@ -146,44 +145,12 @@ void Field::Uninit()
 }
 
 
-void Field::Update(float deltaTime)
+void Field::Update(float dt)
 {
-	m_Time += deltaTime;
-
-	// 頂点のY座標を波の形にする
-	for (auto& vertex : m_Vertices)
+	if (m_WaveEnabled)
 	{
-		float x = vertex.Position.x;
-
-		vertex.Position.y =
-			sinf(x * 0.5f + m_Time) * 2.0f;
+		UpdateWave(dt);
 	}
-
-	// GPUへ頂点データを送る
-	D3D11_MAPPED_SUBRESOURCE mapped{};
-
-	Renderer::GetDeviceContext()->Map
-	(
-		m_VertexBuffer,
-		0,
-		D3D11_MAP_WRITE_DISCARD,
-		0,
-		&mapped
-	);
-
-	memcpy
-	(
-		mapped.pData,
-		m_Vertices.data(),
-		sizeof(VERTEX_3D) * m_Vertices.size()
-	);
-
-
-	Renderer::GetDeviceContext()->Unmap
-	(
-		m_VertexBuffer,
-		0
-	);
 }
 
 
@@ -242,7 +209,51 @@ void Field::Draw()
 	// Draw
 	Renderer::GetDeviceContext()->Draw
 	(
-		GRID_SIZE * GRID_SIZE * 6,
+		m_GridSize * m_GridSize * 6,
 		0
 	);
+}
+
+
+// 波 ==============================================
+void Field::UpdateWave(float dt)
+{
+	{
+		m_WaveTime += dt;
+
+		// 頂点のY座標を波の形にする
+		for (auto& vertex : m_Vertices)
+		{
+			float x = vertex.Position.x;
+
+			vertex.Position.y =
+				sinf(x * 0.5f + m_WaveTime) * 2.0f;
+		}
+
+		// GPUへ頂点データを送る
+		D3D11_MAPPED_SUBRESOURCE mapped{};
+
+		Renderer::GetDeviceContext()->Map
+		(
+			m_VertexBuffer,
+			0,
+			D3D11_MAP_WRITE_DISCARD,
+			0,
+			&mapped
+		);
+
+		memcpy
+		(
+			mapped.pData,
+			m_Vertices.data(),
+			sizeof(VERTEX_3D) * m_Vertices.size()
+		);
+
+
+		Renderer::GetDeviceContext()->Unmap
+		(
+			m_VertexBuffer,
+			0
+		);
+	}
 }
