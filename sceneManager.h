@@ -30,4 +30,7 @@ public:
     static void Draw();
     static void Uninit();
 
+    static void DrawScene();
+    static void DrawFade();
+
 };

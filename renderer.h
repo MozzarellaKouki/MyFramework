@@ -61,7 +61,8 @@ struct POSTERIZE
 enum class BlendMode
 {
 	Opaque,
-	Alpha
+	Alpha,
+	Additive
 };
 
 
@@ -88,11 +89,13 @@ private:
 
 
 
+
 	static ID3D11DepthStencilState* m_DepthStateEnable;
 	static ID3D11DepthStencilState* m_DepthStateDisable;
 
 	static ID3D11BlendState*		m_BlendState;
 	static ID3D11BlendState*		m_BlendStateATC;
+	static ID3D11BlendState*        m_BlendStateAdditive;
 
 
 
@@ -114,13 +117,14 @@ public:
 	static void SetLight(LIGHT Light);
 	static void SetSpriteAnimation(SPRITE_ANIMATION animation);
 	static void SetPosterizeLevels(float levels);
+	static void SetBackBufferRenderTarget();
 
 	static void Set2D();
 	static void Set3D();
 
 	static ID3D11Device* GetDevice( void ){ return m_Device; }
 	static ID3D11DeviceContext* GetDeviceContext( void ){ return m_DeviceContext; }
-
+	static ID3D11DepthStencilView* GetDepthStencilView( void ){ return m_DepthStencilView; }
 
 
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);

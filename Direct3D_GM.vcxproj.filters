@@ -46,6 +46,9 @@
     <Filter Include="Component\Collider">
       <UniqueIdentifier>{c2a0596e-7538-4d2f-9f1c-bd1246db78b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\PostEffect">
+      <UniqueIdentifier>{6ed3ed68-68bd-41f8-9fa0-eb9f61594503}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.hlsl" />
@@ -217,6 +220,18 @@
     <ClInclude Include="collisionManager.h">
       <Filter>Component\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="renderTexture.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="bloom.h">
+      <Filter>Graphics\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="postEffect.h">
+      <Filter>Graphics\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="postEffectManager.h">
+      <Filter>Graphics\PostEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -366,10 +381,28 @@
     <ClCompile Include="collisionManager.cpp">
       <Filter>Component\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="renderTexture.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="bloom.cpp">
+      <Filter>Graphics\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="postEffectManager.cpp">
+      <Filter>Graphics\PostEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="unlitTexturePS.hlsl" />
     <FxCompile Include="unlitTextureVS.hlsl" />
+    <FxCompile Include="bloomExtractPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="bloomBlurHorizontalPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="bloomBlurVerticalPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="DirectXTex.inl">

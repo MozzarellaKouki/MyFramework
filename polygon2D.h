@@ -11,9 +11,12 @@ private:
 	ID3D11VertexShader* m_VertexShader;
 	ID3D11PixelShader* m_PixelShader;
 
+
+
 	bool m_TextureEnable = true;
 	ID3D11ShaderResourceView* m_Texture; 
 	VERTEX_3D m_Vertex[4];
+	BlendMode m_BlendMode = BlendMode::Alpha;
 
 
 	float m_PosX = 0.0f;
@@ -28,7 +31,7 @@ private:
 
 
 public:
-	void Init();
+	void Init(const char* pixelShaderFile = "Shader//unlitTexturePS.cso");
 	void Uninit();
 	void Update();
 	void Draw();
@@ -39,6 +42,7 @@ public:
 	void SetAlpha(float alpha) { m_Alpha = alpha; };
 	void SetColor(float r, float g, float b);
 	void SetUV(float u0, float v0, float u1, float v1);
+	void SetBlendMode(BlendMode mode) { m_BlendMode = mode; }
 
 
 };

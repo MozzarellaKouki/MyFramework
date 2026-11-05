@@ -14,6 +14,7 @@ IDXGISwapChain*         Renderer::m_SwapChain{};
 ID3D11RenderTargetView* Renderer::m_RenderTargetView{};
 ID3D11DepthStencilView* Renderer::m_DepthStencilView{};
 
+
 ID3D11Buffer*			Renderer::m_WorldBuffer{};
 ID3D11Buffer*			Renderer::m_ViewBuffer{};
 ID3D11Buffer*			Renderer::m_ProjectionBuffer{};
@@ -29,6 +30,7 @@ ID3D11DepthStencilState* Renderer::m_DepthStateDisable{};
 
 ID3D11BlendState*		Renderer::m_BlendState{};
 ID3D11BlendState*		Renderer::m_BlendStateATC{};
+ID3D11BlendState* Renderer::m_BlendStateAdditive{};
 
 
 
@@ -155,6 +157,28 @@ void Renderer::Init()
 	blendDesc.AlphaToCoverageEnable = TRUE;
 	m_Device->CreateBlendState( &blendDesc, &m_BlendStateATC );
 
+	// 加算ブレンドステート作成
+	blendDesc.AlphaToCoverageEnable = FALSE;
+
+	// RGBを「元の色 + 重ねる色」にする
+	blendDesc.RenderTarget[0].BlendEnable = TRUE;
+	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+
+	// アルファ値の設定
+	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+
+	blendDesc.RenderTarget[0].RenderTargetWriteMask =
+		D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	m_Device->CreateBlendState(
+		&blendDesc,
+		&m_BlendStateAdditive
+	);
+
 	float blendFactor[4] = {0.0f, 0.0f, 0.0f, 0.0f};
 	m_DeviceContext->OMSetBlendState(m_BlendState, blendFactor, 0xffffffff );
 
@@ -279,22 +303,38 @@ void Renderer::Init()
 
 void Renderer::Uninit()
 {
+	// GPUの描画状態を解除
+	if (m_DeviceContext)
+	{
+		m_DeviceContext->ClearState();
+	}
 
-	m_WorldBuffer->Release();
-	m_ViewBuffer->Release();
-	m_ProjectionBuffer->Release();
-	m_MaterialBuffer->Release();
-	m_LightBuffer->Release();
-	m_SpriteAnimationBuffer->Release();
+	// 定数バッファを解放
+	if (m_WorldBuffer)          m_WorldBuffer->Release();
+	if (m_ViewBuffer)           m_ViewBuffer->Release();
+	if (m_ProjectionBuffer)     m_ProjectionBuffer->Release();
+	if (m_MaterialBuffer)       m_MaterialBuffer->Release();
+	if (m_LightBuffer)          m_LightBuffer->Release();
+	if (m_SpriteAnimationBuffer) m_SpriteAnimationBuffer->Release();
+	if (m_PosterizeBuffer)      m_PosterizeBuffer->Release();
 
+	// ブレンドステートを解放
+	if (m_BlendState)          m_BlendState->Release();
+	if (m_BlendStateATC)       m_BlendStateATC->Release();
+	if (m_BlendStateAdditive)  m_BlendStateAdditive->Release();
 
+	// 深度ステンシルステートを解放
+	if (m_DepthStateEnable)  m_DepthStateEnable->Release();
+	if (m_DepthStateDisable) m_DepthStateDisable->Release();
 
-	m_DeviceContext->ClearState();
-	m_RenderTargetView->Release();
-	m_SwapChain->Release();
-	m_DeviceContext->Release();
-	m_Device->Release();
+	// 描画先関連を解放
+	if (m_DepthStencilView) m_DepthStencilView->Release();
+	if (m_RenderTargetView) m_RenderTargetView->Release();
+	if (m_SwapChain)        m_SwapChain->Release();
 
+	// 最後にContextとDeviceを解放
+	if (m_DeviceContext) m_DeviceContext->Release();
+	if (m_Device)        m_Device->Release();
 }
 
 
@@ -360,6 +400,14 @@ void Renderer::SetBlendMode(BlendMode mode)
 			factor,
 			0xffffffff);
 		//DebugLog("Alpha");
+		break;
+
+	case BlendMode::Additive:
+		m_DeviceContext->OMSetBlendState(
+			m_BlendStateAdditive,
+			factor,
+			0xffffffff
+		);
 		break;
 	}
 }
@@ -450,6 +498,27 @@ void Renderer::SetPosterizeLevels(float levels)
 		0,
 		0
 	);
+}
+
+
+void Renderer::SetBackBufferRenderTarget()
+{
+	m_DeviceContext->OMSetRenderTargets
+	(
+		1,
+		&m_RenderTargetView,
+		m_DepthStencilView
+	);
+
+	D3D11_VIEWPORT viewport{};
+	viewport.Width = static_cast<float>(SCREEN_WIDTH);
+	viewport.Height = static_cast<float>(SCREEN_HEIGHT);
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+	viewport.TopLeftX = 0.0f;
+	viewport.TopLeftY = 0.0f;
+
+	m_DeviceContext->RSSetViewports(1, &viewport);
 }
 
 

@@ -5,7 +5,7 @@
 
 
 
-void Polygon2D::Init()
+void Polygon2D::Init(const char* pixelShaderFile)
 {
 
 	m_Vertex[0].Position = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
@@ -44,7 +44,7 @@ void Polygon2D::Init()
 
 	//シェーダー読み込み
 	Renderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "Shader//unlitTextureVS.cso");
-	Renderer::CreatePixelShader(&m_PixelShader, "Shader//unlitTexturePS.cso");
+	Renderer::CreatePixelShader(&m_PixelShader, pixelShaderFile);
 }
 
 
@@ -83,7 +83,7 @@ void Polygon2D::Draw()
 		XMMatrixTranslation(m_PosX, m_PosY, 0.0f);
 
 	Renderer::SetWorldMatrix(world);
-	Renderer::SetBlendMode(BlendMode::Alpha);
+	Renderer::SetBlendMode(m_BlendMode);
 
 
 	//マテリアル設定

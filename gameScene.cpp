@@ -149,23 +149,23 @@ void GameScene::Update()
 		GameObjectFactory::CreateEnemy(m_Player);
 	}
 
-	if (Keyboard_IsKeyDownTrigger(KK_O))
+	/*if (Keyboard_IsKeyDownTrigger(KK_O))
 	{
 		m_PosterizeLevels += 1.0f;
 
 		if (m_PosterizeLevels > 64.0f)
 			m_PosterizeLevels = 64.0f;
 		Renderer::SetPosterizeLevels(m_PosterizeLevels);
-	}
+	}*/
 
-	if (Keyboard_IsKeyDownTrigger(KK_P))
+	/*if (Keyboard_IsKeyDownTrigger(KK_P))
 	{
 		m_PosterizeLevels -= 1.0f;
 
 		if (m_PosterizeLevels < 2.0f)
 			m_PosterizeLevels = 2.0f;
 		Renderer::SetPosterizeLevels(m_PosterizeLevels);
-	}
+	}*/
 
 
 }

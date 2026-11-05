@@ -83,13 +83,22 @@ void SceneManager::Update()
 
 }
 
+void SceneManager::DrawScene()
+{
+    if (currentScene)
+        currentScene->Draw();
+}
+
+void SceneManager::DrawFade()
+{
+    Renderer::Set2D();
+    fadeObject.Draw();
+}
 
 void SceneManager::Draw()
 {
-    if (currentScene) currentScene->Draw();
-
-    Renderer::Set2D();
-    fadeObject.Draw();
+    DrawScene();
+    DrawFade();
 }
 
 
