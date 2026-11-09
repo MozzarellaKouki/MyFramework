@@ -22,6 +22,7 @@ ID3D11Buffer*			Renderer::m_MaterialBuffer{};
 ID3D11Buffer*			Renderer::m_LightBuffer{};
 ID3D11Buffer*           Renderer::m_SpriteAnimationBuffer{};
 ID3D11Buffer*           Renderer::m_PosterizeBuffer{};
+ID3D11Buffer*           Renderer::m_GrayscaleBuffer{};
 
 
 ID3D11DepthStencilState* Renderer::m_DepthStateEnable{};
@@ -240,39 +241,30 @@ void Renderer::Init()
 
 
 	bufferDesc.ByteWidth = sizeof(MATERIAL);
-
 	m_Device->CreateBuffer(&bufferDesc, NULL, &m_MaterialBuffer);
 	m_DeviceContext->VSSetConstantBuffers(3, 1, &m_MaterialBuffer);
 	m_DeviceContext->PSSetConstantBuffers(3, 1, &m_MaterialBuffer);
 
 
 	bufferDesc.ByteWidth = sizeof(LIGHT);
-
 	m_Device->CreateBuffer(&bufferDesc, NULL, &m_LightBuffer);
 	m_DeviceContext->VSSetConstantBuffers(4, 1, &m_LightBuffer);
 	m_DeviceContext->PSSetConstantBuffers(4, 1, &m_LightBuffer);
 
 
 	bufferDesc.ByteWidth = sizeof(SPRITE_ANIMATION);
-
-
 	m_Device->CreateBuffer(&bufferDesc, NULL, &m_SpriteAnimationBuffer);
 	m_DeviceContext->VSSetConstantBuffers(6, 1, &m_SpriteAnimationBuffer);
 
 
 	bufferDesc.ByteWidth = sizeof(POSTERIZE);
+	m_Device->CreateBuffer(&bufferDesc, NULL, &m_PosterizeBuffer);
+	m_DeviceContext->PSSetConstantBuffers(7, 1, &m_PosterizeBuffer);
 
-	m_Device->CreateBuffer(
-		&bufferDesc,
-		NULL,
-		&m_PosterizeBuffer
-	);
+	bufferDesc.ByteWidth = sizeof(GRAYSCALE);
+	m_Device->CreateBuffer(&bufferDesc, nullptr, &m_GrayscaleBuffer);
+	m_DeviceContext->PSSetConstantBuffers(8, 1, &m_GrayscaleBuffer);
 
-	m_DeviceContext->PSSetConstantBuffers(
-		7,
-		1,
-		&m_PosterizeBuffer
-	);
 
 
 
@@ -317,6 +309,7 @@ void Renderer::Uninit()
 	if (m_LightBuffer)          m_LightBuffer->Release();
 	if (m_SpriteAnimationBuffer) m_SpriteAnimationBuffer->Release();
 	if (m_PosterizeBuffer)      m_PosterizeBuffer->Release();
+	if (m_GrayscaleBuffer)      m_GrayscaleBuffer->Release();
 
 	// ブレンドステートを解放
 	if (m_BlendState)          m_BlendState->Release();
@@ -490,11 +483,29 @@ void Renderer::SetPosterizeLevels(float levels)
 
 	data.Levels = levels;
 
-	m_DeviceContext->UpdateSubresource(
+	m_DeviceContext->UpdateSubresource
+	(
 		m_PosterizeBuffer,
 		0,
 		nullptr,
 		&data,
+		0,
+		0
+	);
+}
+
+void Renderer::SetGrayscaleIntensity(float intensity)
+{
+	GRAYSCALE grayscale{};
+
+	grayscale.Intensity = intensity;
+
+	m_DeviceContext->UpdateSubresource
+	(
+		m_GrayscaleBuffer,
+		0,
+		nullptr,
+		&grayscale,
 		0,
 		0
 	);
@@ -520,6 +531,9 @@ void Renderer::SetBackBufferRenderTarget()
 
 	m_DeviceContext->RSSetViewports(1, &viewport);
 }
+
+
+
 
 
 

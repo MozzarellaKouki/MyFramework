@@ -5,12 +5,8 @@ SamplerState g_SamplerState : register(s0);
 
 void main(in PS_IN In, out float4 outDiffuse : SV_Target)
 {
-    // 横方向の1ピクセル分のUVサイズを取得
-    float2 offset = float2(
-        abs(ddx(In.TexCoord.x)),
-        0.0f
-    );
-
+    //横方向の1ピクセル分のUVサイズを取得
+    float2 offset = float2(abs(ddx(In.TexCoord.x)), 0.0f );
     float2 uv = In.TexCoord;
 
     outDiffuse = g_Texture.Sample(

@@ -51,7 +51,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common.hlsl" />
     <ClInclude Include="physicsComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
@@ -232,6 +231,12 @@
     <ClInclude Include="postEffectManager.h">
       <Filter>Graphics\PostEffect</Filter>
     </ClInclude>
+    <ClInclude Include="grayScale.h">
+      <Filter>Graphics\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="common.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -390,10 +395,11 @@
     <ClCompile Include="postEffectManager.cpp">
       <Filter>Graphics\PostEffect</Filter>
     </ClCompile>
+    <ClCompile Include="grayScale.cpp">
+      <Filter>Graphics\PostEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="unlitTexturePS.hlsl" />
-    <FxCompile Include="unlitTextureVS.hlsl" />
     <FxCompile Include="bloomExtractPS.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
@@ -401,6 +407,15 @@
       <Filter>リソース ファイル</Filter>
     </FxCompile>
     <FxCompile Include="bloomBlurVerticalPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="unlitTexturePS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="unlitTextureVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="grayScalePS.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>

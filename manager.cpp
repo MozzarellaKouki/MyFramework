@@ -9,10 +9,15 @@
 #include "textureManager.h"
 #include "postEffectManager.h"
 #include "bloom.h"
+#include "grayScale.h"
 #include <memory>
 
 RenderTexture Manager::m_RenderTexture;
 Bloom* Manager::m_Bloom = nullptr;
+GrayScale* Manager::m_GrayScale = nullptr;
+
+
+
 
 void Manager::Init()
 {
@@ -31,10 +36,28 @@ void Manager::Init()
     SceneManager::Init(std::make_unique<TitleScene>());
     TextureManager::Init();
 
+
+    // Grayscale
+    auto grayscale = std::make_unique<GrayScale>();
+    m_GrayScale = grayscale.get();
+    m_GrayScale->SetIntensity(0.5f);
+    m_GrayScale->SetEnabled(true);
+
+    // Bloom
     auto bloom = std::make_unique<Bloom>();
     m_Bloom = bloom.get();
-    PostEffectManager::AddEffect(std::move(bloom));
+    m_Bloom->SetIntensity(0.5f);
+    m_Bloom->SetEnabled(true);
+
+
+    // PostEffectManagerへ登録
+    PostEffectManager::AddEffect(std::make_unique<Bloom>());
+    PostEffectManager::AddEffect(std::make_unique<GrayScale>());
+
+    // エフェクトの初期化
     PostEffectManager::Init();
+
+
 }
 
 void Manager::Uninit()
@@ -46,6 +69,7 @@ void Manager::Uninit()
 
     PostEffectManager::Uninit();
     m_Bloom = nullptr;
+    m_GrayScale = nullptr;
     m_RenderTexture.Uninit();
     Renderer::Uninit();
 }
@@ -58,7 +82,7 @@ void Manager::Update()
 
 
     //デバッグ
-    if (!m_Bloom)return;
+    if (!m_Bloom) return;
 
     float intensity = m_Bloom->GetIntensity();
     if (Keyboard_IsKeyDownTrigger(KK_P))

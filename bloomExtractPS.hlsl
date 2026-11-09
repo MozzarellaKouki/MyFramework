@@ -5,19 +5,13 @@ SamplerState g_SamplerState : register(s0);
 
 void main(in PS_IN In, out float4 outDiffuse : SV_Target)
 {
-    // 元のシーン画像を取得
-    float4 color = g_Texture.Sample(
-        g_SamplerState,
-        In.TexCoord
-    );
+    //元のシーン画像を取得
+    float4 color = g_Texture.Sample( g_SamplerState, In.TexCoord );
 
-    // 明るさを計算
-    float brightness = dot(
-        color.rgb,
-        float3(0.299f, 0.587f, 0.114f)
-    );
+    //明るさを計算
+    float brightness = dot( color.rgb, float3(0.299f, 0.587f, 0.114f) );
 
-    // 明るい部分だけを残す
+    //明るい部分だけを残す
     const float threshold = 0.7f;
 
     if (brightness >= threshold)

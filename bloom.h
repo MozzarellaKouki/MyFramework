@@ -21,10 +21,7 @@ public:
     void Init() override;
     void Uninit() override;
     void Update() override;
-    void Draw(
-        ID3D11ShaderResourceView* source,
-        RenderTexture& destination) override;
+    void Draw(ID3D11ShaderResourceView* source, RenderTexture& destination) override;
 
-    void SetIntensity(float intensity);
-    float GetIntensity() const;
+
 };

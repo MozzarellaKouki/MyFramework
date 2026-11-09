@@ -13,8 +13,7 @@ bool PostEffectManager::m_DisplayInitialized = false;
 
 void PostEffectManager::Init()
 {
-    if (m_Initialized)
-        return;
+    if (m_Initialized) return;
 
     if (!m_DisplayInitialized)
     {
@@ -30,15 +29,13 @@ void PostEffectManager::Init()
     if (!m_Ping.Init(SCREEN_WIDTH, SCREEN_HEIGHT) ||
         !m_Pong.Init(SCREEN_WIDTH, SCREEN_HEIGHT))
     {
-        MessageBox(nullptr, "Post effect render target initialization failed.",
-            "Error", MB_OK);
+        MessageBox(nullptr, "PostEffect RT Initialization failed.","Error", MB_OK);
         m_Ping.Uninit();
         m_Pong.Uninit();
         return;
     }
 
-    for (auto& effect : m_Effects)
-        effect->Init();
+    for(auto& effect : m_Effects) effect->Init();
 
     m_Initialized = true;
 }
@@ -47,8 +44,7 @@ void PostEffectManager::Uninit()
 {
     if (m_Initialized)
     {
-        for (auto& effect : m_Effects)
-            effect->Uninit();
+        for(auto& effect : m_Effects) effect->Uninit();
     }
     m_Effects.clear();
 
@@ -57,35 +53,46 @@ void PostEffectManager::Uninit()
         m_Display.Uninit();
         m_DisplayInitialized = false;
     }
+
     m_Pong.Uninit();
     m_Ping.Uninit();
+
     m_Initialized = false;
 }
 
+
 void PostEffectManager::Update()
 {
-    for (auto& effect : m_Effects)
-        effect->Update();
+    for(auto& effect : m_Effects) effect->Update();
 }
+
 
 void PostEffectManager::Draw(ID3D11ShaderResourceView* source)
 {
     if (!source) return;
     if (!m_DisplayInitialized) return;
 
+
     ID3D11ShaderResourceView* currentSource = source;
     auto* context = Renderer::GetDeviceContext();
 
-    for (size_t i = 0; m_Initialized && i < m_Effects.size(); i++)
+    size_t appliedCount = 0;
+
+    for (auto& effect : m_Effects)
     {
-        RenderTexture& target = (i % 2 == 0) ? m_Ping : m_Pong;
+        if (!effect->IsEnabled()) continue;
+
+        //ŽÀÛ‚É“K—p‚µ‚½‰ñ”‚Å Ping / Pong ‚ðØ‚è‘Ö‚¦‚é
+        RenderTexture& target = (appliedCount % 2 == 0) ? m_Ping : m_Pong;
 
         ID3D11ShaderResourceView* nullSRV = nullptr;
         context->PSSetShaderResources(0, 1, &nullSRV);
 
-        m_Effects[i]->Draw(currentSource, target);
+        effect->Draw(currentSource, target);
         currentSource = target.GetShaderResourceView();
+        appliedCount++;
     }
+
 
     Renderer::SetBackBufferRenderTarget();
     m_Display.SetTexture(currentSource);
@@ -98,10 +105,38 @@ void PostEffectManager::Draw(ID3D11ShaderResourceView* source)
     context->PSSetShaderResources(0, 1, &nullSRV);
 }
 
-void PostEffectManager::AddEffect(std::unique_ptr<PostEffect> effect)
-{
-    if (!effect) return;
-    if (m_Initialized) effect->Init();
 
+PostEffectHandle PostEffectManager::AddEffect(std::unique_ptr<PostEffect> effect)
+{
+    if (!effect) return static_cast<size_t>(-1);
+
+    if (m_Initialized) effect->Init();
     m_Effects.push_back(std::move(effect));
+
+    return m_Effects.size() - 1;
+}
+
+
+void PostEffectManager::SetEnabled(PostEffectHandle handle, bool enabled)
+{
+    if (handle >= m_Effects.size()) return;
+    m_Effects[handle]->SetEnabled(enabled);
+}
+
+bool PostEffectManager::IsEnabled(PostEffectHandle handle)
+{
+    if (handle >= m_Effects.size()) return false;
+    return m_Effects[handle]->IsEnabled();
+}
+
+void PostEffectManager::SetIntensity(PostEffectHandle handle, float intensity)
+{
+    if (handle >= m_Effects.size()) return;
+    m_Effects[handle]->SetIntensity(intensity);
+}
+
+float PostEffectManager::GetIntensity(PostEffectHandle handle)
+{
+    if (handle >= m_Effects.size()) return 0.0f;
+    return m_Effects[handle]->GetIntensity();
 }

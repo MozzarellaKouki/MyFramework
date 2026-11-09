@@ -55,6 +55,12 @@ struct POSTERIZE
 	float Dummy[3];
 };
 
+struct GRAYSCALE
+{
+	float Intensity;
+	float Dummy[3];
+};
+
 //===============================
 // ブレンドステートクラス
 //===============================
@@ -86,6 +92,7 @@ private:
 	static ID3D11Buffer*			m_LightBuffer;
 	static ID3D11Buffer*            m_SpriteAnimationBuffer;
 	static ID3D11Buffer*            m_PosterizeBuffer;
+	static ID3D11Buffer*            m_GrayscaleBuffer;
 
 
 
@@ -96,6 +103,7 @@ private:
 	static ID3D11BlendState*		m_BlendState;
 	static ID3D11BlendState*		m_BlendStateATC;
 	static ID3D11BlendState*        m_BlendStateAdditive;
+
 
 
 
@@ -118,6 +126,7 @@ public:
 	static void SetSpriteAnimation(SPRITE_ANIMATION animation);
 	static void SetPosterizeLevels(float levels);
 	static void SetBackBufferRenderTarget();
+	static void SetGrayscaleIntensity(float intensity);
 
 	static void Set2D();
 	static void Set3D();

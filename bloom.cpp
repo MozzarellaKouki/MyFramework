@@ -8,8 +8,7 @@ void Bloom::Init()
         !m_BlurHorizontalTexture.Init(SCREEN_WIDTH, SCREEN_HEIGHT) ||
         !m_BlurVerticalTexture.Init(SCREEN_WIDTH, SCREEN_HEIGHT))
     {
-        MessageBox(nullptr, "Bloom render target initialization failed.",
-            "Error", MB_OK);
+        MessageBox(nullptr, "Bloom render target initialization failed.", "Error", MB_OK);
         m_ExtractTexture.Uninit();
         m_BlurHorizontalTexture.Uninit();
         m_BlurVerticalTexture.Uninit();
@@ -18,28 +17,24 @@ void Bloom::Init()
 
     m_Display.Init();
     m_Display.SetPosition(0.0f, 0.0f);
-    m_Display.SetSize(static_cast<float>(SCREEN_WIDTH),
-        static_cast<float>(SCREEN_HEIGHT));
+    m_Display.SetSize(static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT));
     m_Display.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
 
     m_ExtractQuad.Init("Shader//bloomExtractPS.cso");
     m_ExtractQuad.SetPosition(0.0f, 0.0f);
-    m_ExtractQuad.SetSize(static_cast<float>(SCREEN_WIDTH),
-        static_cast<float>(SCREEN_HEIGHT));
+    m_ExtractQuad.SetSize(static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT));
     m_ExtractQuad.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
     m_ExtractQuad.SetBlendMode(BlendMode::Opaque);
 
     m_BlurHorizontalQuad.Init("Shader//bloomBlurHorizontalPS.cso");
     m_BlurHorizontalQuad.SetPosition(0.0f, 0.0f);
-    m_BlurHorizontalQuad.SetSize(static_cast<float>(SCREEN_WIDTH),
-        static_cast<float>(SCREEN_HEIGHT));
+    m_BlurHorizontalQuad.SetSize(static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT));
     m_BlurHorizontalQuad.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
     m_BlurHorizontalQuad.SetBlendMode(BlendMode::Opaque);
 
     m_BlurVerticalQuad.Init("Shader//bloomBlurVerticalPS.cso");
     m_BlurVerticalQuad.SetPosition(0.0f, 0.0f);
-    m_BlurVerticalQuad.SetSize(static_cast<float>(SCREEN_WIDTH),
-        static_cast<float>(SCREEN_HEIGHT));
+    m_BlurVerticalQuad.SetSize(static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT));
     m_BlurVerticalQuad.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
     m_BlurVerticalQuad.SetBlendMode(BlendMode::Opaque);
 
@@ -66,12 +61,9 @@ void Bloom::Update()
 {
 }
 
-void Bloom::Draw(
-    ID3D11ShaderResourceView* source,
-    RenderTexture& destination)
+void Bloom::Draw(ID3D11ShaderResourceView* source, RenderTexture& destination)
 {
-    if (!m_Initialized || !source)
-        return;
+    if (!m_Initialized || !source) return;
 
     auto* context = Renderer::GetDeviceContext();
     ID3D11ShaderResourceView* nullSRV = nullptr;
@@ -113,14 +105,4 @@ void Bloom::Draw(
     m_Display.Draw();
 
     context->PSSetShaderResources(0, 1, &nullSRV);
-}
-
-void Bloom::SetIntensity(float intensity)
-{
-    m_Intensity = intensity;
-}
-
-float Bloom::GetIntensity() const
-{
-    return m_Intensity;
 }
