@@ -10,6 +10,7 @@
 #include "postEffectManager.h"
 #include "bloom.h"
 #include "grayScale.h"
+#include "posterize.h"
 #include <memory>
 
 
@@ -17,7 +18,6 @@
 void Manager::Init()
 {
     Renderer::Init();
-    Renderer::SetPosterizeLevels(64.0f);
 
     if (!m_RenderTexture.Init(SCREEN_WIDTH, SCREEN_HEIGHT))
     {
@@ -33,6 +33,7 @@ void Manager::Init()
     //PostEffect Test
     PostEffectManager::AddEffect(std::make_unique<GrayScale>());
     PostEffectManager::AddEffect(std::make_unique<Bloom>());
+    PostEffectManager::AddEffect(std::make_unique<Posterize>());
 
     
     auto* grayscale = PostEffectManager::GetEffect<GrayScale>();
@@ -41,6 +42,10 @@ void Manager::Init()
 
     auto* bloom = PostEffectManager::GetEffect<Bloom>();
     bloom->SetEnabled(true);
+
+    auto* posterize = PostEffectManager::GetEffect<Posterize>();
+    posterize->SetEnabled(true);
+    posterize->SetLevels(3);
 
 
   

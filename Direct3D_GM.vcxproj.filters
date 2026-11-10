@@ -234,6 +234,9 @@
     <ClInclude Include="grayScale.h">
       <Filter>Graphics\PostEffect</Filter>
     </ClInclude>
+    <ClInclude Include="posterize.h">
+      <Filter>Graphics\PostEffect</Filter>
+    </ClInclude>
     <ClInclude Include="common.hlsl">
       <Filter>リソース ファイル</Filter>
     </ClInclude>
@@ -398,6 +401,9 @@
     <ClCompile Include="grayScale.cpp">
       <Filter>Graphics\PostEffect</Filter>
     </ClCompile>
+    <ClCompile Include="posterize.cpp">
+      <Filter>Graphics\PostEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="bloomExtractPS.hlsl">
@@ -417,6 +423,9 @@
     </FxCompile>
     <FxCompile Include="grayScalePS.hlsl">
       <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="posterizePS.hlsl">
+      <Filter>Graphics\PostEffect</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
