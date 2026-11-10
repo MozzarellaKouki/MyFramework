@@ -497,7 +497,6 @@ void Renderer::SetPosterizeLevels(float levels)
 void Renderer::SetGrayscaleIntensity(float intensity)
 {
 	GRAYSCALE grayscale{};
-
 	grayscale.Intensity = intensity;
 
 	m_DeviceContext->UpdateSubresource
@@ -509,6 +508,8 @@ void Renderer::SetGrayscaleIntensity(float intensity)
 		0,
 		0
 	);
+
+	GetDeviceContext()->PSSetConstantBuffers(8, 1, &m_GrayscaleBuffer);
 }
 
 

@@ -6,8 +6,6 @@
 #include "RenderTexture.h"
 #include "Polygon2D.h"
 
-using PostEffectHandle = size_t;
-
 class PostEffectManager
 {
 private:
@@ -18,22 +16,48 @@ private:
     static bool m_Initialized;
     static bool m_DisplayInitialized;
 
-    bool m_Enabled = false;
-
 public:
     static void Init();
     static void Uninit();
     static void Update();
     static void Draw(ID3D11ShaderResourceView* source);
 
-    //エフェクト登録
-    static PostEffectHandle AddEffect(std::unique_ptr<PostEffect> effect);
+    //エフェクト登録・取得
+    inline static void AddEffect(std::unique_ptr<PostEffect> effect)
+    {
+        if (!effect) return;
 
-    //仕様フラグ
-    static void SetEnabled(PostEffectHandle handle, bool enabled);
-    static bool IsEnabled(PostEffectHandle handle);
+        //同じ型がすでに登録されていないか確認
+        for (auto& existing : m_Effects)
+        {
+            if (typeid(*existing) == typeid(*effect))
+            {
+                return;
+            }
+        }
 
-    //強度
-    static void SetIntensity(PostEffectHandle handle, float intensity);
-    static float GetIntensity(PostEffectHandle handle);
+        if (m_Initialized)
+        {
+            effect->Init();
+        }
+
+        m_Effects.push_back(std::move(effect));
+    }
+
+
+    template<typename T> inline static T* GetEffect()
+    {
+        for (auto& effect : m_Effects)
+        {
+            if (T* result = dynamic_cast<T*>(effect.get()))
+            {
+                return result;
+            }
+        }
+
+        return nullptr;
+    }
+
+
+
 };

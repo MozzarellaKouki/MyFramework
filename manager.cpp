@@ -12,22 +12,16 @@
 #include "grayScale.h"
 #include <memory>
 
-RenderTexture Manager::m_RenderTexture;
-Bloom* Manager::m_Bloom = nullptr;
-GrayScale* Manager::m_GrayScale = nullptr;
-
-
 
 
 void Manager::Init()
 {
     Renderer::Init();
-    Renderer::SetPosterizeLevels(16.0f);
+    Renderer::SetPosterizeLevels(64.0f);
 
     if (!m_RenderTexture.Init(SCREEN_WIDTH, SCREEN_HEIGHT))
     {
-        MessageBox(nullptr, "Scene render texture initialization failed.",
-            "Error", MB_OK);
+        MessageBox(nullptr, "Scene render texture initialization failed.", "Error", MB_OK);
         return;
     }
 
@@ -36,23 +30,20 @@ void Manager::Init()
     SceneManager::Init(std::make_unique<TitleScene>());
     TextureManager::Init();
 
-
-    // Grayscale
-    auto grayscale = std::make_unique<GrayScale>();
-    m_GrayScale = grayscale.get();
-    m_GrayScale->SetIntensity(0.5f);
-    m_GrayScale->SetEnabled(true);
-
-    // Bloom
-    auto bloom = std::make_unique<Bloom>();
-    m_Bloom = bloom.get();
-    m_Bloom->SetIntensity(0.5f);
-    m_Bloom->SetEnabled(true);
-
-
-    // PostEffectManagerへ登録
-    PostEffectManager::AddEffect(std::make_unique<Bloom>());
+    //PostEffect Test
     PostEffectManager::AddEffect(std::make_unique<GrayScale>());
+    PostEffectManager::AddEffect(std::make_unique<Bloom>());
+
+    
+    auto* grayscale = PostEffectManager::GetEffect<GrayScale>();
+    grayscale->SetEnabled(true);
+    grayscale->SetIntensity(0.0f);
+
+    auto* bloom = PostEffectManager::GetEffect<Bloom>();
+    bloom->SetEnabled(true);
+
+
+  
 
     // エフェクトの初期化
     PostEffectManager::Init();
@@ -68,8 +59,6 @@ void Manager::Uninit()
     TextureManager::Uninit();
 
     PostEffectManager::Uninit();
-    m_Bloom = nullptr;
-    m_GrayScale = nullptr;
     m_RenderTexture.Uninit();
     Renderer::Uninit();
 }
@@ -81,24 +70,18 @@ void Manager::Update()
     PostEffectManager::Update();
 
 
-    //デバッグ
-    if (!m_Bloom) return;
 
-    float intensity = m_Bloom->GetIntensity();
-    if (Keyboard_IsKeyDownTrigger(KK_P))
+    if (Keyboard_IsKeyDown(KK_P))
     {
-        intensity += 0.1f;
-        if (intensity > 2.0f)
-            intensity = 2.0f;
-        m_Bloom->SetIntensity(intensity);
+        auto* grayscale = PostEffectManager::GetEffect<GrayScale>();
+        grayscale->SetIntensity( std::min(grayscale->GetIntensity() + 0.01f, 1.0f));
+
     }
 
-    if (Keyboard_IsKeyDownTrigger(KK_O))
+    if (Keyboard_IsKeyDown(KK_O))
     {
-        intensity -= 0.1f;
-        if (intensity < 0.0f)
-            intensity = 0.0f;
-        m_Bloom->SetIntensity(intensity);
+        auto* grayscale = PostEffectManager::GetEffect<GrayScale>();
+        grayscale->SetIntensity(std::max(grayscale->GetIntensity() - 0.01f, 0.0f));
     }
 }
 

@@ -7,8 +7,6 @@ class GrayScale : public PostEffect
 {
 private:
     Polygon2D m_Display;
-    float m_Intensity = 0.5f;
-    bool m_Initialized = false;
 
 public:
     void Init() override;

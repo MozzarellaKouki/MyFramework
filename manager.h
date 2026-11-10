@@ -8,9 +8,7 @@ class GrayScale;
 class Manager
 {
 private:
-    static RenderTexture m_RenderTexture;
-    static Bloom* m_Bloom;
-    static GrayScale* m_GrayScale;
+    static inline RenderTexture m_RenderTexture;
 
 public:
     static void Init();

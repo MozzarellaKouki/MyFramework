@@ -14,8 +14,7 @@ private:
     Polygon2D m_BlurHorizontalQuad;
     RenderTexture m_BlurVerticalTexture;
     Polygon2D m_BlurVerticalQuad;
-    float m_Intensity = 0.4f;
-    bool m_Initialized = false;
+
 
 public:
     void Init() override;

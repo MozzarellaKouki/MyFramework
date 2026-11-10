@@ -7,7 +7,10 @@ class PostEffect
 {
 protected:
     bool m_Enabled = false;
+    bool m_Initialized = false;
+
     float m_Intensity = 0.0f;
+
 
 public:
     virtual ~PostEffect() = default;

@@ -2,7 +2,6 @@
 #include "cmath"
 #include "main.h"
 
-
 //Colorç\ë¢ëÃ ===============================
 struct Color
 {

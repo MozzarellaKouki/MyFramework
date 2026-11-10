@@ -35,7 +35,10 @@ void PostEffectManager::Init()
         return;
     }
 
-    for(auto& effect : m_Effects) effect->Init();
+    for (auto& effect : m_Effects)
+    {
+        effect->Init();
+    }
 
     m_Initialized = true;
 }
@@ -106,37 +109,5 @@ void PostEffectManager::Draw(ID3D11ShaderResourceView* source)
 }
 
 
-PostEffectHandle PostEffectManager::AddEffect(std::unique_ptr<PostEffect> effect)
-{
-    if (!effect) return static_cast<size_t>(-1);
-
-    if (m_Initialized) effect->Init();
-    m_Effects.push_back(std::move(effect));
-
-    return m_Effects.size() - 1;
-}
 
 
-void PostEffectManager::SetEnabled(PostEffectHandle handle, bool enabled)
-{
-    if (handle >= m_Effects.size()) return;
-    m_Effects[handle]->SetEnabled(enabled);
-}
-
-bool PostEffectManager::IsEnabled(PostEffectHandle handle)
-{
-    if (handle >= m_Effects.size()) return false;
-    return m_Effects[handle]->IsEnabled();
-}
-
-void PostEffectManager::SetIntensity(PostEffectHandle handle, float intensity)
-{
-    if (handle >= m_Effects.size()) return;
-    m_Effects[handle]->SetIntensity(intensity);
-}
-
-float PostEffectManager::GetIntensity(PostEffectHandle handle)
-{
-    if (handle >= m_Effects.size()) return 0.0f;
-    return m_Effects[handle]->GetIntensity();
-}
