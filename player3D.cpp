@@ -5,6 +5,7 @@
 #include "textureManager.h"
 #include "keyboard.h"
 #include "gameObjectManager.h"
+#include "boxColliderComponent.h"
 #include "explosion.h"
 
 #include "sprite3DComponent.h"
@@ -151,7 +152,32 @@ void Player3D::Update(float deltaTime)
 
 
 
+    m_physics->AddForce({ 0.0f, -9.8f, 0.0f });
     GameObject::Update(deltaTime);
+
+    auto* collider = GetComponent<BoxColliderComponent>();
+    if (collider != nullptr)
+    {
+        Vector3 position = m_transform->GetPosition();
+        float groundHeight = 0.0f;
+        if (GameObjectManager::GetInstance().TryGetGroundHeight(
+            position.x, position.z, groundHeight))
+        {
+            const float halfHeight = collider->GetWorldSize().y * 0.5f;
+            if (position.y - halfHeight < groundHeight)
+            {
+                position.y = groundHeight + halfHeight;
+                m_transform->SetPosition(position);
+
+                Vector3 velocity = m_physics->GetVelocity();
+                if (velocity.y < 0.0f)
+                {
+                    velocity.y = 0.0f;
+                    m_physics->SetVelocity(velocity);
+                }
+            }
+        }
+    }
 
 }
 

@@ -7,6 +7,11 @@
 #include "scoreObject3D.h"
 
 
+#include "debugUtils.h"
+#include "field.h"
+
+
+
 void GameObjectManager::Uninit()
 {
     for (auto& obj : m_GameObjects)
@@ -110,3 +115,22 @@ int GameObjectManager::GetScoreObjectCount()
     return count;
 }
 
+#include "heightFieldSurfaceComponent.h"
+
+bool GameObjectManager::TryGetGroundHeight(
+    float worldX,
+    float worldZ,
+    float& worldHeight) const
+{
+    for (const auto& obj : m_GameObjects)
+    {
+        if (!obj || obj->IsDestroy())
+            continue;
+
+        const auto* surface = obj->GetComponent<HeightFieldSurfaceComponent>();
+        if (surface && surface->TryGetHeight(worldX, worldZ, worldHeight))
+            return true;
+    }
+
+    return false;
+}

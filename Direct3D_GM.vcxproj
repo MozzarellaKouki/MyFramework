@@ -180,6 +180,8 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="gameObjectFactory.h" />
     <ClInclude Include="gameObjectManager.h" />
+    <ClInclude Include="heightFieldData.h" />
+    <ClInclude Include="heightFieldSurfaceComponent.h" />
     <ClInclude Include="gameOverField.h" />
     <ClInclude Include="gameOverScene.h" />
     <ClInclude Include="gameScene.h" />
@@ -245,6 +247,8 @@
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="gameObjectFactory.cpp" />
     <ClCompile Include="gameObjectManager.cpp" />
+    <ClCompile Include="heightFieldData.cpp" />
+    <ClCompile Include="heightFieldSurfaceComponent.cpp" />
     <ClCompile Include="gameOverField.cpp" />
     <ClCompile Include="gameOverScene.cpp" />
     <ClCompile Include="gameScene.cpp" />

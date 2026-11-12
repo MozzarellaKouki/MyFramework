@@ -43,10 +43,8 @@ void GameScene::Init()
 
 
 
-	//auto* player3D = GameObjectFactory::CreatePlayer();
 	m_Player = GameObjectFactory::CreatePlayer();
 	auto* field = GameObjectFactory::CreateField();
-	//auto* Enemy3D = GameObjectFactory::CreateEnemy(player3D);
 	auto* scoreObjectSpawner = GameObjectFactory::CreateScoreObjectSpawner(m_Player);
 
 	//GameObjectFactory::CreateBGM();

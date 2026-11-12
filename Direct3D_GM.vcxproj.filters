@@ -102,6 +102,12 @@
     <ClInclude Include="meshBuilder.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="heightFieldData.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="heightFieldSurfaceComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
     <ClInclude Include="modelLoader.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
@@ -268,6 +274,12 @@
     </ClCompile>
     <ClCompile Include="meshBuilder.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="heightFieldData.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="heightFieldSurfaceComponent.cpp">
+      <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="modelLoader.cpp">
       <Filter>ソース ファイル</Filter>

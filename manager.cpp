@@ -44,7 +44,7 @@ void Manager::Init()
     bloom->SetEnabled(true);
 
     auto* posterize = PostEffectManager::GetEffect<Posterize>();
-    posterize->SetEnabled(true);
+    posterize->SetEnabled(false);
     posterize->SetLevels(3);
 
 

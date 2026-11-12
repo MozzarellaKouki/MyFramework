@@ -3,6 +3,7 @@
 #include "sprite3DComponent.h"
 #include <memory>
 #include <vector>
+#include <utility>
 
 class Enemy3D;
 
@@ -21,6 +22,7 @@ public:
     void Uninit();
     void Update(float dt);
     void Draw();
+    bool TryGetGroundHeight(float worldX, float worldZ, float& worldHeight) const;
 
     
     static GameObjectManager& GetInstance()
@@ -29,9 +31,9 @@ public:
         return instance;
     }
 
-    template<typename T> T* CreateGameObject()
+    template<typename T, typename... Args> T* CreateGameObject(Args&&... args)
     {
-        std::unique_ptr<T> obj = std::make_unique<T>();
+        std::unique_ptr<T> obj = std::make_unique<T>(std::forward<Args>(args)...);
         T* ptr = obj.get();
         ptr->Init(); 
         m_PendingObjects.push_back(std::move(obj));

@@ -3,6 +3,12 @@
 #include "debugUtils.h"
 
 
+GameObject::GameObject()
+    : m_Destroy(false)
+{
+
+}
+
 void GameObject::Init()
 {
     for (auto &comp : m_Components)

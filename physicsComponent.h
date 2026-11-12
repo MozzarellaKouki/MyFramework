@@ -19,6 +19,8 @@ public:
     // ŠO‚©‚ç—Í‚ðŽó‚¯Žæ‚é
     void AddVelocity(Vector3 force) { m_Velocity += force; }
     void AddForce(Vector3 force) { m_Acceleration += force / m_Mass; } // a = F / m
+    Vector3 GetVelocity() const { return m_Velocity; }
+    void SetVelocity(const Vector3& velocity) { m_Velocity = velocity; }
 
  
     void Update(float deltaTime) override;

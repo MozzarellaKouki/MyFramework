@@ -9,16 +9,14 @@
 
 class GameObject
 {
-private:
-    std::vector<Component*> m_Components;
-    bool m_Destroy;
+public: 
 
-public:
+    GameObject();
 
     //デストラクタ
     virtual ~GameObject()
     {
-        for (auto comp : m_Components)
+        for (auto &comp : m_Components)
         {
             comp->Uninit();
             delete comp;
@@ -92,4 +90,8 @@ public:
     virtual void Draw();
     virtual void Uninit();
 
+
+private:
+    std::vector<Component*> m_Components;
+    bool m_Destroy;
 };
