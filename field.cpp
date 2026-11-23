@@ -20,7 +20,7 @@ void Field::Init()
     if (m_Initialized)
         return;
 
-    // A few smooth rises and a shallow basin give the initial field visible height variation.
+    //test フィールドの地形高低差
     const HeightFieldConfig& config = m_HeightField.GetConfig();
     for (int z = 0; z <= config.segmentsZ; ++z)
     {
@@ -28,8 +28,10 @@ void Field::Init()
         {
             const float localX = -config.width * 0.5f +
                 config.width * static_cast<float>(x) / config.segmentsX;
+
             const float localZ = config.depth * 0.5f -
                 config.depth * static_cast<float>(z) / config.segmentsZ;
+
             const auto hill = [](float x, float z, float centerX, float centerZ,
                 float radius, float height)
             {
@@ -39,9 +41,9 @@ void Field::Init()
             };
 
             const float height =
-                hill(localX, localZ, -0.45f, 0.25f, 0.12f, 0.35f) +
-                hill(localX, localZ, 0.45f, -0.25f, 0.18f, 0.50f) -
-                hill(localX, localZ, 0.05f, 0.05f, 0.30f, 0.12f);
+               + hill(localX, localZ, -0.45f, 0.25f, 0.12f, 0.35f)
+               + hill(localX, localZ, 0.45f, -0.25f, 0.18f, 0.50f) 
+               - hill(localX, localZ, 0.05f, 0.05f, 0.30f, 0.82f);
             m_HeightField.SetHeight(x, z, height);
         }
     }
@@ -55,7 +57,7 @@ void Field::Init()
     auto* transform = AddComponent<TransformComponent>();
     transform->SetPosition(Vector3(0.0f, 0.0f, 5.0f));
     transform->SetRotation(Vector3(0.0f, 0.0f, 0.0f));
-    transform->SetScale(Vector3(10.0f, 10.0f, 10.0f));
+    transform->SetScale(Vector3(50.0f, 10.0f, 50.0f));
 
     m_Surface = AddComponent<HeightFieldSurfaceComponent>();
     m_Surface->SetHeightField(&m_HeightField);

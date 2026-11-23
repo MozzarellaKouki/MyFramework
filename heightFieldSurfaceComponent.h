@@ -5,7 +5,7 @@
 class HeightFieldData;
 class TransformComponent;
 
-// Queries the rendered heightfield using world-space X/Z coordinates.
+//ワールド空間のX/Z座標を使用して、レンダリングされた高さフィールドを参照します。
 class HeightFieldSurfaceComponent : public Component
 {
 private:

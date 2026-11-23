@@ -19,51 +19,55 @@
 void Player3D::Init()
 {
 
-    m_transform = AddComponent<TransformComponent>();
-    m_physics = AddComponent<PhysicsComponent>();
-    m_renderer = AddComponent<MeshRendererComponent>();
+	m_transform = AddComponent<TransformComponent>();
+	m_physics = AddComponent<PhysicsComponent>();
+	m_renderer = AddComponent<MeshRendererComponent>();
 
-    m_transform->SetPosition({ 0,0,0 });
-    m_transform->SetRotation({ 0,0,0 });
-    m_transform->SetScale({ 1,1,1 });
-    
-    SetState(Player3DState::Normal);
+	m_transform->SetPosition({ 0,0,0 });
+	m_transform->SetRotation({ 0,0,0 });
+	m_transform->SetScale({ 1,1,1 });
 
-    //m_TestSE.Load("Asset/Sound/cursor_01.wav");
+	m_physics->SetMass(1.0f);
 
 
+	
+	SetState(Player3DState::Normal);
 
-    //--------------------------------
-    // OBJ読込
-    //--------------------------------
-
-    Mesh* mesh = ModelLoader::LoadOBJ("Asset/model/player.obj");
-    assert(mesh != nullptr);
-    m_renderer->SetMesh(mesh);
-
-    //--------------------------------
-    // Material
-    //--------------------------------
-
-    MaterialData mat{};
-
-    mat.color =
-    { 1,1,1,1 };
-
-    mat.texture = TextureManager::Load(L"Asset/texture/Brick.png");
-
-    m_renderer->SetMaterial(mat);
+	//m_TestSE.Load("Asset/Sound/cursor_01.wav");
 
 
-    //常駐パーティクル
-    auto* emitter = AddComponent<ParticleEmitterComponent>();
-    emitter->Configure(ParticleTemperSettings::Rain());
-    emitter->SetBillboardType(BillboardType::Full);
-    emitter->Play();
 
-    m_SmokeEmitter = AddComponent<ParticleEmitterComponent>();
-    m_SmokeEmitter->Configure(ParticleTemperSettings::Smoke());
-    m_SmokeEmitter->SetBillboardType( BillboardType::Full );
+	//--------------------------------
+	// OBJ読込
+	//--------------------------------
+
+	Mesh* mesh = ModelLoader::LoadOBJ("Asset/model/player.obj");
+	assert(mesh != nullptr);
+	m_renderer->SetMesh(mesh);
+
+	//--------------------------------
+	// Material
+	//--------------------------------
+
+	MaterialData mat{};
+
+	mat.color =
+	{ 1,1,1,1 };
+
+	mat.texture = TextureManager::Load(L"Asset/texture/Brick.png");
+
+	m_renderer->SetMaterial(mat);
+
+
+	//常駐パーティクル
+	auto* emitter = AddComponent<ParticleEmitterComponent>();
+	emitter->Configure(ParticleTemperSettings::Rain());
+	emitter->SetBillboardType(BillboardType::Full);
+	emitter->Play();
+
+	m_SmokeEmitter = AddComponent<ParticleEmitterComponent>();
+	m_SmokeEmitter->Configure(ParticleTemperSettings::Smoke());
+	m_SmokeEmitter->SetBillboardType( BillboardType::Full );
 }
 
 void Player3D::Uninit()
@@ -74,118 +78,117 @@ void Player3D::Uninit()
 void Player3D::Update(float deltaTime)
 {
 
-    switch (m_State)
-    {
+	switch (m_State)
+	{
 
-        case Player3DState::Normal:
-        InputMove();
-        break;
-    }   
-
-
-    if (Keyboard_IsKeyDownTrigger(KK_ENTER))
-    {
-        m_Boost = !m_Boost;
-        AudioManager::PlaySE(SEType::Cursor);
-        auto* emitter = AddComponent<ParticleEmitterComponent>();
-        emitter->Configure(ParticleTemperSettings::ShockWave());
-        emitter->SetBillboardType(BillboardType::Horizontal);
-        emitter->Play(1.0f);
-
-        if (m_Boost)
-        {
-            m_BoostFrameCount = 0;
-            m_SmokeEmitter->Play();
-        }
-        else
-        {
-            m_SmokeEmitter->Stop();
-        }
-    }
-
-    if (m_Boost)
-    {
-        m_BoostFrameCount++;
-
-        if (m_BoostFrameCount >= 3)
-        {
-            m_BoostFrameCount = 0;
-
-            if (ScoreManager::GetScore(0) > 0)
-            {
-                ScoreManager::AddScore(0, -1);
-            }
-        }
-    }
+		case Player3DState::Normal:
+		InputMove();
+		break;
+	}   
 
 
-    //デバッグ用　爆発エフェクト
-    //if (Keyboard_IsKeyDownTrigger(KK_F))
-    //{
-    //  /*  auto* exp = GameObjectManager::GetInstance().CreateGameObject<Explosion>();
-    //    exp->GetComponent<TransformComponent>()->SetPosition(m_transform->GetPosition());*/
-    //    auto* emitter = AddComponent<ParticleEmitterComponent>();
-    //    emitter->Configure(ParticleTemperSettings::ShockWave());
-    //    emitter->SetBillboardType(BillboardType::Horizontal);
-    //    emitter->Play(1.0f);
+	if (Keyboard_IsKeyDownTrigger(KK_ENTER))
+	{
+		m_Boost = !m_Boost;
+		AudioManager::PlaySE(SEType::Cursor);
+		auto* emitter = AddComponent<ParticleEmitterComponent>();
+		emitter->Configure(ParticleTemperSettings::ShockWave());
+		emitter->SetBillboardType(BillboardType::Horizontal);
+		emitter->Play(1.0f);
 
-    //   // m_TestSE.Play(false);
-    //   // AudioManager::PlaySE(SEType::Get);
+		if (m_Boost)
+		{
+			m_BoostFrameCount = 0;
+			m_SmokeEmitter->Play();
+		}
+		else
+		{
+			m_SmokeEmitter->Stop();
+		}
+	}
 
-    //   // ScoreManager::AddScore(0, 100);
-    //}
+	if (m_Boost)
+	{
+		m_BoostFrameCount++;
 
-    ////デバッグ用　パーティクル
-    //if (Keyboard_IsKeyDownTrigger(KK_G))
-    //{
-    //    auto* emitter = AddComponent<ParticleEmitterComponent>();
-    //    emitter->Configure(ParticleTemperSettings::Smoke());
-    //    emitter->SetBillboardType(BillboardType::Full);
-    //    emitter->Play(2.5f);
+		if (m_BoostFrameCount >= 3)
+		{
+			m_BoostFrameCount = 0;
 
-    //    //m_TestSE.Play(false);
-    //    AudioManager::PlaySE(SEType::Enemy);
+			if (ScoreManager::GetScore(0) > 0)
+			{
+				ScoreManager::AddScore(0, -1);
+			}
+		}
+	}
 
-    //   // ScoreManager::AddScore(0, 800);
-    //}
+
+	//デバッグ用　爆発エフェクト
+	//if (Keyboard_IsKeyDownTrigger(KK_F))
+	//{
+	//  /*  auto* exp = GameObjectManager::GetInstance().CreateGameObject<Explosion>();
+	//    exp->GetComponent<TransformComponent>()->SetPosition(m_transform->GetPosition());*/
+	//    auto* emitter = AddComponent<ParticleEmitterComponent>();
+	//    emitter->Configure(ParticleTemperSettings::ShockWave());
+	//    emitter->SetBillboardType(BillboardType::Horizontal);
+	//    emitter->Play(1.0f);
+
+	//   // m_TestSE.Play(false);
+	//   // AudioManager::PlaySE(SEType::Get);
+
+	//   // ScoreManager::AddScore(0, 100);
+	//}
+
+	////デバッグ用　パーティクル
+	//if (Keyboard_IsKeyDownTrigger(KK_G))
+	//{
+	//    auto* emitter = AddComponent<ParticleEmitterComponent>();
+	//    emitter->Configure(ParticleTemperSettings::Smoke());
+	//    emitter->SetBillboardType(BillboardType::Full);
+	//    emitter->Play(2.5f);
+
+	//    //m_TestSE.Play(false);
+	//    AudioManager::PlaySE(SEType::Enemy);
+
+	//   // ScoreManager::AddScore(0, 800);
+	//}
   
 
 
 
-    m_physics->AddForce({ 0.0f, -9.8f, 0.0f });
-    GameObject::Update(deltaTime);
+	GameObject::Update(deltaTime);
 
-    auto* collider = GetComponent<BoxColliderComponent>();
-    if (collider != nullptr)
-    {
-        Vector3 position = m_transform->GetPosition();
-        float groundHeight = 0.0f;
-        if (GameObjectManager::GetInstance().TryGetGroundHeight(
-            position.x, position.z, groundHeight))
-        {
-            const float halfHeight = collider->GetWorldSize().y * 0.5f;
-            if (position.y - halfHeight < groundHeight)
-            {
-                position.y = groundHeight + halfHeight;
-                m_transform->SetPosition(position);
+	auto* collider = GetComponent<BoxColliderComponent>();
+	if (collider != nullptr)
+	{
+		Vector3 position = m_transform->GetPosition();
+		float groundHeight = 0.0f;
+		if (GameObjectManager::GetInstance().TryGetGroundHeight(
+			position.x, position.z, groundHeight))
+		{
+			const float halfHeight = collider->GetWorldSize().y * 0.5f;
+			if (position.y - halfHeight < groundHeight)
+			{
+				position.y = groundHeight + halfHeight;
+				m_transform->SetPosition(position);
 
-                Vector3 velocity = m_physics->GetVelocity();
-                if (velocity.y < 0.0f)
-                {
-                    velocity.y = 0.0f;
-                    m_physics->SetVelocity(velocity);
-                }
-            }
-        }
-    }
+				Vector3 velocity = m_physics->GetVelocity();
+				if (velocity.y < 0.0f)
+				{
+					velocity.y = 0.0f;
+					m_physics->SetVelocity(velocity);
+				}
+			}
+		}
+	}
 
 }
 
 void Player3D::Draw()
 {
-    //OutputDebugStringA("Polygon3D Draw\n");
+	//OutputDebugStringA("Polygon3D Draw\n");
 
-    GameObject::Draw();
+	GameObject::Draw();
 }
 
 
@@ -194,49 +197,49 @@ void Player3D::InputMove()
 {
   
 
-    Vector3 rot = m_transform->GetRotation();
-    float yaw = rot.y;
+	Vector3 rot = m_transform->GetRotation();
+	float yaw = rot.y;
 
-    Vector3 forward;
-    forward.x = sinf(yaw);
-    forward.y = 0.0f;
-    forward.z = cosf(yaw);
+	Vector3 forward;
+	forward.x = sinf(yaw);
+	forward.y = 0.0f;
+	forward.z = cosf(yaw);
 
-    Vector3 right;
-    right.x = cosf(yaw);
-    right.y = 0.0f;
-    right.z = -sinf(yaw);
-    float movePower = m_Boost ? 160.0f : 80.0f;
+	Vector3 right;
+	right.x = cosf(yaw);
+	right.y = 0.0f;
+	right.z = -sinf(yaw);
+	float movePower = m_Boost ? 160.0f : 80.0f;
 
-    if (Keyboard_IsKeyDown(KK_W))
-    {
-        m_physics->AddForce(forward * movePower);
-    }
+	if (Keyboard_IsKeyDown(KK_W))
+	{
+		m_physics->AddForce(forward * movePower);
+	}
 
-    if (Keyboard_IsKeyDown(KK_S))
-    {
-        m_physics->AddForce(forward * -movePower);
-    }
+	if (Keyboard_IsKeyDown(KK_S))
+	{
+		m_physics->AddForce(forward * -movePower);
+	}
 
-    if (Keyboard_IsKeyDown(KK_D))
-    {
-        m_physics->AddForce(right * movePower);
-    }
+	if (Keyboard_IsKeyDown(KK_D))
+	{
+		m_physics->AddForce(right * movePower);
+	}
 
-    if (Keyboard_IsKeyDown(KK_A))
-    {
-        m_physics->AddForce(right * -movePower);
-    }
+	if (Keyboard_IsKeyDown(KK_A))
+	{
+		m_physics->AddForce(right * -movePower);
+	}
 
-    if (Keyboard_IsKeyDown(KK_RIGHT))
-    {
-        m_transform->AddRotation({ 0, 0.1f, 0 });
-    }
+	if (Keyboard_IsKeyDown(KK_RIGHT))
+	{
+		m_transform->AddRotation({ 0, 0.1f, 0 });
+	}
 
-    if (Keyboard_IsKeyDown(KK_LEFT))
-    {
-        m_transform->AddRotation({ 0, -0.1f, 0 });
-    }
+	if (Keyboard_IsKeyDown(KK_LEFT))
+	{
+		m_transform->AddRotation({ 0, -0.1f, 0 });
+	}
 
 
 }

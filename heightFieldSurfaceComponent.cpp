@@ -56,7 +56,6 @@ bool HeightFieldSurfaceComponent::TryGetHeight(
         return false;
     }
 
-    // Keep the query surface aligned with MeshBuilder's TL-TR-BL / BL-TR-BR split.
     float localHeight = 0.0f;
     if (tx + tz <= 1.0f)
     {

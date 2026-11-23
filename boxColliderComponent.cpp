@@ -11,8 +11,7 @@ void BoxColliderComponent::Init()
 
 
 
-bool BoxColliderComponent::CheckCollision(
-    ColliderComponent* other)
+bool BoxColliderComponent::CheckCollision(ColliderComponent* other)
 {
     BoxColliderComponent* box =
         dynamic_cast<BoxColliderComponent*>(other);
