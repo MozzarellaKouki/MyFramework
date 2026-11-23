@@ -1,4 +1,4 @@
-#include "sprite3DComponent.h"
+ï»¿#include "sprite3DComponent.h"
 #include "gameObject.h"
 #include "renderer.h"
 #include "textureManager.h"
@@ -23,7 +23,7 @@ void Sprite3DComponent::Init()
 
 void Sprite3DComponent::Draw()
 {
-    //’Êí•`‰æ—pB‹——£ƒ\[ƒg‘ÎÛ‚È‚ç‚±‚±‚Å‚Í•`‰æ‚µ‚È‚¢
+    //é€šå¸¸æç”»ç”¨ã€‚è·é›¢ã‚½ãƒ¼ãƒˆå¯¾è±¡ãªã‚‰ã“ã“ã§ã¯æç”»ã—ãªã„
     if (m_SortByDistance)
         return;
 
@@ -37,12 +37,12 @@ void Sprite3DComponent::Draw()
 }
 
 //============================
-//“§‰ßRenderŠÖ”
+//é€éRenderé–¢æ•°
 //============================
 
 void Sprite3DComponent::SubmitTransparentSprites()
 {
-    //“§–¾ƒXƒvƒ‰ƒCƒg‚Í‚±‚±‚Å“§–¾•`‰æƒ}ƒl[ƒWƒƒ[‚Ö“o˜^
+    //é€æ˜ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã¯ã“ã“ã§é€æ˜æç”»ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã¸ç™»éŒ²
     for (auto* sprite : s_TransparentSprites)
     {
         if (!sprite->IsVisible()) continue;
@@ -53,7 +53,7 @@ void Sprite3DComponent::SubmitTransparentSprites()
 
 void Sprite3DComponent::RenderTransparent()
 {
-    //“§‰ßƒXƒvƒ‰ƒCƒg—p‚Ì•`‰æˆ—B“§–¾•`‰æƒ}ƒl[ƒWƒƒ[‚©‚çŒÄ‚Î‚ê‚éB
+    //é€éã‚¹ãƒ—ãƒ©ã‚¤ãƒˆç”¨ã®æç”»å‡¦ç†ã€‚é€æ˜æç”»ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‹ã‚‰å‘¼ã°ã‚Œã‚‹ã€‚
     if (!m_Transform)
         return;
 
@@ -64,13 +64,13 @@ void Sprite3DComponent::RenderTransparent()
 }
 
 //============================
-//ApplyŠÖ”
+//Applyé–¢æ•°
 //============================
 
 void Sprite3DComponent::ApplyAnimation()
 {
 
-    // ƒfƒtƒHƒ‹ƒg’l
+    // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
     SPRITE_ANIMATION data{};
     data.Frame = 0;
     data.Columns = 1;
@@ -119,17 +119,17 @@ void Sprite3DComponent::ApplyBillboard(TransformComponent* transform)
         Vector3 scale = transform->GetScale();
 
 
-        //ƒXƒP[ƒ‹
+        //ã‚¹ã‚±ãƒ¼ãƒ«
         XMMATRIX s = XMMatrixScaling(scale.x, scale.y, scale.z);
 
-        //‰ñ“]s—ñ
+        //å›è»¢è¡Œåˆ—
         XMMATRIX rot = invView;
-        rot.r[3] = XMVectorSet(0, 0, 0, 1); //•½sˆÚ“®‚ğÁ‚·
+        rot.r[3] = XMVectorSet(0, 0, 0, 1); //å¹³è¡Œç§»å‹•ã‚’æ¶ˆã™
 
-        //•½sˆÚ“®
+        //å¹³è¡Œç§»å‹•
         XMMATRIX t = XMMatrixTranslation(pos.x, pos.y, pos.z);
 
-        //S ¨ R ¨ T
+        //S â†’ R â†’ T
         XMMATRIX world = s * rot * t;
 
         Renderer::SetWorldMatrix(world);
@@ -142,7 +142,7 @@ void Sprite3DComponent::ApplyBillboard(TransformComponent* transform)
         Vector3 pos = transform->GetPosition();
         Vector3 scale = transform->GetScale();
 
-        //ƒXƒP[ƒ‹
+        //ã‚¹ã‚±ãƒ¼ãƒ«
         XMMATRIX s = XMMatrixScaling(
             scale.x,
             scale.y,
@@ -150,12 +150,12 @@ void Sprite3DComponent::ApplyBillboard(TransformComponent* transform)
         );
 
 
-        //’n–Ê‚ÉQ‚©‚¹‚é‰ñ“]
+        //åœ°é¢ã«å¯ã‹ã›ã‚‹å›è»¢
         XMMATRIX rot =
             XMMatrixRotationX(XMConvertToRadians(90.0f));
 
 
-        //À•W
+        //åº§æ¨™
         XMMATRIX t =
             XMMatrixTranslation(
                 pos.x,
@@ -232,7 +232,7 @@ BillboardType  Sprite3DComponent::GetBillboard() const
 
 
 //=================================
-//@“§‰ßƒXƒvƒ‰ƒCƒg‚Ì“o˜^EíœE•`Ê
+//ã€€é€éã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ç™»éŒ²ãƒ»å‰Šé™¤ãƒ»æå†™
 //=================================
 
 void Sprite3DComponent::RegisterTransparentSprite()

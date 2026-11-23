@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "GameObject.h"
 #include "mathUtils.h"
 #include "polygon2D.h"

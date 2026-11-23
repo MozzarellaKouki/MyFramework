@@ -219,6 +219,12 @@
     <ClInclude Include="colliderComponent.h">
       <Filter>Component\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="collision.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="sphereColliderComponent.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
     <ClInclude Include="collisionManager.h">
       <Filter>Component\Collider</Filter>
     </ClInclude>
@@ -392,7 +398,7 @@
     <ClCompile Include="gameOverField.cpp">
       <Filter>Temporary</Filter>
     </ClCompile>
-    <ClCompile Include="boxColliderComponent.cpp">
+    <ClCompile Include="colliderComponent.cpp">
       <Filter>Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="collisionManager.cpp">

@@ -1,4 +1,4 @@
-#include "physicsComponent.h"
+ï»¿#include "physicsComponent.h"
 #include "gameObject.h"
 
 
@@ -13,23 +13,23 @@ void PhysicsComponent::Update(float deltaTime)
 	if (!m_Transform) return;
 
 
-	//d—Í
+	//é‡åŠ›
 	if (m_UseGravity)
 	{
 		m_Velocity.y -= m_Gravity * deltaTime;
 	}
 
-	//‘¬“x‚ÌXV
+	//é€Ÿåº¦ã®æ›´æ–°
 	m_Velocity += m_Acceleration * deltaTime;
 
-	//Œ¸Š
+	//æ¸›è¡°
 	m_Velocity.x *= m_Damping;
 	m_Velocity.z *= m_Damping;
 
-	//ˆÊ’u‚ÌXV 
+	//ä½ç½®ã®æ›´æ–° 
 	m_Transform->AddPosition(m_Velocity * deltaTime);
 
 
-	//‰Á‘¬“x‚ÌƒŠƒZƒbƒg
+	//åŠ é€Ÿåº¦ã®ãƒªã‚»ãƒƒãƒˆ
 	m_Acceleration = { 0, 0, 0 };
 }

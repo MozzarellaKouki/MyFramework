@@ -1,4 +1,4 @@
-#include "main.h"
+ï»¿#include "main.h"
 #include "audioManager.h"
 #include "audioComponent.h"
 #include "gameObjectManager.h"
@@ -63,7 +63,7 @@ void AudioManager::Update()
     }
 
 
-    //‰¼À‘• (ƒGƒlƒ~[‚Æ‚Ì‰¹‚Ì‹——£Š´)
+    //ä»®å®Ÿè£… (ã‚¨ãƒãƒŸãƒ¼ã¨ã®éŸ³ã®è·é›¢æ„Ÿ)
     float nearestDistance = FLT_MAX;
 
     auto enemies =
@@ -96,10 +96,10 @@ void AudioManager::Update()
     }
 
 
-    //BGM‚Ì‰¹—Ê‚ğ•ÏX
+    //BGMã®éŸ³é‡ã‚’å¤‰æ›´
     if (nearestDistance == FLT_MAX)
     {
-        //“G‚ª‚¢‚È‚¢
+        //æ•µãŒã„ãªã„
         AudioManager::SetBGMVolume(1.0f);
     }
     else
@@ -124,14 +124,14 @@ void AudioManager::SetListenerPosition(Vector3 position)
 
 
 //==================================
-//@BGM‚ÌÄ¶E’â~@‚È‚Ç
+//ã€€BGMã®å†ç”Ÿãƒ»åœæ­¢ã€€ãªã©
 //==================================
 
 void AudioManager::PlayBGM(int index, const char* fileName)
 {
     if (index < 0 || index >= BGM_COUNT) return;
 
-    //Šù‚É—¬‚ê‚Ä‚¢‚éBGM‚ğØ‚Á‚Ä‚¨‚­
+    //æ—¢ã«æµã‚Œã¦ã„ã‚‹BGMã‚’åˆ‡ã£ã¦ãŠã
     StopBGM();
 
     m_BGM[index].Load(fileName);
@@ -157,7 +157,7 @@ void AudioManager::SetBGMVolume(float volume)
 
 
 //==================================
-//@“o˜^EœŠO
+//ã€€ç™»éŒ²ãƒ»é™¤å¤–
 //==================================
 
 void AudioManager::Register(AudioComponent* audio)
@@ -167,12 +167,12 @@ void AudioManager::Register(AudioComponent* audio)
 
 void AudioManager::Unregister(AudioComponent* audio)
 {
-    //Œã‚ÅÀ‘•
+    //å¾Œã§å®Ÿè£…
 }
 
 
 //==================================
-//@SE‚Ìƒ[ƒhEÄ¶
+//ã€€SEã®ãƒ­ãƒ¼ãƒ‰ãƒ»å†ç”Ÿ
 //==================================
 
 void AudioManager::LoadSE(SEType type, const char* fileName)

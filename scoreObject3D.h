@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "gameObject.h"
 #include "particleEmitterComponent.h"
@@ -25,6 +25,8 @@ public:
     void Uninit() override;
     void Update(float deltaTime) override;
     void Draw() override;
+
+    void OnCollisionEnter(const Collision& collision) override;
 
     void SetPlayer(Player3D* player)
     {

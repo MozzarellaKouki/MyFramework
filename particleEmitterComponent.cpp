@@ -1,4 +1,4 @@
-#include "particleEmitterComponent.h"
+ï»¿#include "particleEmitterComponent.h"
 #include "textureManager.h"
 #include "cameramanager.h"
 #include "renderer.h"
@@ -23,11 +23,11 @@ void ParticleEmitterComponent::Init()
 
 }
 
-void ParticleEmitterComponent::Configure(const ParticleTemper& temper) //¶¬Œã‚É“n‚·
+void ParticleEmitterComponent::Configure(const ParticleTemper& temper) //ç”Ÿæˆå¾Œã«æ¸¡ã™
 {
 	m_Temper = temper;
 
-	//ƒp[ƒeƒBƒNƒ‹”‚ğŠm’è
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æ•°ã‚’ç¢ºå®š
 	m_Particles.clear();
 	m_Particles.resize(m_Temper.MaxParticles);
 
@@ -69,7 +69,7 @@ void ParticleEmitterComponent::Update(float deltaTime)
 	if (m_Playing)
 	{
 	
-		//ƒ^ƒCƒ}[ˆ—
+		//ã‚¿ã‚¤ãƒãƒ¼å‡¦ç†
 		if (m_PlayTimer > 0.0f)
 		{
 			m_PlayTimer -= deltaTime;
@@ -81,7 +81,7 @@ void ParticleEmitterComponent::Update(float deltaTime)
 		}
 
 
-		//ƒGƒ~ƒbƒgˆ—
+		//ã‚¨ãƒŸãƒƒãƒˆå‡¦ç†
 		if (m_Temper.EmitRate <= 0.0f) { DebugLog("!!! ParticleEmitterComponent : EmitRate <= 0 !!!"); return; }
 		float interval = 1.0f / m_Temper.EmitRate;
 
@@ -262,7 +262,7 @@ void ParticleEmitterComponent::Emit(int count, Vector3 pos)
 
 
 //=================================
-//@ƒp[ƒeƒBƒNƒ‹‰Šú‰»
+//ã€€ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«åˆæœŸåŒ–
 //=================================
 void ParticleEmitterComponent::SetParticle(Particle& particle, Vector3 pos)
 {
@@ -298,7 +298,7 @@ void ParticleEmitterComponent::SetParticle(Particle& particle, Vector3 pos)
 
 
 //=================================
-//@“§‰ßƒGƒ~ƒbƒ^[‚Ì“o˜^Eíœ
+//ã€€é€éã‚¨ãƒŸãƒƒã‚¿ãƒ¼ã®ç™»éŒ²ãƒ»å‰Šé™¤
 //=================================
 void ParticleEmitterComponent::RegisterTransparentEmitter()
 {

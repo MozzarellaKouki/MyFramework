@@ -1,4 +1,4 @@
-#include "gameObjectManager.h"
+﻿#include "gameObjectManager.h"
 
 #include "sprite3DComponent.h"
 #include "particleEmitterComponent.h"
@@ -9,17 +9,28 @@
 
 #include "debugUtils.h"
 #include "field.h"
+#include "collisionManager.h"
 
 
 
 void GameObjectManager::Uninit()
 {
+    // 破棄中に OnCollisionExit が飛ばないよう、先に衝突状態を消す
+    CollisionManager::Clear();
+
     for (auto& obj : m_GameObjects)
     {
         obj->Uninit();
     }
 
+    // まだ Update に乗っていない生成予約分も破棄する（シーン切替時の取り残し防止）
+    for (auto& obj : m_PendingObjects)
+    {
+        obj->Uninit();
+    }
+
     m_GameObjects.clear();
+    m_PendingObjects.clear();
 }
 
 
@@ -30,7 +41,10 @@ void GameObjectManager::Update(float dt)
         obj->Update(dt);
     }
 
-    //�����\�񂳂ꂽ�I�u�W�F�N�g�̏���
+    // 当たり判定（Destroy 予約されたオブジェクトはここで Exit が通知される）
+    CollisionManager::Update();
+
+    //生成予約されたオブジェクトの処理
     for (auto& obj : m_PendingObjects)
     {
         m_GameObjects.push_back(std::move(obj));
@@ -38,7 +52,7 @@ void GameObjectManager::Update(float dt)
 
     m_PendingObjects.clear();
 
-    //�폜�\�񂳂ꂽ�I�u�W�F�N�g�̏���
+    //削除予約されたオブジェクトの処理
     for (auto it = m_GameObjects.begin();
         it != m_GameObjects.end();)
     {
@@ -58,13 +72,13 @@ void GameObjectManager::Update(float dt)
 
 void GameObjectManager::Draw()
 {
-    // �ʏ�`��
+    // 通常描画
     for (auto& obj : m_GameObjects)
     {
         obj->Draw();
     }
 
-    // �����`��
+    // 透明描画
     Renderer::SetATCEnable(true);
     Renderer::SetDepthEnable(false);
 

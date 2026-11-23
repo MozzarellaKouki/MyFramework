@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "GameObject.h"
 #include "polygon2D.h"
 #include "mathUtils.h"
@@ -11,12 +11,12 @@ enum class State
 {
     None = 0,
 
-    UniformVelocity,      //“™‘¬‰^“®
-    UniformAcceleration,  //“§‰ß‘¬“x‰^“®
-    FreeFall,             //©—R—‰º
-    VerticalProjectile,   //‚’¼“Š‚°ã‚°
-    HorizontalProjectile, //…•½“ŠË
-    ObliqueProjectile     //Î•û“ŠË
+    UniformVelocity,      //ç­‰é€Ÿé‹å‹•
+    UniformAcceleration,  //é€éé€Ÿåº¦é‹å‹•
+    FreeFall,             //è‡ªç”±è½ä¸‹
+    VerticalProjectile,   //å‚ç›´æŠ•ã’ä¸Šã’
+    HorizontalProjectile, //æ°´å¹³æŠ•å°„
+    ObliqueProjectile     //æ–œæ–¹æŠ•å°„
 
 };
 
@@ -32,9 +32,9 @@ private:
     float m_Time;            //t
     float m_Speed;           //s
     float m_Acceleration;    //a
-    float m_Grabity;         //g
+    float m_Gravity;         //g
     float m_InitialVelocity; //v
-    float m_Degree;          //ƒÆ
+    float m_Degree;          //Î¸
 
 
 public:
@@ -46,6 +46,6 @@ public:
     void Input();
 
 
-    void RoopCheck();
+    void LoopCheck();
 
 };

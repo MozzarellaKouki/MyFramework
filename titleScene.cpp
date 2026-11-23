@@ -1,4 +1,4 @@
-#include "main.h"
+ï»¿#include "main.h"
 #include "keyboard.h"
 #include "titleScene.h"
 #include "gameScene.h"
@@ -19,7 +19,7 @@
 void TitleScene::Init()
 {
 
-	//ƒJƒƒ‰‚Ì‰Šú‰»
+	//ã‚«ãƒ¡ãƒ©ã®åˆæœŸåŒ–
 	m_Camera = new Camera();
 	m_Camera->Init();
 
@@ -53,7 +53,7 @@ void TitleScene::Update()
 	m_Camera->Update();
 	GameObjectManager::GetInstance().Update(1.0f / 60.0f);
 
-	//ƒfƒoƒbƒO—p
+	//ãƒ‡ãƒãƒƒã‚°ç”¨
 	if (Keyboard_IsKeyDownTrigger(KK_ENTER) || Keyboard_IsKeyDownTrigger(KK_SPACE))
 	{
 		SceneManager::ChangeScene(std::make_unique<GameScene>());
@@ -63,8 +63,8 @@ void TitleScene::Update()
 void TitleScene::Draw()
 {
 
-	m_Camera->Apply(); //ƒIƒuƒWƒFƒNƒg‚ğ•`Ê‚·‚é‘O‚ÉŒÄ‚Ô
+	m_Camera->Apply(); //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æå†™ã™ã‚‹å‰ã«å‘¼ã¶
 
-	Renderer::Set3D(); //3D•`Ê
+	Renderer::Set3D(); //3Dæå†™
 	GameObjectManager::GetInstance().Draw();
 }

@@ -1,11 +1,11 @@
-#include "enemy3D.h"
+﻿#include "enemy3D.h"
 #include "sprite3DComponent.h"
 #include "sceneManager.h"
 #include "GameoverScene.h"
 #include "particleTemperSettings.h"
 #include "scoreManager.h"
 #include "boxcolliderComponent.h"
-#include "collisionManager.h"
+#include "debugUtils.h"
 
 void Enemy3D::Init()
 {
@@ -32,6 +32,8 @@ void Enemy3D::Init()
 
     auto* enemyCollider = AddComponent<BoxColliderComponent>();
     enemyCollider->SetSize({ 1.0f, 1.0f, 1.0f });
+    enemyCollider->SetLayer(CollisionLayer::Enemy);
+    enemyCollider->SetMask(CollisionLayer::Player);
 }
 
 void Enemy3D::Uninit()
@@ -79,10 +81,12 @@ void Enemy3D::Update(float deltaTime)
         }
     }
 
-    CollisionManager::CheckCollision(
-        this,
-        m_Player
-    );
+}
+
+void Enemy3D::OnCollisionEnter(const Collision& collision)
+{
+    // マスクで Player だけと判定しているので、ここに来るのはプレイヤーとの接触
+    DebugLog("[Enemy3D] プレイヤーに接触\n");
 }
 
 void Enemy3D::Draw()

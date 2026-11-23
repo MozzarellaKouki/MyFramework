@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "gameObject.h"
 #include "transformComponent.h"
@@ -33,6 +33,8 @@ public:
     void Update(float dt) override;
     void Draw() override;
     void Uninit() override;
+
+    void OnCollisionEnter(const Collision& collision) override;
 
     void SetState(Enemy3DState state)
     {

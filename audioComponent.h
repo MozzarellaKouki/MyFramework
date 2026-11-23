@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "component.h"
 #include "audio.h"

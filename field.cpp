@@ -1,4 +1,4 @@
-#include "main.h"
+ï»¿#include "main.h"
 #include "field.h"
 #include "mesh.h"
 #include "meshBuilder.h"
@@ -20,7 +20,7 @@ void Field::Init()
     if (m_Initialized)
         return;
 
-    //test ƒtƒB[ƒ‹ƒh‚Ì’nŒ`‚’á·
+    //test ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®åœ°å½¢é«˜ä½å·®
     const HeightFieldConfig& config = m_HeightField.GetConfig();
     for (int z = 0; z <= config.segmentsZ; ++z)
     {

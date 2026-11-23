@@ -1,4 +1,4 @@
-#include "main.h"
+Ôªø#include "main.h"
 #include "testMotion.h"
 #include "textureManager.h"
 #include "keyboard.h"
@@ -33,9 +33,9 @@ void TestMotion::Init()
     m_Time = 0.0f;               //t
     m_Speed = 1.0f;              //s
     m_Acceleration = 0.2f;       //a
-    m_Grabity = 0.98f;           //g
+    m_Gravity = 0.98f;           //g
     m_InitialVelocity = 25.0f;   //v
-    m_Degree = 45.0f;            //É∆
+    m_Degree = 45.0f;            //Œ∏
   
 }
 
@@ -77,7 +77,7 @@ void TestMotion::Update()
     case State::FreeFall:
 
         m_Transform.position.x = (g_InitialPosotion.position.x);
-        m_Transform.position.y = (g_InitialPosotion.position.y + (0.5f * m_Grabity * m_Time * m_Time));
+        m_Transform.position.y = (g_InitialPosotion.position.y + (0.5f * m_Gravity * m_Time * m_Time));
 
         break;
 
@@ -85,7 +85,7 @@ void TestMotion::Update()
     case State::VerticalProjectile:
 
         m_Transform.position.x = (g_InitialPosotion.position.x);
-        m_Transform.position.y = (g_InitialPosotion.position.y - (m_InitialVelocity * m_Time) + (0.5f * m_Grabity * m_Time * m_Time));
+        m_Transform.position.y = (g_InitialPosotion.position.y - (m_InitialVelocity * m_Time) + (0.5f * m_Gravity * m_Time * m_Time));
 
         break;
 
@@ -93,7 +93,7 @@ void TestMotion::Update()
     case State::HorizontalProjectile:
 
         m_Transform.position.x = (g_InitialPosotion.position.x + (m_Time * m_InitialVelocity));
-        m_Transform.position.y = (g_InitialPosotion.position.y + (0.5f * m_Grabity * m_Time * m_Time));
+        m_Transform.position.y = (g_InitialPosotion.position.y + (0.5f * m_Gravity * m_Time * m_Time));
 
         break;
 
@@ -103,16 +103,16 @@ void TestMotion::Update()
         float rad = DegToRad(m_Degree);
 
         m_Transform.position.x = (g_InitialPosotion.position.x + (m_InitialVelocity * cos(rad)) * m_Time);
-        m_Transform.position.y = (g_InitialPosotion.position.y - ((m_InitialVelocity * sin(rad)) * m_Time) + (0.5f * m_Grabity * m_Time * m_Time));
+        m_Transform.position.y = (g_InitialPosotion.position.y - ((m_InitialVelocity * sin(rad)) * m_Time) + (0.5f * m_Gravity * m_Time * m_Time));
 
         break;
 
     }
 
-    RoopCheck();
+    LoopCheck();
 
 
-    //ÉEÉCÉìÉhÉEñºÇ…ÉfÉoÉbÉOã≥é¶
+    //„Ç¶„Ç§„É≥„Éâ„Ç¶Âêç„Å´„Éá„Éê„ÉÉ„Ç∞ÊïôÁ§∫
     char text[256];
     sprintf_s(text, "Time = %f  State = %d", m_Time, (int)m_State);
     SetWindowText(GetWindow(), text);
@@ -160,7 +160,7 @@ void TestMotion::Input()
 
 
 
-    //èÛë‘ïœçX
+    //Áä∂ÊÖãÂ§âÊõ¥
     if (Keyboard_IsKeyDownTrigger(KK_D1))
         m_State = State::UniformVelocity;
 
@@ -181,7 +181,7 @@ void TestMotion::Input()
 
 }
 
-void TestMotion::RoopCheck()
+void TestMotion::LoopCheck()
 {
     int loopCountX = 0;
     int loopCountY = 0;

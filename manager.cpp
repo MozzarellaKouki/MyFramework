@@ -1,4 +1,4 @@
-#include "main.h"
+﻿#include "main.h"
 #include "manager.h"
 #include "renderer.h"
 #include "sceneManager.h"
@@ -11,6 +11,8 @@
 #include "bloom.h"
 #include "grayScale.h"
 #include "posterize.h"
+#include "debugCommands.h"
+#include "collisionManager.h"
 #include <memory>
 
 
@@ -27,8 +29,9 @@ void Manager::Init()
 
     Audio::InitMaster();
     AudioManager::Init();
-    SceneManager::Init(std::make_unique<TitleScene>());
     TextureManager::Init();
+    SceneManager::Init(std::make_unique<TitleScene>());
+  
 
     //PostEffect Test
     PostEffectManager::AddEffect(std::make_unique<GrayScale>());
@@ -50,9 +53,10 @@ void Manager::Init()
 
   
 
-    // �G�t�F�N�g�̏�����
+    // エフェクトの初期化
     PostEffectManager::Init();
 
+    RegisterDebugCommands();
 
 }
 
@@ -74,20 +78,27 @@ void Manager::Update()
     AudioManager::Update();
     PostEffectManager::Update();
 
+    DebugCommands::Update();
+}
 
-
-    if (Keyboard_IsKeyDown(KK_P))
+void Manager::RegisterDebugCommands()
+{
+    DebugCommands::AddHold(KK_P, "グレースケールを強くする", []
     {
         auto* grayscale = PostEffectManager::GetEffect<GrayScale>();
-        grayscale->SetIntensity( std::min(grayscale->GetIntensity() + 0.01f, 1.0f));
+        grayscale->SetIntensity(std::min(grayscale->GetIntensity() + 0.01f, 1.0f));
+    }, DebugScope::Global);
 
-    }
-
-    if (Keyboard_IsKeyDown(KK_O))
+    DebugCommands::AddHold(KK_O, "グレースケールを弱くする", []
     {
         auto* grayscale = PostEffectManager::GetEffect<GrayScale>();
         grayscale->SetIntensity(std::max(grayscale->GetIntensity() - 0.01f, 0.0f));
-    }
+    }, DebugScope::Global);
+
+    DebugCommands::AddTrigger(KK_F2, "当たり判定の状態を表示", []
+    {
+        CollisionManager::PrintDebugInfo();
+    }, DebugScope::Global);
 }
 
 void Manager::Draw()

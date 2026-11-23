@@ -1,4 +1,4 @@
-#include "main.h"
+ï»¿#include "main.h"
 #include "keyboard.h"
 #include "resultScene.h"
 #include "titleScene.h"
@@ -21,7 +21,7 @@
 void GameOverScene::Init()
 {
 
-	//ƒJƒƒ‰‚Ì‰Šú‰»
+	//ã‚«ãƒ¡ãƒ©ã®åˆæœŸåŒ–
 	m_Camera = new Camera();
 	m_Camera->Init();
 
@@ -61,8 +61,8 @@ void GameOverScene::Update()
 void GameOverScene::Draw()
 {
 
-	m_Camera->Apply(); //ƒIƒuƒWƒFƒNƒg‚ğ•`Ê‚·‚é‘O‚ÉŒÄ‚Ô
+	m_Camera->Apply(); //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æå†™ã™ã‚‹å‰ã«å‘¼ã¶
 
-	Renderer::Set3D(); //3D•`Ê
+	Renderer::Set3D(); //3Dæå†™
 	GameObjectManager::GetInstance().Draw();
 }

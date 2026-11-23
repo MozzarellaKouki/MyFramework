@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <memory>
 #include <vector>
@@ -22,12 +22,12 @@ public:
     static void Update();
     static void Draw(ID3D11ShaderResourceView* source);
 
-    //ƒGƒtƒFƒNƒg“o˜^Eæ“¾
+    //ã‚¨ãƒ•ã‚§ã‚¯ãƒˆç™»éŒ²ãƒ»å–å¾—
     inline static void AddEffect(std::unique_ptr<PostEffect> effect)
     {
         if (!effect) return;
 
-        //“¯‚¶Œ^‚ª‚·‚Å‚É“o˜^‚³‚ê‚Ä‚¢‚È‚¢‚©Šm”F
+        //åŒã˜å‹ãŒã™ã§ã«ç™»éŒ²ã•ã‚Œã¦ã„ãªã„ã‹ç¢ºèª
         for (auto& existing : m_Effects)
         {
             if (typeid(*existing) == typeid(*effect))

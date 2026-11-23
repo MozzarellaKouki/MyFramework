@@ -1,4 +1,4 @@
-#include "sprite2DComponent.h"
+﻿#include "sprite2DComponent.h"
 
 void Sprite2DComponent::SetSprite(const wchar_t* path)
 {

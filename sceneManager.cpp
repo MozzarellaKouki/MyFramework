@@ -1,5 +1,6 @@
-#include "SceneManager.h"
+﻿#include "SceneManager.h"
 #include "renderer.h"
+#include "debugCommands.h"
 
 
 std::unique_ptr<Scene> SceneManager::currentScene = nullptr;
@@ -65,6 +66,8 @@ void SceneManager::Update()
             currentScene->Uninit();
         }
 
+        DebugCommands::ClearScene();
+
         currentScene = std::move(nextScene);
         currentScene->Init();
 
@@ -104,6 +107,7 @@ void SceneManager::Draw()
 
 void SceneManager::Uninit()
 {
+    DebugCommands::Clear();
     fadeObject.Uninit();
 
     if (currentScene)

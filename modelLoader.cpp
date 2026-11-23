@@ -1,19 +1,19 @@
-#include "modelLoader.h"
+ï»¿#include "modelLoader.h"
 #include <fstream>
 #include <sstream>
 
 Mesh* ModelLoader::LoadOBJ(const char* fileName)
 {
-    //OBJ‚Ìˆê•Û‘¶—p
+    //OBJã®ä¸€æ™‚ä¿å­˜ç”¨
     std::vector<XMFLOAT3>positions;
     std::vector<XMFLOAT2>texcoords;
 
-    //ƒƒbƒVƒ…‚ÌÅIŒˆ’è
+    //ãƒ¡ãƒƒã‚·ãƒ¥ã®æœ€çµ‚æ±ºå®š
     std::vector<VERTEX_3D>vertices;
     std::vector<UINT>indices;
 
     //--------------------------------
-    // ƒtƒ@ƒCƒ‹ŠJ‚­
+    // ãƒ•ã‚¡ã‚¤ãƒ«é–‹ã
     //--------------------------------
 
     std::ifstream file(fileName);
@@ -24,7 +24,7 @@ Mesh* ModelLoader::LoadOBJ(const char* fileName)
     }
 
     //--------------------------------
-    //           1s‚¸‚Â“Ç‚Ş
+    //           1è¡Œãšã¤èª­ã‚€
     //--------------------------------
 
     std::string line;
@@ -36,7 +36,7 @@ Mesh* ModelLoader::LoadOBJ(const char* fileName)
         ss >> type;
 
         //--------------------------------
-        //           ’¸“_À•W
+        //           é ‚ç‚¹åº§æ¨™
         //--------------------------------
 
         if (type == "v")
@@ -67,7 +67,7 @@ Mesh* ModelLoader::LoadOBJ(const char* fileName)
         }
 
         //--------------------------------
-        // –Ê
+        // é¢
         //--------------------------------
 
         else if (type == "f")
@@ -99,7 +99,7 @@ Mesh* ModelLoader::LoadOBJ(const char* fileName)
                     std::stoi(t);
 
                 //--------------------------------
-                // Vertex¶¬
+                // Vertexç”Ÿæˆ
                 //--------------------------------
 
                 VERTEX_3D v{};

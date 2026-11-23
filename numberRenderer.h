@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Polygon2D.h"
 
 class NumberRenderer

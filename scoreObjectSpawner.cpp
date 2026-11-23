@@ -1,4 +1,4 @@
-#include "scoreObjectSpawner.h"
+ï»¿#include "scoreObjectSpawner.h"
 
 #include "gameObjectManager.h"
 #include "scoreObject3D.h"
@@ -20,7 +20,7 @@ void ScoreObjectSpawner::Update(float deltaTime)
 {
     m_Timer += deltaTime;
 
-    // 10•bŒo‰ß‚µ‚½‚çƒXƒ|[ƒ“
+    // 10ç§’çµŒéŽã—ãŸã‚‰ã‚¹ãƒãƒ¼ãƒ³
     if (m_Timer >= 10.0f)
     {
         m_Timer = 0.0f;
@@ -46,7 +46,7 @@ void ScoreObjectSpawner::Update(float deltaTime)
             });
         }
 
-        // ƒvƒŒƒCƒ„[‚ð“n‚·
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ¸¡ã™
         scoreObject->SetPlayer(m_Player);
     }
 }

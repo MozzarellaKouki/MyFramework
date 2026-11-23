@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "main.h"
 #include "gameObject.h"
 #include "mathUtils.h" 
@@ -23,7 +23,7 @@ private:
 public:
     void Init();
     void Update();
-    void Apply();   //Renderer‚É“n‚·—p
+    void Apply();   //Rendererã«æ¸¡ã™ç”¨
 
     void UpdateFollowTarget();
 

@@ -1,27 +1,27 @@
-#pragma once
+ï»¿#pragma once
 #include "cmath"
 #include "main.h"
 
-//Color\‘¢‘Ì ===============================
+//Coloræ§‹é€ ä½“ ===============================
 struct Color
 {
 	float r, g, b, a;
 };
 
 
-//‰~ü—¦•ÏŠ· ================================
+//å††å‘¨ç‡å¤‰æ› ================================
 constexpr float PI = 3.141592f;
 inline float DegToRad(float degree) {return degree * PI / 180.0f;}
 inline float RadToDeg(float rad){ return rad * 180.0f / PI;}
 
 
-//—””ÍˆÍ¶¬ ==============================
+//ä¹±æ•°ç¯„å›²ç”Ÿæˆ ==============================
 inline float RandomRange(float min, float max)
 {
 	return min + (max - min) * (float)rand() / RAND_MAX;
 }
 
-//ƒŠ[ƒv•âŠ® ================================
+//ãƒªãƒ¼ãƒ—è£œå®Œ ================================
 inline float Lerp(float a, float b, float t)
 {
 	return a + (b - a) * t;
@@ -57,26 +57,26 @@ public:
 	float x, y, z;
 
 
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^‰Šú‰»
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿åˆæœŸåŒ–
 	Vector3() : x(0), y(0), z(0) {}
 
-	// ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Vector3(const Vector3& a) : x(a.x), y(a.y), z(a.z) {}
 
-	// 3‚Â‚Ì’l‚Åì¬‚·‚é
+	// 3ã¤ã®å€¤ã§ä½œæˆã™ã‚‹
 	Vector3(float nx, float ny, float nz) : x(nx), y(ny), z(nz) {}
 
 
-	// ====== €“I‚ÈƒIƒuƒWƒFƒNƒg‚Ì•Ûç =======
+	// ====== æº–çš„ãªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¿å®ˆ =======
 
-	//‘ã“üiC‚ÌŠµK‚É]‚¢’l‚Ö‚ÌQÆ‚ğ•Ô‚·j
+	//ä»£å…¥ï¼ˆCã®æ…£ç¿’ã«å¾“ã„å€¤ã¸ã®å‚ç…§ã‚’è¿”ã™ï¼‰
 	Vector3& operator = (const Vector3& a)
 	{
 		x = a.x; y = a.y; z = a.z;
 		return *this;
 	}
 
-	//“™‚µ‚³‚Ìƒ`ƒFƒbƒN
+	//ç­‰ã—ã•ã®ãƒã‚§ãƒƒã‚¯
 	bool operator == (const Vector3& a) const
 	{
 		return x == a.x && y == a.y && z == a.z;
@@ -87,26 +87,26 @@ public:
 		return x != a.x || y != a.y || z != a.z;
 	}
 
-	// ===== ƒxƒNƒgƒ‹‘€ì ============
+	// ===== ãƒ™ã‚¯ãƒˆãƒ«æ“ä½œ ============
 
-	//ƒxƒNƒgƒ‹‚ğ0‚Éİ’è‚·‚é
+	//ãƒ™ã‚¯ãƒˆãƒ«ã‚’0ã«è¨­å®šã™ã‚‹
 	void zero() { x = y = z = 0.0f; }
 
 
 
-	//’P€®‚Ìƒ}ƒCƒiƒX‚ÍA”½“]‚µ‚½ƒxƒNƒgƒ‹‚ğ•Ô‚·
+	//å˜é …å¼ã®ãƒã‚¤ãƒŠã‚¹ã¯ã€åè»¢ã—ãŸãƒ™ã‚¯ãƒˆãƒ«ã‚’è¿”ã™
 	Vector3 operator - () const { return Vector3(-x, -y, -z); }
 
 
 
-	//“ñ€®‚Ì{‚Æ[‚ÍƒxƒNƒgƒ‹‚ğ‰ÁZ‚µAŒ¸Z‚·‚é
+	//äºŒé …å¼ã®ï¼‹ã¨ãƒ¼ã¯ãƒ™ã‚¯ãƒˆãƒ«ã‚’åŠ ç®—ã—ã€æ¸›ç®—ã™ã‚‹
 	Vector3 operator + (const Vector3& a) const { return Vector3(x + a.x, y + a.y, z + a.z); }
 
 	Vector3 operator - (const Vector3& a) const { return Vector3(x - a.x, y - a.y, z - a.z); }
 
 
 
-	//ƒXƒJƒ‰[‚É‚æ‚éæZ‚ÆœZ
+	//ã‚¹ã‚«ãƒ©ãƒ¼ã«ã‚ˆã‚‹ä¹—ç®—ã¨é™¤ç®—
 	Vector3 operator * (float a) const { return Vector3(x * a, y * a, z * a); }
 
 	Vector3 operator / (float a) const
@@ -116,7 +116,7 @@ public:
 
 
 
-	// C‚Ì•\‹L–@‚É€‹’‚·‚é‚½‚ß‚Ì‘g‚İ‡‚í‚¹‘ã“ü‰‰Z
+	// Cã®è¡¨è¨˜æ³•ã«æº–æ‹ ã™ã‚‹ãŸã‚ã®çµ„ã¿åˆã‚ã›ä»£å…¥æ¼”ç®—
 	Vector3& operator += (const Vector3& a)
 	{
 		x += a.x; y += a.y; z += a.z;
@@ -140,7 +140,7 @@ public:
 
 
 
-	//ƒxƒNƒgƒ‹‚ğ³‹K‰»‚·‚é
+	//ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–ã™ã‚‹
 
 	void normalize()
 	{
@@ -157,9 +157,9 @@ public:
 
 	void normalize() const { normalize(); }
 
-	// ======= ƒxƒNƒgƒ‹‚Ì“àÏ ========
+	// ======= ãƒ™ã‚¯ãƒˆãƒ«ã®å†…ç© ========
 
-	//•W€‚ÌæZ‹L†‚ğ‚±‚ê‚ÉƒI[ƒo[ƒ[ƒh‚·‚é
+	//æ¨™æº–ã®ä¹—ç®—è¨˜å·ã‚’ã“ã‚Œã«ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
 	float operator *(const Vector3& a) const 
 	{
 		return x * a.x + y * a.y + z * a.z;

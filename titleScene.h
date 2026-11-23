@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "sceneManager.h"
 #include "gameObject.h"
 #include <vector>
@@ -20,7 +20,7 @@ private:
 
 public:
 
-    //ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ¶¬
+    //ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆ
     template<typename T> T* CreateGameObject()
     {
         std::unique_ptr<T> obj = std::make_unique<T>();

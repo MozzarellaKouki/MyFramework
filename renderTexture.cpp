@@ -1,4 +1,4 @@
-
+ï»¿
 #include "main.h"
 #include "renderer.h"
 #include "RenderTexture.h"
@@ -37,7 +37,7 @@ bool RenderTexture::Init(int width, int height)
         return false;
     }
 
-    // [“xƒoƒbƒtƒ@—pƒeƒNƒXƒ`ƒƒ‚ğì¬
+    // æ·±åº¦ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½œæˆ
     D3D11_TEXTURE2D_DESC depthDesc{};
     depthDesc.Width = static_cast<UINT>(m_Width);
     depthDesc.Height = static_cast<UINT>(m_Height);
@@ -127,14 +127,14 @@ void RenderTexture::SetRenderTarget()
 {
     ID3D11DeviceContext* context = Renderer::GetDeviceContext();
 
-    // RenderTexture‚ğ•`‰ææ‚Éİ’è
+    // RenderTextureã‚’æç”»å…ˆã«è¨­å®š
     context->OMSetRenderTargets(
         1,
         &m_RenderTargetView,
         m_DepthStencilView
     );
 
-    // ƒrƒ…[ƒ|[ƒg‚ğİ’è
+    // ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’è¨­å®š
     D3D11_VIEWPORT viewport{};
     viewport.TopLeftX = 0.0f;
     viewport.TopLeftY = 0.0f;
@@ -145,7 +145,7 @@ void RenderTexture::SetRenderTarget()
 
     context->RSSetViewports(1, &viewport);
 
-    // RenderTexture‚ğƒNƒŠƒA
+    // RenderTextureã‚’ã‚¯ãƒªã‚¢
     float clearColor[4] = {
         0.2196f, 0.9137f, 0.5216f, 1.0f
     };
@@ -155,7 +155,7 @@ void RenderTexture::SetRenderTarget()
         clearColor
     );
 
-    // RenderTexture—p‚Ì[“xƒoƒbƒtƒ@‚ğƒNƒŠƒA
+    // RenderTextureç”¨ã®æ·±åº¦ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢
     context->ClearDepthStencilView(
         m_DepthStencilView,
         D3D11_CLEAR_DEPTH,

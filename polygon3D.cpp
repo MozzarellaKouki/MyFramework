@@ -1,4 +1,4 @@
-#include "main.h"
+ï»¿#include "main.h"
 #include "renderer.h"
 #include "textureManager.h"
 #include "polygon3D.h"
@@ -28,7 +28,7 @@ void Polygon3D::Init()
 	m_Vertices[3].Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
 	m_Vertices[3].TexCoord = XMFLOAT2{ 1.0f, 1.0f };
 
-	//’¸“_ƒoƒbƒtƒ@¶¬
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	D3D11_BUFFER_DESC bd{};
 	bd.Usage = D3D11_USAGE_DEFAULT;
 	bd.ByteWidth = sizeof(VERTEX_3D) * 4;
@@ -40,7 +40,7 @@ void Polygon3D::Init()
 
 	Renderer::GetDevice()->CreateBuffer(&bd, &sd, &m_VertexBuffer);
 
-	//ƒVƒF[ƒ_[“Ç‚Ýž‚Ý
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼èª­ã¿è¾¼ã¿
 	Renderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout, "Shader//unlitTextureVS.cso");
 	Renderer::CreatePixelShader(&m_PixelShader, "Shader//unlitTexturePS.cso");
 
@@ -61,36 +61,36 @@ void Polygon3D::Uninit()
 
 void Polygon3D::Draw()
 {
-	//“ü—ÍƒŒƒCƒAƒEƒgÝ’è
+	//å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
 	Renderer::GetDeviceContext()->IASetInputLayout(m_VertexLayout);
 
-	//ƒVƒF[ƒ_[Ý’è
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼è¨­å®š
 	Renderer::GetDeviceContext()->VSSetShader(m_VertexShader, NULL, 0);
 	Renderer::GetDeviceContext()->PSSetShader(m_PixelShader, NULL, 0);
 
 
-	//ƒ}ƒeƒŠƒAƒ‹Ý’è
+	//ãƒžãƒ†ãƒªã‚¢ãƒ«è¨­å®š
 	MATERIAL material{};
 	material.Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
 	material.TextureEnable = true;
 	Renderer::SetMaterial(material);
 
 
-	//ƒeƒNƒXƒ`ƒƒÝ’è
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®š
 	Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &m_Texture);
 
 
-	//’¸“_ƒoƒbƒtƒ@Ý’è
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡è¨­å®š
 	UINT stride = sizeof(VERTEX_3D);
 	UINT offset = 0;
 	Renderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
 
 
-	//ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWÝ’è
+	//ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
 	Renderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
 
-	//ƒ|ƒŠƒSƒ“•`ŽÊ
+	//ãƒãƒªã‚´ãƒ³æå†™
 	Renderer::SetDepthEnable(false);
 	Renderer::GetDeviceContext()->Draw(4, 0);
 	Renderer::SetDepthEnable(true);

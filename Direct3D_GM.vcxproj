@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -170,8 +170,11 @@
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="colliderComponent.h" />
     <ClInclude Include="collisionManager.h" />
+    <ClInclude Include="collision.h" />
+    <ClInclude Include="sphereColliderComponent.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="debugUtils.h" />
+    <ClInclude Include="debugCommands.h" />
     <ClInclude Include="DirectXTex.h" />
     <ClInclude Include="enemy3D.h" />
     <ClInclude Include="explosion.h" />
@@ -236,7 +239,7 @@
     <ClCompile Include="audioComponent.cpp" />
     <ClCompile Include="audioManager.cpp" />
     <ClCompile Include="bloom.cpp" />
-    <ClCompile Include="boxColliderComponent.cpp" />
+    <ClCompile Include="colliderComponent.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="collisionManager.cpp" />
@@ -255,6 +258,7 @@
     <ClCompile Include="grayScale.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="debugCommands.cpp" />
     <ClCompile Include="manager.cpp" />
     <ClCompile Include="material.cpp" />
     <ClCompile Include="mathUtils.cpp" />

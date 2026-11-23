@@ -1,4 +1,4 @@
-#include "main.h"
+ï»¿#include "main.h"
 #include "postEffectManager.h"
 #include "renderer.h"
 
@@ -85,7 +85,7 @@ void PostEffectManager::Draw(ID3D11ShaderResourceView* source)
     {
         if (!effect->IsEnabled()) continue;
 
-        //ÀÛ‚É“K—p‚µ‚½‰ñ”‚Å Ping / Pong ‚ğØ‚è‘Ö‚¦‚é
+        //å®Ÿéš›ã«é©ç”¨ã—ãŸå›æ•°ã§ Ping / Pong ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
         RenderTexture& target = (appliedCount % 2 == 0) ? m_Ping : m_Pong;
 
         ID3D11ShaderResourceView* nullSRV = nullptr;

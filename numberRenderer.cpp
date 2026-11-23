@@ -1,4 +1,4 @@
-#include "numberRenderer.h"
+﻿#include "numberRenderer.h"
 #include <string>
 #include "renderer.h"
 #include "textureManager.h"

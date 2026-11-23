@@ -1,4 +1,4 @@
-#include "spriteAnimationComponent.h"
+ï»¿#include "spriteAnimationComponent.h"
 #include "sprite3DComponent.h"
 #include "gameObject.h"
 
@@ -16,7 +16,7 @@ void  SpriteAnimationComponent::Update(float dt)
         if (m_CurrentFrame > m_MaxFrame)
         {
             m_CurrentFrame = m_MaxFrame;
-            GetOwner()->Destroy();  //‰¼
+            GetOwner()->Destroy();  //ä»®
         }
 
         ApplyUV();

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "gameobject.h"
 #include "sprite3DComponent.h"
 #include <memory>

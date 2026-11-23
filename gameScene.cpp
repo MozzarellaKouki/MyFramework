@@ -1,4 +1,4 @@
-#include "main.h"
+ï»¿#include "main.h"
 #include "keyboard.h"
 #include "GameScene.h"
 #include "resultScene.h"
@@ -17,11 +17,11 @@
 #include "audioManager.h"
 
 #include "boxColliderComponent.h"
+#include "debugCommands.h"
 
 
 
 
-#include "testMotion.h"
 
 
 
@@ -31,7 +31,7 @@
 void GameScene::Init()
 {
 
-	//ƒJƒƒ‰‚Ì‰Šú‰»
+	//ã‚«ãƒ¡ãƒ©ã®åˆæœŸåŒ–
 	m_Camera = new Camera();
 	m_Camera->Init();
 
@@ -60,10 +60,20 @@ void GameScene::Init()
 
 
 
-	auto* playerCollider = m_Player->AddComponent<BoxColliderComponent>();
-	playerCollider->SetSize({ 1.0f, 2.0f, 1.0f });
+	RegisterDebugCommands();
+}
 
+void GameScene::RegisterDebugCommands()
+{
+	DebugCommands::AddTrigger(KK_B, "ãƒªã‚¶ãƒ«ãƒˆã¸é·ç§»", []
+	{
+		SceneManager::ChangeScene(std::make_unique<ResultScene>());
+	});
 
+	DebugCommands::AddTrigger(KK_V, "æ•µã‚’ç”Ÿæˆ", [this]
+	{
+		GameObjectFactory::CreateEnemy(m_Player);
+	});
 }
 
 
@@ -105,17 +115,8 @@ void GameScene::Update()
 	}
 
 
-	// ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ğ‰¹‚ÌƒŠƒXƒi[ˆÊ’u‚Éİ’è
-	auto* transform =
-		m_Player->GetComponent<TransformComponent>();
-
-	if (transform != nullptr)
-	{
-		AudioManager::SetListenerPosition(
-			transform->GetPosition()
-		);
-	}
-
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’éŸ³ã®ãƒªã‚¹ãƒŠãƒ¼ä½ç½®ã«è¨­å®š
+	auto* transform = m_Player->GetComponent<TransformComponent>();
 	if (transform != nullptr)
 	{
 		Vector3 pos = transform->GetPosition();
@@ -123,60 +124,25 @@ void GameScene::Update()
 		if (pos.x < -1000.0f ||
 			pos.x >  1000.0f ||
 			pos.z < -1000.0f ||
-			pos.z >	1000.0f)
+			pos.z >  1000.0f)
 		{
-			SceneManager::QuitWithFade(0.06);
+			SceneManager::QuitWithFade(0.06f);
 			return;
 		}
 
 		AudioManager::SetListenerPosition(pos);
 	}
-
-
-
-
-
-	//ƒfƒoƒbƒO—p
-	if (Keyboard_IsKeyDownTrigger(KK_B))
-	{
-		SceneManager::ChangeScene(std::make_unique<ResultScene>());
-	}
-
-	if (Keyboard_IsKeyDownTrigger(KK_V))
-	{
-		GameObjectFactory::CreateEnemy(m_Player);
-	}
-
-	/*if (Keyboard_IsKeyDownTrigger(KK_O))
-	{
-		m_PosterizeLevels += 1.0f;
-
-		if (m_PosterizeLevels > 64.0f)
-			m_PosterizeLevels = 64.0f;
-		Renderer::SetPosterizeLevels(m_PosterizeLevels);
-	}*/
-
-	/*if (Keyboard_IsKeyDownTrigger(KK_P))
-	{
-		m_PosterizeLevels -= 1.0f;
-
-		if (m_PosterizeLevels < 2.0f)
-			m_PosterizeLevels = 2.0f;
-		Renderer::SetPosterizeLevels(m_PosterizeLevels);
-	}*/
-
-
 }
 
 void GameScene::Draw()
 {
 
-	m_Camera->Apply(); //ƒIƒuƒWƒFƒNƒg‚ğ•`Ê‚·‚é‘O‚ÉŒÄ‚Ô
+	m_Camera->Apply(); //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æå†™ã™ã‚‹å‰ã«å‘¼ã¶
 
-	Renderer::Set3D(); //3D•`Ê
+	Renderer::Set3D(); //3Dæå†™
 	m_Skyplate.Draw();
 	GameObjectManager::GetInstance().Draw();
 
-	Renderer::Set2D(); //2D•`Ê
+	Renderer::Set2D(); //2Dæå†™
 	m_NumberRenderer.Draw(ScoreManager::GetScore(0), 20, 20);
 }

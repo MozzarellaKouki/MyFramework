@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "mathUtils.h"
 #include "component.h"
 #include "particle.h"

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "RenderTexture.h"
 
@@ -9,6 +9,8 @@ class Manager
 {
 private:
     static inline RenderTexture m_RenderTexture;
+
+    static void RegisterDebugCommands();
 
 public:
     static void Init();

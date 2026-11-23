@@ -1,4 +1,4 @@
-#include "scoreManager.h"
+﻿#include "scoreManager.h"
 
 std::vector<ScoreData> ScoreManager::m_Scores;
 

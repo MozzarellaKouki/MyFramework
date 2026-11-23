@@ -1,4 +1,4 @@
-#include "main.h"
+ï»¿#include "main.h"
 #include "player3D.h"
 #include "modelLoader.h"
 #include "material.h"
@@ -29,6 +29,10 @@ void Player3D::Init()
 
 	m_physics->SetMass(1.0f);
 
+	auto* collider = AddComponent<BoxColliderComponent>();
+	collider->SetSize({ 1.0f, 2.0f, 1.0f });
+	collider->SetLayer(CollisionLayer::Player);
+
 
 	
 	SetState(Player3DState::Normal);
@@ -38,7 +42,7 @@ void Player3D::Init()
 
 
 	//--------------------------------
-	// OBJ“Ç
+	// OBJèª­è¾¼
 	//--------------------------------
 
 	Mesh* mesh = ModelLoader::LoadOBJ("Asset/model/player.obj");
@@ -59,7 +63,7 @@ void Player3D::Init()
 	m_renderer->SetMaterial(mat);
 
 
-	//í’“ƒp[ƒeƒBƒNƒ‹
+	//å¸¸é§ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
 	auto* emitter = AddComponent<ParticleEmitterComponent>();
 	emitter->Configure(ParticleTemperSettings::Rain());
 	emitter->SetBillboardType(BillboardType::Full);
@@ -123,7 +127,7 @@ void Player3D::Update(float deltaTime)
 	}
 
 
-	//ƒfƒoƒbƒO—p@”š”­ƒGƒtƒFƒNƒg
+	//ãƒ‡ãƒãƒƒã‚°ç”¨ã€€çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	//if (Keyboard_IsKeyDownTrigger(KK_F))
 	//{
 	//  /*  auto* exp = GameObjectManager::GetInstance().CreateGameObject<Explosion>();
@@ -139,7 +143,7 @@ void Player3D::Update(float deltaTime)
 	//   // ScoreManager::AddScore(0, 100);
 	//}
 
-	////ƒfƒoƒbƒO—p@ƒp[ƒeƒBƒNƒ‹
+	////ãƒ‡ãƒãƒƒã‚°ç”¨ã€€ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
 	//if (Keyboard_IsKeyDownTrigger(KK_G))
 	//{
 	//    auto* emitter = AddComponent<ParticleEmitterComponent>();

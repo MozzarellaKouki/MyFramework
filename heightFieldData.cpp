@@ -1,4 +1,4 @@
-#include "heightFieldData.h"
+﻿#include "heightFieldData.h"
 
 #include <cmath>
 #include <limits>

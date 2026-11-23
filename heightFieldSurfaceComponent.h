@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 
 #include "component.h"
 
 class HeightFieldData;
 class TransformComponent;
 
-//ƒ[ƒ‹ƒh‹óŠÔ‚ÌX/ZÀ•W‚ğg—p‚µ‚ÄAƒŒƒ“ƒ_ƒŠƒ“ƒO‚³‚ê‚½‚‚³ƒtƒB[ƒ‹ƒh‚ğQÆ‚µ‚Ü‚·B
+//ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã®X/Zåº§æ¨™ã‚’ä½¿ç”¨ã—ã¦ã€ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã•ã‚ŒãŸé«˜ã•ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’å‚ç…§ã—ã¾ã™ã€‚
 class HeightFieldSurfaceComponent : public Component
 {
 private:

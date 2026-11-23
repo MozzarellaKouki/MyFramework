@@ -1,4 +1,4 @@
-#include "main.h"
+ï»¿#include "main.h"
 #include "titlefield.h"
 #include "renderer.h"
 #include "textureManager.h"
@@ -30,7 +30,7 @@ void Field3::Init()
 	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
 
-	// ’¸“_ƒoƒbƒtƒ@¶¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	D3D11_BUFFER_DESC bd{};
 	bd.Usage = D3D11_USAGE_DEFAULT;
 	bd.ByteWidth = sizeof(VERTEX_3D) * 4;
@@ -42,19 +42,19 @@ void Field3::Init()
 
 	Renderer::GetDevice()->CreateBuffer(&bd, &sd, &m_VertexBuffer);
 
-	// ƒVƒF[ƒ_[“Ç
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼èª­è¾¼
 	Renderer::CreateVertexShader(&m_VertexShader, &m_VertexLayout,
 		"shader\\unlitTextureVS.cso");
 
 	Renderer::CreatePixelShader(&m_PixelShader,
 		"shader\\unlitTexturePS.cso");
 
-	// ƒeƒNƒXƒ`ƒƒ
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£
 	m_Texture = TextureManager::Load(L"Asset/texture/Title.png");
 	//m_Texture = TextureManager::Load(L"Asset/texture/MoonSurface.png");
 
 
-	//ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€İ’è
+	//ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ è¨­å®š
 	auto transform = AddComponent<TransformComponent>();
 	transform->SetPosition(Vector3(0, 0, 5));
 	transform->SetRotation(Vector3(0, 0, 0));
@@ -82,7 +82,7 @@ void Field3::Draw()
 
 	Renderer::GetDeviceContext()->IASetInputLayout(m_VertexLayout);
 
-	// ƒVƒF[ƒ_İ’è
+	// ã‚·ã‚§ãƒ¼ãƒ€è¨­å®š
 	Renderer::GetDeviceContext()->VSSetShader(m_VertexShader, NULL, 0);
 	Renderer::GetDeviceContext()->PSSetShader(m_PixelShader, NULL, 0);
 
@@ -92,19 +92,19 @@ void Field3::Draw()
 		Renderer::SetWorldMatrix(transform->GetWorldMatrix());
 	}
 
-	//Animationİ’è
+	//Animationè¨­å®š
 	SPRITE_ANIMATION anim{};
 	anim.Frame = 0;
 	anim.Columns = 1;
 	anim.Rows = 1;
 	Renderer::SetSpriteAnimation(anim);
 
-	// Materialİ’è
+	// Materialè¨­å®š
 	MATERIAL material{};
 
 	//
 	//
-	// ‰´‚Íƒ^ƒCƒgƒ‹‚¾III
+	// ä¿ºã¯ã‚¿ã‚¤ãƒˆãƒ«ã ï¼ï¼ï¼
 	//
 	//
 	material.Diffuse = { 1,1,1,1 };

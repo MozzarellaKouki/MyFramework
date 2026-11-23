@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 struct HeightFieldConfig;
 class Player3D;

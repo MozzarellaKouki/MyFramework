@@ -1,4 +1,4 @@
-#include "scoreObject3D.h"
+﻿#include "scoreObject3D.h"
 
 #include "transformComponent.h"
 #include "physicsComponent.h"
@@ -10,6 +10,7 @@
 
 #include "particleEmitterComponent.h"
 #include "particleTemperSettings.h"
+#include "sphereColliderComponent.h"
 
 #include "keyboard.h"
 
@@ -32,6 +33,11 @@ void ScoreObject3D::Init()
     m_Emitter->Configure( ParticleTemperSettings::ShockWave() );
     m_Emitter->SetBillboardType( BillboardType::Horizontal );
 
+    // 取得判定（半径 0.8 × スケール10 = 約8）
+    auto* collider = AddComponent<SphereColliderComponent>();
+    collider->SetRadius(0.8f);
+    collider->SetLayer(CollisionLayer::Item);
+    collider->SetMask(CollisionLayer::Player);
 }
 
 void ScoreObject3D::Uninit()
@@ -43,11 +49,6 @@ void ScoreObject3D::Update(float deltaTime)
     if (m_Player == nullptr)
         return;
 
-    auto* playerTransform = m_Player->GetComponent<TransformComponent>();
-    if (playerTransform == nullptr)
-        return;
-
-
     m_Timer += deltaTime;
     if (m_Timer >= 5.0f)
     {
@@ -58,33 +59,14 @@ void ScoreObject3D::Update(float deltaTime)
         emitter->SetBillboardType(BillboardType::Full);
         emitter->Play(1.5f);
     }
+}
 
- 
-
-
-    Vector3 objectPosition = m_transform->GetPosition();
-    Vector3 playerPosition = playerTransform->GetPosition();
-    Vector3 direction = playerPosition - objectPosition;
-
-    float distance = sqrt
-    (
-        direction.x * direction.x +
-        direction.y * direction.y +
-        direction.z * direction.z
-    );
-
-
-    //�v���C���[���߂Â�����擾
-    if (distance < 8.0f)
-    {
-        ScoreManager::AddScore(0, 1000);
-        AudioManager::PlaySE(SEType::Get);
-
-        Destroy(); return;
-    }
-
-  
-
+void ScoreObject3D::OnCollisionEnter(const Collision& collision)
+{
+    // マスクで Player だけと判定しているので、ここに来たら取得
+    ScoreManager::AddScore(0, 1000);
+    AudioManager::PlaySE(SEType::Get);
+    Destroy();
 }
 
 void ScoreObject3D::Draw()

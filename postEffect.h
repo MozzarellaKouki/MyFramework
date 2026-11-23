@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <d3d11.h>
 #include "renderTexture.h"
@@ -20,11 +20,11 @@ public:
     virtual void Draw(ID3D11ShaderResourceView* source, RenderTexture& destination) = 0;
     virtual void Update() {}
 
-    //—˜—p‰Â”\ƒtƒ‰ƒO
+    //åˆ©ç”¨å¯èƒ½ãƒ•ãƒ©ã‚°
     void SetEnabled(bool enabled) { m_Enabled = enabled; }
     bool IsEnabled() const { return m_Enabled; }
 
-    //‹­“x
+    //å¼·åº¦
     void SetIntensity(float intensity) { m_Intensity = intensity; }
     float GetIntensity() const { return m_Intensity; }
 

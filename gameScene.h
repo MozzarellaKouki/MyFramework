@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include "sceneManager.h"
 #include "gameObject.h"
 #include <vector>
@@ -19,35 +19,18 @@ class GameScene : public Scene
 
 private:
 
-    //Polygon2D* m_Polygon;
-    GameObject* m_BGMObject = nullptr;
-    Camera* m_Camera;
+    Camera* m_Camera = nullptr;
     SkyPlate m_Skyplate;
-    std::vector<std::unique_ptr<GameObject>> m_GameObjects;
-   
 
     //Test
-    int m_Score = 0;
     int m_NextEnemyScore = 2000;
-    float m_PosterizeLevels = 16.0f;
 
     NumberRenderer m_NumberRenderer;
-    Audio m_TestSE;
     Player3D* m_Player = nullptr;
 
+    void RegisterDebugCommands();
+
 public:
-
-    //ÉQÅ[ÉÄÉIÉuÉWÉFÉNÉgÇê∂ê¨
-    template<typename T> T* CreateGameObject()
-    {
-        std::unique_ptr<T> obj = std::make_unique<T>();
-        T* ptr = obj.get();
-        m_GameObjects.push_back(std::move(obj));
-        ptr->Init();
-
-        return ptr;
-    }
-
 
     void Init() override;
 

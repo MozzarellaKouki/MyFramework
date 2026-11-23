@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "mathUtils.h"
 #include "transformComponent.h"
 #include "component.h"
@@ -28,14 +28,14 @@ public:
 
 private:
 
-	Vector3 m_Velocity;       //‘¬“x
-	Vector3 m_Acceleration;   //‰Á‘¬“x
-	float   m_Mass = 1.0f;    //¿—Ê
-	float   m_Gravity = 39.8f; //d—Í‰Á‘¬“x
-	float   m_Damping = 0.9f; //Œ¸ŠŒW”
+	Vector3 m_Velocity;       //é€Ÿåº¦
+	Vector3 m_Acceleration;   //åŠ é€Ÿåº¦
+	float   m_Mass = 1.0f;    //è³ªé‡
+	float   m_Gravity = 39.8f; //é‡åŠ›åŠ é€Ÿåº¦
+	float   m_Damping = 0.9f; //æ¸›è¡°ä¿‚æ•°
 
-	//g—pƒtƒ‰ƒO
-	bool m_UseGravity = true;
+	//ä½¿ç”¨ãƒ•ãƒ©ã‚°
+	bool m_UseGravity = false;
 
 	TransformComponent* m_Transform = nullptr;
 };

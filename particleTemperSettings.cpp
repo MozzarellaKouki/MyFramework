@@ -1,4 +1,4 @@
-#include "ParticleTemperSettings.h"
+ï»¿#include "ParticleTemperSettings.h"
 
 ParticleTemper ParticleTemperSettings::Smoke()
 {
@@ -15,7 +15,7 @@ ParticleTemper ParticleTemperSettings::Smoke()
     t.MinVelocity = { -0.5f, 1.0f, -0.5f };
     t.MaxVelocity = { 0.5f, 3.0f,  0.5f };
 
-    t.Acceleration = { 0.0f, 1.5f, 0.0f };   //­‚µã¸
+    t.Acceleration = { 0.0f, 1.5f, 0.0f };   //å°‘ã—ä¸Šæ˜‡
 
 
     t.MinStartScale = 0.3f;
@@ -105,12 +105,12 @@ ParticleTemper ParticleTemperSettings::ShockWave()
     t.MaxLife = 3.0f;
 
 
-    //Å‰¬‚³‚¢
+    //æœ€åˆå°ã•ã„
     t.MinStartScale = 1.0f;
     t.MaxStartScale = 1.0f;
 
 
-    //ÅŒã‹‘å
+    //æœ€å¾Œå·¨å¤§
     t.MinEndScale = 50.0f;
     t.MaxEndScale = 50.0f;
 

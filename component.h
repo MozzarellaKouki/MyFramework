@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 
 class GameObject;
+struct Collision;
 
 class Component
 {
@@ -16,6 +17,11 @@ public:
     virtual void Update(float dt) {}
     virtual void Draw() {}
     virtual void Uninit() {}
+
+    // 当たり判定の通知（同じ GameObject のどれかのコライダーが衝突した時）
+    virtual void OnCollisionEnter(const Collision& collision) {}
+    virtual void OnCollisionStay(const Collision& collision) {}
+    virtual void OnCollisionExit(const Collision& collision) {}
 
     void SetOwner(GameObject* owner)
     {

@@ -1,4 +1,4 @@
-#include "fadeObject.h"
+﻿#include "fadeObject.h"
 #include "main.h"
 
 void FadeObject::Init()
