@@ -71,7 +71,7 @@ void AudioManager::Update()
 
     for (auto* enemy : enemies)
     {
-        auto* transform = enemy->GetComponent<TransformComponent>();
+        auto* transform = enemy->GetTransform();
 
         if (transform == nullptr)
             continue;

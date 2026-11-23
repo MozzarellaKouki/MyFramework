@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "mathUtils.h"
-#include "transformComponent.h"
+#include "transform.h"
 #include "component.h"
 
 
@@ -37,5 +37,5 @@ private:
 	//使用フラグ
 	bool m_UseGravity = false;
 
-	TransformComponent* m_Transform = nullptr;
+	Transform* m_Transform = nullptr;
 };

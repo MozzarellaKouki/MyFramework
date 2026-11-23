@@ -1,12 +1,12 @@
 ﻿#include "main.h"
-#include "transformComponent.h"
+#include "transform.h"
 
 
 
 
 
 
-XMMATRIX TransformComponent::GetWorldMatrix() const
+XMMATRIX Transform::GetWorldMatrix() const
 {
     return
         XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z)

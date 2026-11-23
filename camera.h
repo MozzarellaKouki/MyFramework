@@ -1,13 +1,12 @@
 ﻿#pragma once
 #include "main.h"
-#include "gameObject.h"
+#include "spatialObject.h"
 #include "mathUtils.h" 
-#include "transformComponent.h"
+#include "transform.h"
 
-class Camera : public GameObject
+class Camera : public SpatialObject
 {
 private:
-    TransformComponent* m_Transform;
     Vector3 m_Target;
     Vector3 m_Up;
 
@@ -40,7 +39,6 @@ public:
     const XMMATRIX& GetBillboardMatrix() const { return m_BillboardMatrix; }
     
 
-    TransformComponent* GetTransform() const {return m_Transform; }
 
     Vector3 GetForward() const;
 

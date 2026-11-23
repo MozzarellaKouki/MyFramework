@@ -1,7 +1,7 @@
 ﻿#include "colliderComponent.h"
 #include "collisionManager.h"
 #include "gameObject.h"
-#include "transformComponent.h"
+#include "transform.h"
 
 
 ColliderComponent::~ColliderComponent()
@@ -16,7 +16,7 @@ ColliderComponent::~ColliderComponent()
 
 void ColliderComponent::Init()
 {
-    GetTransform();
+    m_Transform = RequireTransform("ColliderComponent");
 
     if (!m_Registered)
     {
@@ -34,26 +34,15 @@ void ColliderComponent::Uninit()
     }
 }
 
-TransformComponent* ColliderComponent::GetTransform() const
-{
-    // コライダーが Transform より先に追加された場合にも対応するため遅延取得
-    if (m_Transform == nullptr && m_Owner != nullptr)
-    {
-        m_Transform = m_Owner->GetComponent<TransformComponent>();
-    }
-
-    return m_Transform;
-}
-
 Vector3 ColliderComponent::GetWorldScale() const
 {
-    const TransformComponent* transform = GetTransform();
+    const Transform* transform = GetTransform();
     return transform ? transform->GetScale() : Vector3(1.0f, 1.0f, 1.0f);
 }
 
 Vector3 ColliderComponent::GetCenter() const
 {
-    const TransformComponent* transform = GetTransform();
+    const Transform* transform = GetTransform();
     if (transform == nullptr)
         return m_Offset;
 

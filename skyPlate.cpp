@@ -2,7 +2,7 @@
 #include "skyplate.h"
 
 #include "camera.h"
-#include "transformComponent.h"
+#include "transform.h"
 #include "textureManager.h"
 #include "renderer.h"
 
@@ -11,11 +11,10 @@ void SkyPlate::Init()
 {
 
 
-    m_Transform = AddComponent<TransformComponent>();
 
-    m_Transform->SetPosition({ 0.0f, 0.0f, 0.0f });
-    m_Transform->SetRotation({ 0.0f, 0.0f, 0.0f });
-    m_Transform->SetScale({ 200.0f, 200.0f, 0.0f });
+    GetTransform()->SetPosition({ 0.0f, 0.0f, 0.0f });
+    GetTransform()->SetRotation({ 0.0f, 0.0f, 0.0f });
+    GetTransform()->SetScale({ 200.0f, 200.0f, 0.0f });
 
     m_Polygon.Init();
 
@@ -32,7 +31,7 @@ void SkyPlate::Update(float deltaTime)
         return;
 
     auto* cameraTransform =
-        m_Camera->GetComponent<TransformComponent>();
+        m_Camera->GetTransform();
 
     if (cameraTransform == nullptr)
         return;
@@ -51,7 +50,7 @@ void SkyPlate::Update(float deltaTime)
     pos.y = cameraPos.y + forward.y * 100.0f - 20;
     pos.z = cameraPos.z + forward.z * 100.0f;
 
-    m_Transform->SetPosition(pos);
+    GetTransform()->SetPosition(pos);
 
 
     float yaw = atan2f
@@ -60,7 +59,7 @@ void SkyPlate::Update(float deltaTime)
         forward.z
     );
 
-    m_Transform->SetRotation
+    GetTransform()->SetRotation
     ({
         0.0f,
         yaw,
@@ -82,7 +81,7 @@ void SkyPlate::Draw()
 
 
     Renderer::SetWorldMatrix(
-        m_Transform->GetWorldMatrix()
+        GetTransform()->GetWorldMatrix()
     );
 
 

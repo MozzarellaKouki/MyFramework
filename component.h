@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 class GameObject;
+class Transform;
 struct Collision;
 
 class Component
@@ -37,4 +38,10 @@ public:
     {
         return m_Owner;
     }
+
+protected:
+
+    // 位置が必要なコンポーネントが Init で呼ぶ。
+    // 持ち主が SpatialObject でなければ（位置を持たなければ）エラーを出して nullptr を返す。
+    Transform* RequireTransform(const char* componentName) const;
 };

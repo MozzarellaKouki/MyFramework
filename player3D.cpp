@@ -19,7 +19,7 @@
 void Player3D::Init()
 {
 
-	m_transform = AddComponent<TransformComponent>();
+	m_transform = GetTransform();
 	m_physics = AddComponent<PhysicsComponent>();
 	m_renderer = AddComponent<MeshRendererComponent>();
 
@@ -131,7 +131,7 @@ void Player3D::Update(float deltaTime)
 	//if (Keyboard_IsKeyDownTrigger(KK_F))
 	//{
 	//  /*  auto* exp = GameObjectManager::GetInstance().CreateGameObject<Explosion>();
-	//    exp->GetComponent<TransformComponent>()->SetPosition(m_transform->GetPosition());*/
+	//    exp->GetTransform()->SetPosition(m_transform->GetPosition());*/
 	//    auto* emitter = AddComponent<ParticleEmitterComponent>();
 	//    emitter->Configure(ParticleTemperSettings::ShockWave());
 	//    emitter->SetBillboardType(BillboardType::Horizontal);

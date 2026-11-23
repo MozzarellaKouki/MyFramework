@@ -1,13 +1,12 @@
 ﻿#include "Camera.h"
 #include "keyboard.h"
 #include "renderer.h"
-#include "transformComponent.h"
+#include "transform.h"
 
 
 void Camera::Init()
 {
-    m_Transform = AddComponent<TransformComponent>();
-    m_Transform->SetPosition({ 0,1,-5 });
+    GetTransform()->SetPosition({ 0,1,-5 });
     m_Target = { 0.0f, 2.0f,  0.0f };
     m_Up = { 0.0f, 1.0f,  0.0f };
 
@@ -22,7 +21,7 @@ void Camera::Update()
 {
     UpdateFollowTarget();
 
-    Vector3 eyePos = m_Transform->GetPosition();
+    Vector3 eyePos = GetTransform()->GetPosition();
     XMVECTOR eye = XMVectorSet(  eyePos.x, eyePos.y, eyePos.z, 1.0f);
     XMVECTOR target = XMVectorSet(m_Target.x, m_Target.y, m_Target.z, 1.0f);
     XMVECTOR up = XMVectorSet(m_Up.x, m_Up.y, m_Up.z, 0.0f);
@@ -48,7 +47,7 @@ void Camera::UpdateFollowTarget()
 {
     if (m_FollowTarget)
     {
-        auto transform = m_FollowTarget->GetComponent<TransformComponent>();
+        auto transform = m_FollowTarget->GetTransform();
 
         if (transform)
         {
@@ -63,7 +62,7 @@ void Camera::UpdateFollowTarget()
             forward.y = 0.0f;
             forward.z = cosf(yaw);
 
-            m_Transform->SetPosition(
+            GetTransform()->SetPosition(
                 {
                     pos.x - forward.x * 10.0f,
                     pos.y + 2.0f,
@@ -81,7 +80,7 @@ void Camera::UpdateFollowTarget()
 
 Vector3 Camera::GetForward() const
 {
-    Vector3 eyePos = m_Transform->GetPosition();
+    Vector3 eyePos = GetTransform()->GetPosition();
 
     Vector3 forward;
     forward.x = m_Target.x - eyePos.x;

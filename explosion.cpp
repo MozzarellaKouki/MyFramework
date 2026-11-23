@@ -1,6 +1,6 @@
 ﻿#include "explosion.h"
 #include "gameObjectManager.h"
-#include "transformComponent.h"
+#include "transform.h"
 
 #include "sprite3DComponent.h"
 
@@ -8,7 +8,7 @@
 
 void Explosion::Init()
 {
-    auto* transform = AddComponent<TransformComponent>();
+    auto* transform = GetTransform();
     auto* sprite = AddComponent<Sprite3DComponent>();
   
 

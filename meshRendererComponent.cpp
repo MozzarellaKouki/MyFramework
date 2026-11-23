@@ -1,5 +1,5 @@
 ﻿#include "meshRendererComponent.h"
-#include "transformComponent.h"
+#include "transform.h"
 #include "gameObject.h"
 #include "renderer.h"
 
@@ -62,7 +62,7 @@ void MeshRendererComponent::Draw()
     if (!m_Initialized || !m_Mesh || !GetOwner())
         return;
 
-    TransformComponent* transform = GetOwner()->GetComponent<TransformComponent>();
+    Transform* transform = GetOwner()->GetTransform();
     if (!transform)
         return;
 

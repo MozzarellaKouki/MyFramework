@@ -5,7 +5,7 @@
 #include "meshRendererComponent.h"
 #include "heightFieldSurfaceComponent.h"
 #include "textureManager.h"
-#include "transformComponent.h"
+#include "transform.h"
 
 #include <utility>
 #include <cmath>
@@ -54,7 +54,7 @@ void Field::Init()
         return;
     }
 
-    auto* transform = AddComponent<TransformComponent>();
+    auto* transform = GetTransform();
     transform->SetPosition(Vector3(0.0f, 0.0f, 5.0f));
     transform->SetRotation(Vector3(0.0f, 0.0f, 0.0f));
     transform->SetScale(Vector3(50.0f, 10.0f, 50.0f));

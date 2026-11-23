@@ -2,7 +2,7 @@
 
 #include "gameObjectManager.h"
 #include "scoreObject3D.h"
-#include "transformComponent.h"
+#include "transform.h"
 #include "player3D.h"
 
 #include <cstdlib>
@@ -34,7 +34,7 @@ void ScoreObjectSpawner::Update(float deltaTime)
         float x = -300.0f + (rand() / (float)RAND_MAX) * 600.0f;
         float z = -300.0f + (rand() / (float)RAND_MAX) * 600.0f;
 
-        auto* transform = scoreObject->GetComponent<TransformComponent>();
+        auto* transform = scoreObject->GetTransform();
 
         if (transform != nullptr)
         {

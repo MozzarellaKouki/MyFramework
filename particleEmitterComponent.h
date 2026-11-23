@@ -5,7 +5,7 @@
 #include "particleTemper.h"
 #include "polygon3D.h"
 #include "sprite3DComponent.h"
-#include "transformComponent.h"
+#include "transform.h"
 
 #include <vector>
 
@@ -17,7 +17,7 @@ private:
     void RegisterTransparentEmitter();
     void UnregisterTransparentEmitter();
 
-    TransformComponent* m_Transform;
+    Transform* m_Transform;
     std::vector<Particle> m_Particles;
     ParticleTemper m_Temper;
     BillboardType m_BillboardType = BillboardType::Full; 

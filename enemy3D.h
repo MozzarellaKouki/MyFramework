@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "gameObject.h"
-#include "transformComponent.h"
+#include "spatialObject.h"
+#include "transform.h"
 #include "sprite3DComponent.h"
 #include "physicsComponent.h"
 #include "particleEmitterComponent.h"
@@ -13,10 +13,10 @@ enum class Enemy3DState
     Normal,
 };
 
-class Enemy3D : public GameObject
+class Enemy3D : public SpatialObject
 {
 private:
-    TransformComponent* m_transform{};
+    Transform* m_transform{};
     PhysicsComponent* m_physics{};
     Sprite3DComponent* m_sprite{};
     ParticleEmitterComponent* m_Emitter{};

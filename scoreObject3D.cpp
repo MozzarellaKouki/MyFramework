@@ -1,6 +1,6 @@
 ﻿#include "scoreObject3D.h"
 
-#include "transformComponent.h"
+#include "transform.h"
 #include "physicsComponent.h"
 #include "sprite3DComponent.h"
 #include "player3D.h"
@@ -16,7 +16,7 @@
 
 void ScoreObject3D::Init()
 {
-    m_transform = AddComponent<TransformComponent>();
+    m_transform = GetTransform();
     m_physics = AddComponent<PhysicsComponent>();
     m_sprite = AddComponent<Sprite3DComponent>();
 

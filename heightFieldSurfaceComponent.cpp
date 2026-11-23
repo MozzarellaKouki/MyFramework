@@ -2,13 +2,13 @@
 
 #include "gameObject.h"
 #include "heightFieldData.h"
-#include "transformComponent.h"
+#include "transform.h"
 
 #include <cmath>
 
 void HeightFieldSurfaceComponent::Init()
 {
-    m_Transform = m_Owner->GetComponent<TransformComponent>();
+    m_Transform = RequireTransform("HeightFieldSurfaceComponent");
 }
 
 bool HeightFieldSurfaceComponent::TryGetHeight(

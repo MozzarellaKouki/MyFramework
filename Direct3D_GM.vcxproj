@@ -226,7 +226,8 @@
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="titleField.h" />
     <ClInclude Include="titleScene.h" />
-    <ClInclude Include="transformComponent.h" />
+    <ClInclude Include="transform.h" />
+    <ClInclude Include="spatialObject.h" />
     <ClInclude Include="TransparentRenderManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -290,7 +291,8 @@
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="titleField.cpp" />
     <ClCompile Include="titleScene.cpp" />
-    <ClCompile Include="transformComponent.cpp" />
+    <ClCompile Include="transform.cpp" />
+    <ClCompile Include="component.cpp" />
     <ClCompile Include="transparentRenderManager.cpp" />
   </ItemGroup>
   <ItemGroup>

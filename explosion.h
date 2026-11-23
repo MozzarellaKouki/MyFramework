@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include "gameObject.h"
+#include "spatialObject.h"
 #include "spriteAnimationComponent.h"
 
-class Explosion : public GameObject
+class Explosion : public SpatialObject
 {
 private:
 

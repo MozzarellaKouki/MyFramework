@@ -116,7 +116,7 @@ void GameScene::Update()
 
 
 	// プレイヤーの位置を音のリスナー位置に設定
-	auto* transform = m_Player->GetComponent<TransformComponent>();
+	auto* transform = m_Player->GetTransform();
 	if (transform != nullptr)
 	{
 		Vector3 pos = transform->GetPosition();

@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 
+class Transform;
+
 
 //--------------------------------------------------------------
 // GameObject
@@ -70,6 +72,10 @@ public:
     {
         return m_Components.size();
     }
+
+    // 位置情報（GameObject は位置を持たないので nullptr。SpatialObject が実体を返す）
+    virtual Transform* GetTransform() { return nullptr; }
+    virtual const Transform* GetTransform() const { return nullptr; }
 
     // 削除予約
     void Destroy() { m_Destroy = true; }

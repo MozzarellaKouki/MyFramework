@@ -1,15 +1,14 @@
 ﻿#pragma once
 
-#include "gameObject.h"
-#include "transformComponent.h"
+#include "spatialObject.h"
+#include "transform.h"
 #include "polygon3D.h"
 
 class Camera;
 
-class SkyPlate : public GameObject
+class SkyPlate : public SpatialObject
 {
 private:
-    TransformComponent* m_Transform = nullptr;
     Camera* m_Camera = nullptr;
 
     Polygon3D m_Polygon;

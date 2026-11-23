@@ -4,7 +4,7 @@
 
 void PhysicsComponent::Init()
 {
-	m_Transform = GetOwner()->GetComponent<TransformComponent>();
+	m_Transform = RequireTransform("PhysicsComponent");
 }
 
 

@@ -1,6 +1,6 @@
 ﻿#include "main.h"
 #include "audioComponent.h"
-#include "transformComponent.h"
+#include "transform.h"
 #include "gameObject.h"
 #include "audioManager.h"
 
@@ -52,9 +52,9 @@ void AudioComponent::SetDistanceVolume(float volume)
 
 Vector3 AudioComponent::GetPosition() const
 {
-    return GetOwner()
-        ->GetComponent<TransformComponent>()
-        ->GetPosition();
+    // 位置を持たないオブジェクト（BGM など）は原点扱い
+    const Transform* transform = GetOwner()->GetTransform();
+    return transform ? transform->GetPosition() : Vector3(0.0f, 0.0f, 0.0f);
 }
 
 float AudioComponent::GetMaxDistance() const

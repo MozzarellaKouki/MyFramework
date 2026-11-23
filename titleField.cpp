@@ -3,7 +3,7 @@
 #include "renderer.h"
 #include "textureManager.h"
 #include "keyboard.h"
-#include "transformComponent.h"
+#include "transform.h"
 
 
 void Field3::Init()
@@ -55,7 +55,7 @@ void Field3::Init()
 
 
 	//トランスフォーム設定
-	auto transform = AddComponent<TransformComponent>();
+	auto transform = GetTransform();
 	transform->SetPosition(Vector3(0, 0, 5));
 	transform->SetRotation(Vector3(0, 0, 0));
 	transform->SetScale(Vector3(10, 10, 10));
@@ -86,7 +86,7 @@ void Field3::Draw()
 	Renderer::GetDeviceContext()->VSSetShader(m_VertexShader, NULL, 0);
 	Renderer::GetDeviceContext()->PSSetShader(m_PixelShader, NULL, 0);
 
-	auto transform = GetComponent<TransformComponent>();
+	auto transform = GetTransform();
 	if (transform)
 	{
 		Renderer::SetWorldMatrix(transform->GetWorldMatrix());

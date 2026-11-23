@@ -63,8 +63,11 @@
     <ClInclude Include="sprite2DComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="transformComponent.h">
-      <Filter>Component</Filter>
+    <ClInclude Include="transform.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="spatialObject.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="sprite3DComponent.h">
       <Filter>Component</Filter>
@@ -296,7 +299,10 @@
     <ClCompile Include="sprite2DComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="transformComponent.cpp">
+    <ClCompile Include="transform.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="component.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="sprite3DComponent.cpp">

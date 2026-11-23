@@ -2,7 +2,7 @@
 
 #include "component.h"
 #include "polygon3D.h"
-#include "transformComponent.h"
+#include "transform.h"
 #include "spriteAnimationComponent.h"
 
 #include <vector>
@@ -19,7 +19,7 @@ class Sprite3DComponent : public Component
 {
 private:
     Polygon3D* m_Sprite{};
-    TransformComponent* m_Transform{};
+    Transform* m_Transform{};
 
     BillboardType m_BillboardType = BillboardType::None;
 
@@ -43,7 +43,7 @@ public:
     void Draw() override;
 
     void ApplyAnimation();
-    void ApplyBillboard(TransformComponent* transform);
+    void ApplyBillboard(Transform* transform);
 
     void SetSprite(const wchar_t* path);
     void SetBillboard(BillboardType type);

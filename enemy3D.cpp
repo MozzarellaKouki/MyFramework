@@ -9,7 +9,7 @@
 
 void Enemy3D::Init()
 {
-    m_transform = AddComponent<TransformComponent>();
+    m_transform = GetTransform();
     m_physics = AddComponent<PhysicsComponent>();
     m_sprite = AddComponent<Sprite3DComponent>();
     m_State = Enemy3DState::Normal;
@@ -94,7 +94,7 @@ void Enemy3D::Draw()
     if (m_Player == nullptr)
         return;
 
-    auto* playerTransform = m_Player->GetComponent<TransformComponent>();
+    auto* playerTransform = m_Player->GetTransform();
 
     if (playerTransform == nullptr)
         return;
@@ -125,8 +125,8 @@ void Enemy3D::ChasePlayer(float deltaTime)
     if (m_Player == nullptr)
         return;
 
-    TransformComponent* playerTransform =
-        m_Player->GetComponent<TransformComponent>();
+    Transform* playerTransform =
+        m_Player->GetTransform();
 
     if (playerTransform == nullptr)
         return;

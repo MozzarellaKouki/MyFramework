@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "gameObject.h"
-#include "transformComponent.h"
+#include "spatialObject.h"
+#include "transform.h"
 #include "meshRendererComponent.h"
 #include "physicsComponent.h"
 #include "particleemittercomponent.h"
@@ -17,7 +17,7 @@ enum class Player3DState
 };
 
 
-class Player3D : public GameObject
+class Player3D : public SpatialObject
 {
 private:
 	ID3D11Buffer* m_VertexBuffer;
@@ -26,7 +26,7 @@ private:
 	ID3D11PixelShader* m_PixelShader;
 	ID3D11ShaderResourceView* m_Texture;
 
-	TransformComponent* m_transform;
+	Transform* m_transform;
 	PhysicsComponent* m_physics;
 	MeshRendererComponent* m_renderer;
 

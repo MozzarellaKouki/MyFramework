@@ -3,7 +3,7 @@
 #include "collision.h"
 #include "mathUtils.h"
 
-class TransformComponent;
+class Transform;
 
 enum class ColliderShape
 {
@@ -16,7 +16,7 @@ enum class ColliderShape
 //
 // AddComponent した時点で CollisionManager に自動登録され、
 // Uninit / 破棄時に自動で登録解除される。
-// TransformComponent を先に AddComponent しておくこと。
+// SpatialObject（位置を持つオブジェクト）に追加すること。
 //
 // 衝突は GameObject / Component の OnCollisionEnter / Stay / Exit で受け取る。
 // ※コールバック内でオブジェクトを消すときは Uninit ではなく Destroy() を使う。
@@ -53,7 +53,7 @@ public:
 
 protected:
 
-    TransformComponent* GetTransform() const;
+    const Transform* GetTransform() const { return m_Transform; }
     Vector3 GetWorldScale() const;
 
 private:
@@ -65,5 +65,5 @@ private:
     bool     m_Enabled = true;
     bool     m_Registered = false;
 
-    mutable TransformComponent* m_Transform = nullptr;
+    Transform* m_Transform = nullptr;
 };

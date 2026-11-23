@@ -1,17 +1,17 @@
 ﻿#pragma once
 
-#include "gameObject.h"
+#include "spatialObject.h"
 #include "particleEmitterComponent.h"
 
 class Player3D;
-class TransformComponent;
+class Transform;
 class PhysicsComponent;
 class Sprite3DComponent;
 
-class ScoreObject3D : public GameObject
+class ScoreObject3D : public SpatialObject
 {
 private:
-    TransformComponent* m_transform = nullptr;
+    Transform* m_transform = nullptr;
     PhysicsComponent* m_physics = nullptr;
     Sprite3DComponent* m_sprite = nullptr;
     ParticleEmitterComponent* m_Emitter{};

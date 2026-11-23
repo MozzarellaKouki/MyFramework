@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include "gameObject.h"
+#include "spatialObject.h"
 
 
-class Field2 : public GameObject
+class Field2 : public SpatialObject
 {
 private:
 	ID3D11Buffer* m_VertexBuffer;

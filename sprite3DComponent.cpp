@@ -5,7 +5,7 @@
 #include "cameraManager.h"
 #include "camera.h"
 
-#include "transformComponent.h"
+#include "transform.h"
 #include "spriteAnimationComponent.h"
 #include "transparentRenderManager.h"
 
@@ -17,7 +17,7 @@ std::vector<Sprite3DComponent*> Sprite3DComponent::s_TransparentSprites;
 
 void Sprite3DComponent::Init()
 {
-    m_Transform = GetOwner()->GetComponent<TransformComponent>();
+    m_Transform = RequireTransform("Sprite3DComponent");
 }
 
 
@@ -91,7 +91,7 @@ void Sprite3DComponent::ApplyAnimation()
 
 
 
-void Sprite3DComponent::ApplyBillboard(TransformComponent* transform)
+void Sprite3DComponent::ApplyBillboard(Transform* transform)
 {
     switch (m_BillboardType)
     {

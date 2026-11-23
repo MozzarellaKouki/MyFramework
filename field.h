@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "gameObject.h"
+#include "spatialObject.h"
 #include "heightFieldData.h"
 #include <memory>
 
@@ -8,7 +8,7 @@ class Mesh;
 class MeshRendererComponent;
 class HeightFieldSurfaceComponent;
 
-class Field : public GameObject
+class Field : public SpatialObject
 {
 private:
     HeightFieldData m_HeightField;

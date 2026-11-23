@@ -4,7 +4,7 @@
 #include "renderer.h"
 #include "debugUtils.h"
 
-#include "transformComponent.h"
+#include "transform.h"
 #include "transparentRenderManager.h"
 
 
@@ -16,7 +16,7 @@ std::vector<ParticleEmitterComponent*> ParticleEmitterComponent::s_TransparentEm
 //==============================
 void ParticleEmitterComponent::Init()
 {
-	m_Transform = GetOwner()->GetComponent<TransformComponent>();
+	m_Transform = RequireTransform("ParticleEmitterComponent");
 	assert(m_Transform);
 
 	m_Quad.Init();

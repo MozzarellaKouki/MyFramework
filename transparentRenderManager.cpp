@@ -6,7 +6,7 @@
 #include "particle.h"
 #include "cameraManager.h"
 #include "camera.h"
-#include "transformComponent.h"
+#include "transform.h"
 
 #include <algorithm>
 
