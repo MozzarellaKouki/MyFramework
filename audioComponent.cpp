@@ -1,11 +1,15 @@
 ﻿#include "main.h"
 #include "audioComponent.h"
 #include "transform.h"
-#include "gameObject.h"
+#include "spatialObject.h"
 #include "audioManager.h"
 
 void AudioComponent::Init()
 {
+    //SpatialObject なら位置付きの音、そうでなければ位置なし（原点扱い）
+    if (SpatialObject* owner = FindSpatialOwner())
+        m_Transform = owner->GetTransform();
+
     AudioManager::Register(this);
 }
 
@@ -53,8 +57,7 @@ void AudioComponent::SetDistanceVolume(float volume)
 Vector3 AudioComponent::GetPosition() const
 {
     // 位置を持たないオブジェクト（BGM など）は原点扱い
-    const Transform* transform = GetOwner()->GetTransform();
-    return transform ? transform->GetPosition() : Vector3(0.0f, 0.0f, 0.0f);
+    return m_Transform ? m_Transform->GetPosition() : Vector3(0.0f, 0.0f, 0.0f);
 }
 
 float AudioComponent::GetMaxDistance() const

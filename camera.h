@@ -17,7 +17,7 @@ private:
 
     float m_Speed = 0.1f;
 
-    GameObject* m_FollowTarget{};
+    SpatialObject* m_FollowTarget{};
 
 public:
     void Init();
@@ -30,7 +30,7 @@ public:
 
 
 
-    void SetTarget(GameObject* target){m_FollowTarget = target; }
+    void SetTarget(SpatialObject* target){m_FollowTarget = target; }
     void SetView(Vector3 view) { m_Target = view; }
 
     const XMMATRIX& GetViewMatrix() const { return m_ViewMatrix; }

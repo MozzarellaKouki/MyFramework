@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <cstdint>
 
-class GameObject;
+class SpatialObject;
 class ColliderComponent;
 
 //--------------------------------------------------------------
@@ -9,7 +9,7 @@ class ColliderComponent;
 //--------------------------------------------------------------
 struct Collision
 {
-    GameObject*        other         = nullptr; // 相手のオブジェクト
+    SpatialObject*     other         = nullptr; // 相手のオブジェクト（コライダーの持ち主は必ず SpatialObject）
     ColliderComponent* self          = nullptr; // 自分側のコライダー
     ColliderComponent* otherCollider = nullptr; // 相手側のコライダー
 };

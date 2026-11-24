@@ -90,7 +90,7 @@ namespace
             return;
 
         Collision collision;
-        collision.other = other->GetOwner();
+        collision.other = other->GetSpatialOwner();
         collision.self = self;
         collision.otherCollider = other;
 

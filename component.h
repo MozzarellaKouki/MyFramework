@@ -2,6 +2,7 @@
 
 class GameObject;
 class Transform;
+class SpatialObject;
 struct Collision;
 
 class Component
@@ -41,7 +42,12 @@ public:
 
 protected:
 
-    // 位置が必要なコンポーネントが Init で呼ぶ。
-    // 持ち主が SpatialObject でなければ（位置を持たなければ）エラーを出して nullptr を返す。
+    //持ち主を SpatialObject として取得する（Init で1回だけ呼んでキャッシュすること）
+    //FindSpatialOwner    : SpatialObject でなければ nullptr（位置がなくても動くコンポーネント用）
+    //RequireSpatialOwner : SpatialObject でなければエラーを出して nullptr（位置が必須のコンポーネント用）
+    SpatialObject* FindSpatialOwner() const;
+    SpatialObject* RequireSpatialOwner(const char* componentName) const;
+
+    //RequireSpatialOwner の Transform 版
     Transform* RequireTransform(const char* componentName) const;
 };

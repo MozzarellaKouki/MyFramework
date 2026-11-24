@@ -10,6 +10,8 @@ unsigned int MeshRendererComponent::s_ReferenceCount = 0;
 
 void MeshRendererComponent::Init()
 {
+    m_Transform = RequireTransform("MeshRendererComponent");
+
     if (m_Initialized)
         return;
 
@@ -62,7 +64,7 @@ void MeshRendererComponent::Draw()
     if (!m_Initialized || !m_Mesh || !GetOwner())
         return;
 
-    Transform* transform = GetOwner()->GetTransform();
+    Transform* transform = m_Transform;
     if (!transform)
         return;
 

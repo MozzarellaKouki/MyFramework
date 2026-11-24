@@ -4,6 +4,8 @@
 #include "audio.h"
 #include "mathUtils.h"
 
+class Transform;
+
 class AudioComponent : public Component
 {
 private:
@@ -11,6 +13,7 @@ private:
 
     float m_Volume = 1.0f;
     float m_MaxDistance = 1000.0f;
+    const Transform* m_Transform = nullptr; //位置を持たない持ち主（BGM など）なら nullptr
 
 public:
     void Init() override;

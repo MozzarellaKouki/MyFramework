@@ -3,7 +3,6 @@
 #include <memory>
 #include <vector>
 
-class Transform;
 
 
 //--------------------------------------------------------------
@@ -23,7 +22,7 @@ public:
         UninitComponents();
     }
 
-    // コピー禁止（コンポーネントの所有者が1つであるため）
+    //コピー禁止（コンポーネントの所有者が1つであるため）
     GameObject(const GameObject&) = delete;
     GameObject& operator=(const GameObject&) = delete;
 
@@ -73,11 +72,7 @@ public:
         return m_Components.size();
     }
 
-    // 位置情報（GameObject は位置を持たないので nullptr。SpatialObject が実体を返す）
-    virtual Transform* GetTransform() { return nullptr; }
-    virtual const Transform* GetTransform() const { return nullptr; }
-
-    // 削除予約
+    //削除予約
     void Destroy() { m_Destroy = true; }
     bool IsDestroy() const { return m_Destroy; }
 

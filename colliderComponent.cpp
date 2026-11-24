@@ -1,6 +1,6 @@
 ﻿#include "colliderComponent.h"
 #include "collisionManager.h"
-#include "gameObject.h"
+#include "spatialObject.h"
 #include "transform.h"
 
 
@@ -16,7 +16,8 @@ ColliderComponent::~ColliderComponent()
 
 void ColliderComponent::Init()
 {
-    m_Transform = RequireTransform("ColliderComponent");
+    m_SpatialOwner = RequireSpatialOwner("ColliderComponent");
+    m_Transform = m_SpatialOwner ? m_SpatialOwner->GetTransform() : nullptr;
 
     if (!m_Registered)
     {

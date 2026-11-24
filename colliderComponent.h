@@ -51,6 +51,9 @@ public:
 
     bool IsRegistered() const { return m_Registered; }
 
+    //持ち主（Init 以降に有効）
+    SpatialObject* GetSpatialOwner() const { return m_SpatialOwner; }
+
 protected:
 
     const Transform* GetTransform() const { return m_Transform; }
@@ -65,5 +68,6 @@ private:
     bool     m_Enabled = true;
     bool     m_Registered = false;
 
+    SpatialObject* m_SpatialOwner = nullptr;
     Transform* m_Transform = nullptr;
 };

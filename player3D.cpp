@@ -20,6 +20,7 @@ void Player3D::Init()
 {
 
 	m_transform = GetTransform();
+
 	m_physics = AddComponent<PhysicsComponent>();
 	m_renderer = AddComponent<MeshRendererComponent>();
 
@@ -45,7 +46,7 @@ void Player3D::Init()
 	// OBJ読込
 	//--------------------------------
 
-	Mesh* mesh = ModelLoader::LoadOBJ("Asset/model/player.obj");
+	auto mesh = (ModelLoader::LoadOBJ("Asset/model/player.obj"));
 	assert(mesh != nullptr);
 	m_renderer->SetMesh(mesh);
 

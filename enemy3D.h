@@ -23,7 +23,7 @@ private:
 
     Enemy3DState m_State = Enemy3DState::None;
 
-    GameObject* m_Player{};
+    SpatialObject* m_Player{};
 
     float m_MoveSpeed = 2.0f;
     float m_TeleportTimer = 0.0f;
@@ -41,7 +41,7 @@ public:
         m_State = state;
     }
 
-    void SetPlayer(GameObject* player)
+    void SetPlayer(SpatialObject* player)
     {
         m_Player = player;
     }

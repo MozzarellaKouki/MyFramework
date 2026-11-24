@@ -4,6 +4,8 @@
 #include "mesh.h"
 #include "material.h"
 
+class Transform;
+
 class MeshRendererComponent : public Component
 {
 private:
@@ -15,6 +17,7 @@ private:
     Mesh* m_Mesh = nullptr;
     MaterialData m_Material;
     bool m_Initialized = false;
+    Transform* m_Transform = nullptr;
 
 public:
     void Init() override;
