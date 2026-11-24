@@ -62,13 +62,13 @@ bool MeshBuilder::CreateHeightField(
             const float v = static_cast<float>(z) / segmentsZ;
 
             VERTEX_3D& vertex = generated.vertices[index];
-            vertex.Position = XMFLOAT3(
+            vertex.Position = DirectX::XMFLOAT3(
                 -width * 0.5f + width * u,
                 heights[index],
                 depth * 0.5f - depth * v);
-            vertex.Normal = XMFLOAT3(0.0f, 0.0f, 0.0f);
-            vertex.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-            vertex.TexCoord = XMFLOAT2(u, v);
+            vertex.Normal = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
+            vertex.Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+            vertex.TexCoord = DirectX::XMFLOAT2(u, v);
         }
     }
 
@@ -134,7 +134,7 @@ bool MeshBuilder::CreateHeightField(
         }
         else
         {
-            vertex.Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
+            vertex.Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
         }
     }
 

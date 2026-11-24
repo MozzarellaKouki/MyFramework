@@ -10,10 +10,10 @@ private:
     Vector3 m_Target;
     Vector3 m_Up;
 
-    XMMATRIX m_ViewMatrix{};
-    XMMATRIX m_ProjectionMatrix{};
-    XMMATRIX m_BillboardMatrix{};
-    XMMATRIX m_ViewProjectionMatrix{};
+    DirectX::XMMATRIX m_ViewMatrix{};
+    DirectX::XMMATRIX m_ProjectionMatrix{};
+    DirectX::XMMATRIX m_BillboardMatrix{};
+    DirectX::XMMATRIX m_ViewProjectionMatrix{};
 
     float m_Speed = 0.1f;
 
@@ -33,10 +33,10 @@ public:
     void SetTarget(SpatialObject* target){m_FollowTarget = target; }
     void SetView(Vector3 view) { m_Target = view; }
 
-    const XMMATRIX& GetViewMatrix() const { return m_ViewMatrix; }
-    const XMMATRIX& GetProjectionMatrix() const { return m_ProjectionMatrix; }
-    const XMMATRIX& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
-    const XMMATRIX& GetBillboardMatrix() const { return m_BillboardMatrix; }
+    const DirectX::XMMATRIX& GetViewMatrix() const { return m_ViewMatrix; }
+    const DirectX::XMMATRIX& GetProjectionMatrix() const { return m_ProjectionMatrix; }
+    const DirectX::XMMATRIX& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+    const DirectX::XMMATRIX& GetBillboardMatrix() const { return m_BillboardMatrix; }
     
 
 

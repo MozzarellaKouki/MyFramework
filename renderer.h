@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include "main.h"
 
 
 
@@ -9,20 +9,20 @@
 
 struct VERTEX_3D
 {
-	XMFLOAT3 Position;
-	XMFLOAT3 Normal;
-	XMFLOAT4 Diffuse;
-	XMFLOAT2 TexCoord;
+	DirectX::XMFLOAT3 Position;
+	DirectX::XMFLOAT3 Normal;
+	DirectX::XMFLOAT4 Diffuse;
+	DirectX::XMFLOAT2 TexCoord;
 };
 
 
 
 struct MATERIAL
 {
-	XMFLOAT4	Ambient;
-	XMFLOAT4	Diffuse;
-	XMFLOAT4	Specular;
-	XMFLOAT4	Emission;
+	DirectX::XMFLOAT4	Ambient;
+	DirectX::XMFLOAT4	Diffuse;
+	DirectX::XMFLOAT4	Specular;
+	DirectX::XMFLOAT4	Emission;
 	float		Shininess;
 	BOOL		TextureEnable;
 	float		Dummy[2];
@@ -34,9 +34,9 @@ struct LIGHT
 {
 	BOOL		Enable;
 	BOOL		Dummy[3];
-	XMFLOAT4	Direction;
-	XMFLOAT4	Diffuse;
-	XMFLOAT4	Ambient;
+	DirectX::XMFLOAT4	Direction;
+	DirectX::XMFLOAT4	Diffuse;
+	DirectX::XMFLOAT4	Ambient;
 };
 
 
@@ -118,9 +118,9 @@ public:
 	static void SetATCEnable(bool Enable);
 	static void SetWorldViewProjection2D();
 	static void SetProjectionMatrix3D();
-	static void SetWorldMatrix(XMMATRIX WorldMatrix);
-	static void SetViewMatrix(XMMATRIX ViewMatrix);
-	static void SetProjectionMatrix(XMMATRIX ProjectionMatrix);
+	static void SetWorldMatrix(DirectX::XMMATRIX WorldMatrix);
+	static void SetViewMatrix(DirectX::XMMATRIX ViewMatrix);
+	static void SetProjectionMatrix(DirectX::XMMATRIX ProjectionMatrix);
 	static void SetMaterial(MATERIAL Material);
 	static void SetLight(LIGHT Light);
 	static void SetSpriteAnimation(SPRITE_ANIMATION animation);

@@ -66,7 +66,7 @@ void Field::Init()
     m_MeshRenderer->SetMesh(m_Mesh.get());
 
     MaterialData material{};
-    material.color = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+    material.color = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     material.texture = TextureManager::Load(L"Asset/texture/MoonSurface.png");
     m_MeshRenderer->SetMaterial(material);
 

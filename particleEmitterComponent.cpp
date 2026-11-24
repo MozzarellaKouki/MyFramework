@@ -161,7 +161,7 @@ void ParticleEmitterComponent::RenderParticle(Particle& p)
 	Camera* cam = CameraManager::GetInstance().GetCamera();
 	if (!cam) return;
 
-	XMMATRIX B;
+	DirectX::XMMATRIX B;
 
 	switch (m_BillboardType)
 	{
@@ -170,28 +170,28 @@ void ParticleEmitterComponent::RenderParticle(Particle& p)
 		break;
 
 	case BillboardType::Horizontal:
-		B = XMMatrixRotationX(
-			XMConvertToRadians(90.0f));
+		B = DirectX::XMMatrixRotationX(
+			DirectX::XMConvertToRadians(90.0f));
 		break;
 
 	default:
-		B = XMMatrixIdentity();
+		B = DirectX::XMMatrixIdentity();
 		break;
 	}
 
-	XMMATRIX S = XMMatrixScaling
+	DirectX::XMMATRIX S = DirectX::XMMatrixScaling
 	(
 		p.Scale,
 		p.Scale,
 		p.Scale
 	);
-	XMMATRIX T = XMMatrixTranslation
+	DirectX::XMMATRIX T = DirectX::XMMatrixTranslation
 	(
 		p.Position.x,
 		p.Position.y,
 		p.Position.z
 	);
-	XMMATRIX R = XMMatrixRotationZ(p.Rotation);
+	DirectX::XMMATRIX R = DirectX::XMMatrixRotationZ(p.Rotation);
 
 
 	Renderer::SetWorldMatrix(S * R * B * T);
@@ -206,8 +206,8 @@ void ParticleEmitterComponent::RenderParticle(Particle& p)
 //	Camera* cam = CameraManager::GetInstance().GetCamera();
 //	if (!cam) return;
 //
-//	//const XMMATRIX& B = cam->GetBillboardMatrix();
-//	XMMATRIX B;
+//	//const DirectX::XMMATRIX& B = cam->GetBillboardMatrix();
+//	DirectX::XMMATRIX B;
 //
 //	switch (m_BillboardType)
 //	{
@@ -216,7 +216,7 @@ void ParticleEmitterComponent::RenderParticle(Particle& p)
 //		break;
 //
 //	case BillboardType::Horizontal:
-//		B = XMMatrixRotationX(XMConvertToRadians(90.0f));
+//		B = DirectX::XMMatrixRotationX(DirectX::XMConvertToRadians(90.0f));
 //		break;
 //	}
 //
@@ -225,17 +225,17 @@ void ParticleEmitterComponent::RenderParticle(Particle& p)
 //		if (!p.Alive)
 //			continue;
 //
-//		XMMATRIX S = XMMatrixScaling(
+//		DirectX::XMMATRIX S = DirectX::XMMatrixScaling(
 //			p.Scale,
 //			p.Scale,
 //			p.Scale);
 //
-//		XMMATRIX T = XMMatrixTranslation(
+//		DirectX::XMMATRIX T = DirectX::XMMatrixTranslation(
 //			p.Position.x,
 //			p.Position.y,
 //			p.Position.z);
 //
-//		XMMATRIX R = XMMatrixRotationZ(p.Rotation);
+//		DirectX::XMMATRIX R = DirectX::XMMatrixRotationZ(p.Rotation);
 //
 //		Renderer::SetWorldMatrix(S * R * B * T);
 //

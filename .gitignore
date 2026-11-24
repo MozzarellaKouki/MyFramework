@@ -17,3 +17,6 @@ obj/
 # Windows
 Thumbs.db
 .DS_Store
+
+# シェーダーのビルド出力
+*.cso

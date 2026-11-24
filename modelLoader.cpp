@@ -5,8 +5,8 @@
 Mesh* ModelLoader::LoadOBJ(const char* fileName)
 {
     //OBJの一時保存用
-    std::vector<XMFLOAT3>positions;
-    std::vector<XMFLOAT2>texcoords;
+    std::vector<DirectX::XMFLOAT3>positions;
+    std::vector<DirectX::XMFLOAT2>texcoords;
 
     //メッシュの最終決定
     std::vector<VERTEX_3D>vertices;
@@ -41,7 +41,7 @@ Mesh* ModelLoader::LoadOBJ(const char* fileName)
 
         if (type == "v")
         {
-            XMFLOAT3 pos{};
+            DirectX::XMFLOAT3 pos{};
 
             ss  >> pos.x
                 >> pos.y
@@ -56,7 +56,7 @@ Mesh* ModelLoader::LoadOBJ(const char* fileName)
 
         else if (type == "vt")
         {
-            XMFLOAT2 uv{};
+            DirectX::XMFLOAT2 uv{};
 
             ss >> uv.x
                 >> uv.y;

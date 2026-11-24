@@ -26,7 +26,7 @@ private:
 	float m_Height = 200.0f;
 
 	float m_Alpha = 1.0f;
-	XMFLOAT4 m_Color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	DirectX::XMFLOAT4 m_Color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 
 

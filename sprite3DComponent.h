@@ -6,6 +6,7 @@
 #include "spriteAnimationComponent.h"
 
 #include <vector>
+#include <memory>
 
 enum class BillboardType
 {
@@ -18,7 +19,7 @@ enum class BillboardType
 class Sprite3DComponent : public Component
 {
 private:
-    Polygon3D* m_Sprite{};
+    std::unique_ptr<Polygon3D> m_Sprite{};
     Transform* m_Transform{};
 
     BillboardType m_BillboardType = BillboardType::None;
@@ -36,7 +37,6 @@ public:
     ~Sprite3DComponent() override
     {
         SetSortByDistance(false);
-        delete m_Sprite;
     }
 
     void Init() override;

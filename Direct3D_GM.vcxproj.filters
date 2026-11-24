@@ -255,6 +255,9 @@
     <ClInclude Include="field.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="debugCommands.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -427,6 +430,9 @@
     </ClCompile>
     <ClCompile Include="field.cpp">
       <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="debugCommands.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

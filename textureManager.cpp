@@ -31,12 +31,12 @@ ID3D11ShaderResourceView* TextureManager::Load(const std::wstring& fileName)
     ID3D11ShaderResourceView* texture = nullptr;
 
 
-    TexMetadata metadata;
-    ScratchImage image;
+    DirectX::TexMetadata metadata;
+    DirectX::ScratchImage image;
 
     LoadFromWICFile(
         fileName.c_str(),
-        WIC_FLAGS_NONE,
+        DirectX::WIC_FLAGS_NONE,
         &metadata,
         image
     );

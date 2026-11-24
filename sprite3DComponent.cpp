@@ -111,26 +111,26 @@ void Sprite3DComponent::ApplyBillboard(Transform* transform)
             return;
         }
 
-        XMMATRIX view = cam->GetViewMatrix();
+        DirectX::XMMATRIX view = cam->GetViewMatrix();
 
 
-        XMMATRIX invView = XMMatrixInverse(nullptr, view);
+        DirectX::XMMATRIX invView = XMMatrixInverse(nullptr, view);
         Vector3 pos = transform->GetPosition();
         Vector3 scale = transform->GetScale();
 
 
         //スケール
-        XMMATRIX s = XMMatrixScaling(scale.x, scale.y, scale.z);
+        DirectX::XMMATRIX s = DirectX::XMMatrixScaling(scale.x, scale.y, scale.z);
 
         //回転行列
-        XMMATRIX rot = invView;
-        rot.r[3] = XMVectorSet(0, 0, 0, 1); //平行移動を消す
+        DirectX::XMMATRIX rot = invView;
+        rot.r[3] = DirectX::XMVectorSet(0, 0, 0, 1); //平行移動を消す
 
         //平行移動
-        XMMATRIX t = XMMatrixTranslation(pos.x, pos.y, pos.z);
+        DirectX::XMMATRIX t = DirectX::XMMatrixTranslation(pos.x, pos.y, pos.z);
 
         //S → R → T
-        XMMATRIX world = s * rot * t;
+        DirectX::XMMATRIX world = s * rot * t;
 
         Renderer::SetWorldMatrix(world);
         break;
@@ -143,7 +143,7 @@ void Sprite3DComponent::ApplyBillboard(Transform* transform)
         Vector3 scale = transform->GetScale();
 
         //スケール
-        XMMATRIX s = XMMatrixScaling(
+        DirectX::XMMATRIX s = DirectX::XMMatrixScaling(
             scale.x,
             scale.y,
             scale.z
@@ -151,13 +151,13 @@ void Sprite3DComponent::ApplyBillboard(Transform* transform)
 
 
         //地面に寝かせる回転
-        XMMATRIX rot =
-            XMMatrixRotationX(XMConvertToRadians(90.0f));
+        DirectX::XMMATRIX rot =
+            DirectX::XMMatrixRotationX(DirectX::XMConvertToRadians(90.0f));
 
 
         //座標
-        XMMATRIX t =
-            XMMatrixTranslation(
+        DirectX::XMMATRIX t =
+            DirectX::XMMatrixTranslation(
                 pos.x,
                 pos.y,
                 pos.z
@@ -179,7 +179,7 @@ void Sprite3DComponent::ApplyBillboard(Transform* transform)
 //Setter
 void Sprite3DComponent::SetSprite(const wchar_t* path)
 {
-    m_Sprite = new Polygon3D();
+    m_Sprite = std::make_unique<Polygon3D>();
     m_Sprite->Init();
     auto tex = TextureManager::Load(path);
     m_Sprite->SetTexture(tex);
@@ -222,7 +222,7 @@ Vector3  Sprite3DComponent::GetPosition() const
 
 Polygon3D* Sprite3DComponent::GetPolygon()
 {
-    return m_Sprite;
+    return m_Sprite.get();
 }
 
 BillboardType  Sprite3DComponent::GetBillboard() const

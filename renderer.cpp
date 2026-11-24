@@ -223,7 +223,7 @@ void Renderer::Init()
 
 	// 定数バッファ生成
 	D3D11_BUFFER_DESC bufferDesc{};
-	bufferDesc.ByteWidth = sizeof(XMFLOAT4X4);
+	bufferDesc.ByteWidth = sizeof(DirectX::XMFLOAT4X4);
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	bufferDesc.CPUAccessFlags = 0;
@@ -272,17 +272,17 @@ void Renderer::Init()
 	// ライト初期化
 	LIGHT light{};
 	light.Enable = true;
-	light.Direction = XMFLOAT4(0.0f, -1.0f, 0.0f, 0.0f);
-	light.Ambient = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.0f);
-	light.Diffuse = XMFLOAT4(1.5f, 1.5f, 1.5f, 1.0f);
+	light.Direction = DirectX::XMFLOAT4(0.0f, -1.0f, 0.0f, 0.0f);
+	light.Ambient = DirectX::XMFLOAT4(0.1f, 0.1f, 0.1f, 1.0f);
+	light.Diffuse = DirectX::XMFLOAT4(1.5f, 1.5f, 1.5f, 1.0f);
 	SetLight(light);
 
 
 
 	// マテリアル初期化
 	MATERIAL material{};
-	material.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	material.Ambient = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	material.Diffuse = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	material.Ambient = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	SetMaterial(material);
 
 
@@ -407,10 +407,10 @@ void Renderer::SetBlendMode(BlendMode mode)
 
 void Renderer::SetWorldViewProjection2D()
 {
-	SetViewMatrix(XMMatrixIdentity());
+	SetViewMatrix(DirectX::XMMatrixIdentity());
 
-	XMMATRIX projection =
-		XMMatrixOrthographicOffCenterLH(
+	DirectX::XMMATRIX projection =
+		DirectX::XMMatrixOrthographicOffCenterLH(
 			0.0f, SCREEN_WIDTH,
 			SCREEN_HEIGHT, 0.0f,
 			0.0f, 1.0f);
@@ -420,10 +420,10 @@ void Renderer::SetWorldViewProjection2D()
 
 void Renderer::SetProjectionMatrix3D() //カメラのプロジェクション行列を使用することを推奨します
 {
-	XMMATRIX projection;
+	DirectX::XMMATRIX projection;
 
-	projection = XMMatrixPerspectiveFovLH(
-		XMConvertToRadians(45.0f),
+	projection = DirectX::XMMatrixPerspectiveFovLH(
+		DirectX::XMConvertToRadians(45.0f),
 		(float)SCREEN_WIDTH / SCREEN_HEIGHT,
 		0.1f,
 		1000.0f
@@ -433,24 +433,24 @@ void Renderer::SetProjectionMatrix3D() //カメラのプロジェクション行
 }
 
 
-void Renderer::SetWorldMatrix(XMMATRIX WorldMatrix)
+void Renderer::SetWorldMatrix(DirectX::XMMATRIX WorldMatrix)
 {
-	XMFLOAT4X4 worldf;
-	XMStoreFloat4x4(&worldf, XMMatrixTranspose(WorldMatrix));
+	DirectX::XMFLOAT4X4 worldf;
+	DirectX::XMStoreFloat4x4(&worldf, DirectX::XMMatrixTranspose(WorldMatrix));
 	m_DeviceContext->UpdateSubresource(m_WorldBuffer, 0, NULL, &worldf, 0, 0);
 }
 
-void Renderer::SetViewMatrix(XMMATRIX ViewMatrix)
+void Renderer::SetViewMatrix(DirectX::XMMATRIX ViewMatrix)
 {
-	XMFLOAT4X4 viewf;
-	XMStoreFloat4x4(&viewf, XMMatrixTranspose(ViewMatrix));
+	DirectX::XMFLOAT4X4 viewf;
+	DirectX::XMStoreFloat4x4(&viewf, DirectX::XMMatrixTranspose(ViewMatrix));
 	m_DeviceContext->UpdateSubresource(m_ViewBuffer, 0, NULL, &viewf, 0, 0);
 }
 
-void Renderer::SetProjectionMatrix(XMMATRIX ProjectionMatrix)
+void Renderer::SetProjectionMatrix(DirectX::XMMATRIX ProjectionMatrix)
 {
-	XMFLOAT4X4 projectionf;
-	XMStoreFloat4x4(&projectionf, XMMatrixTranspose(ProjectionMatrix));
+	DirectX::XMFLOAT4X4 projectionf;
+	DirectX::XMStoreFloat4x4(&projectionf, DirectX::XMMatrixTranspose(ProjectionMatrix));
 	m_DeviceContext->UpdateSubresource(m_ProjectionBuffer, 0, NULL, &projectionf, 0, 0);
 
 }
@@ -540,11 +540,11 @@ void Renderer::SetBackBufferRenderTarget()
 
 void Renderer::Set2D()
 {
-	SetWorldMatrix(XMMatrixIdentity());
-	SetViewMatrix(XMMatrixIdentity());
+	SetWorldMatrix(DirectX::XMMatrixIdentity());
+	SetViewMatrix(DirectX::XMMatrixIdentity());
 
-	XMMATRIX projection =
-		XMMatrixOrthographicOffCenterLH(
+	DirectX::XMMATRIX projection =
+		DirectX::XMMatrixOrthographicOffCenterLH(
 			0.0f, SCREEN_WIDTH,
 			SCREEN_HEIGHT, 0.0f,
 			0.0f, 1.0f);
@@ -554,9 +554,9 @@ void Renderer::Set2D()
 
 void Renderer::Set3D()
 {
-	XMMATRIX projection =
-		XMMatrixPerspectiveFovLH(
-			XMConvertToRadians(45.0f),
+	DirectX::XMMATRIX projection =
+		DirectX::XMMatrixPerspectiveFovLH(
+			DirectX::XMConvertToRadians(45.0f),
 			(float)SCREEN_WIDTH / SCREEN_HEIGHT,
 			0.1f,
 			1000.0f

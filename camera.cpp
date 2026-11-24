@@ -10,7 +10,7 @@ void Camera::Init()
     m_Target = { 0.0f, 2.0f,  0.0f };
     m_Up = { 0.0f, 1.0f,  0.0f };
 
-    m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XMConvertToRadians(45.0f), (float)SCREEN_WIDTH / SCREEN_HEIGHT, 0.1f, 1000.0f);
+    m_ProjectionMatrix = DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(45.0f), (float)SCREEN_WIDTH / SCREEN_HEIGHT, 0.1f, 1000.0f);
 
     m_Speed = 0.1f;
 
@@ -22,14 +22,14 @@ void Camera::Update()
     UpdateFollowTarget();
 
     Vector3 eyePos = GetTransform()->GetPosition();
-    XMVECTOR eye = XMVectorSet(  eyePos.x, eyePos.y, eyePos.z, 1.0f);
-    XMVECTOR target = XMVectorSet(m_Target.x, m_Target.y, m_Target.z, 1.0f);
-    XMVECTOR up = XMVectorSet(m_Up.x, m_Up.y, m_Up.z, 0.0f);
+    DirectX::XMVECTOR eye = DirectX::XMVectorSet(  eyePos.x, eyePos.y, eyePos.z, 1.0f);
+    DirectX::XMVECTOR target = DirectX::XMVectorSet(m_Target.x, m_Target.y, m_Target.z, 1.0f);
+    DirectX::XMVECTOR up = DirectX::XMVectorSet(m_Up.x, m_Up.y, m_Up.z, 0.0f);
 
-    m_ViewMatrix = XMMatrixLookAtLH(eye, target, up);  
+    m_ViewMatrix = DirectX::XMMatrixLookAtLH(eye, target, up);
     m_ViewProjectionMatrix = m_ViewMatrix * m_ProjectionMatrix;
     m_BillboardMatrix = XMMatrixInverse(nullptr, m_ViewMatrix);
-    m_BillboardMatrix.r[3] = XMVectorSet(0, 0, 0, 1);
+    m_BillboardMatrix.r[3] = DirectX::XMVectorSet(0, 0, 0, 1);
 
 }
 

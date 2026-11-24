@@ -8,25 +8,25 @@
 void Polygon2D::Init(const char* pixelShaderFile)
 {
 
-	m_Vertex[0].Position = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
-	m_Vertex[0].Normal = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
-	m_Vertex[0].Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-	m_Vertex[0].TexCoord = XMFLOAT2{ 0.0f, 0.0f };
+	m_Vertex[0].Position = DirectX::XMFLOAT3{ 0.0f, 0.0f, 0.0f };
+	m_Vertex[0].Normal = DirectX::XMFLOAT3{ 0.0f, 0.0f, 0.0f };
+	m_Vertex[0].Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	m_Vertex[0].TexCoord = DirectX::XMFLOAT2{ 0.0f, 0.0f };
 
-	m_Vertex[1].Position = XMFLOAT3{ 1.0f, 0.0f, 0.0f };
-	m_Vertex[1].Normal = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
-	m_Vertex[1].Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-	m_Vertex[1].TexCoord = XMFLOAT2{ 1.0f, 0.0f };
+	m_Vertex[1].Position = DirectX::XMFLOAT3{ 1.0f, 0.0f, 0.0f };
+	m_Vertex[1].Normal = DirectX::XMFLOAT3{ 0.0f, 0.0f, 0.0f };
+	m_Vertex[1].Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	m_Vertex[1].TexCoord = DirectX::XMFLOAT2{ 1.0f, 0.0f };
 
-	m_Vertex[2].Position = XMFLOAT3{ 0.0f, 1.0f, 0.0f };
-	m_Vertex[2].Normal = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
-	m_Vertex[2].Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-	m_Vertex[2].TexCoord = XMFLOAT2{ 0.0f, 1.0f };
+	m_Vertex[2].Position = DirectX::XMFLOAT3{ 0.0f, 1.0f, 0.0f };
+	m_Vertex[2].Normal = DirectX::XMFLOAT3{ 0.0f, 0.0f, 0.0f };
+	m_Vertex[2].Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	m_Vertex[2].TexCoord = DirectX::XMFLOAT2{ 0.0f, 1.0f };
 
-	m_Vertex[3].Position = XMFLOAT3{ 1.0f, 1.0f, 0.0f };
-	m_Vertex[3].Normal = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
-	m_Vertex[3].Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-	m_Vertex[3].TexCoord = XMFLOAT2{ 1.0f, 1.0f };
+	m_Vertex[3].Position = DirectX::XMFLOAT3{ 1.0f, 1.0f, 0.0f };
+	m_Vertex[3].Normal = DirectX::XMFLOAT3{ 0.0f, 0.0f, 0.0f };
+	m_Vertex[3].Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	m_Vertex[3].TexCoord = DirectX::XMFLOAT2{ 1.0f, 1.0f };
 
 
 
@@ -78,9 +78,9 @@ void Polygon2D::Draw()
 	//マトリクス設定
 	Renderer::SetWorldViewProjection2D();
 
-	XMMATRIX world =
-		XMMatrixScaling(m_Width, m_Height, 1.0f) *
-		XMMatrixTranslation(m_PosX, m_PosY, 0.0f);
+	DirectX::XMMATRIX world =
+		DirectX::XMMatrixScaling(m_Width, m_Height, 1.0f) *
+		DirectX::XMMatrixTranslation(m_PosX, m_PosY, 0.0f);
 
 	Renderer::SetWorldMatrix(world);
 	Renderer::SetBlendMode(m_BlendMode);

@@ -13,7 +13,7 @@
 
 
 #include <DirectXMath.h>
-using namespace DirectX;
+//using namespace DirectX;
 
 #include "DirectXTex.h"
 

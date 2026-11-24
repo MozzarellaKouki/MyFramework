@@ -9,24 +9,24 @@ void Polygon3D::Init()
 {
 
 	m_Vertices[0].Position = { -0.5f,  0.5f, 0.0f };
-	m_Vertices[0].Normal = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
-	m_Vertices[0].Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-	m_Vertices[0].TexCoord = XMFLOAT2{ 0.0f, 0.0f };
+	m_Vertices[0].Normal = DirectX::XMFLOAT3{ 0.0f, 0.0f, 0.0f };
+	m_Vertices[0].Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	m_Vertices[0].TexCoord = DirectX::XMFLOAT2{ 0.0f, 0.0f };
 
 	m_Vertices[1].Position = { 0.5f,  0.5f, 0.0f };
-	m_Vertices[1].Normal = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
-	m_Vertices[1].Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-	m_Vertices[1].TexCoord = XMFLOAT2{ 1.0f, 0.0f };
+	m_Vertices[1].Normal = DirectX::XMFLOAT3{ 0.0f, 0.0f, 0.0f };
+	m_Vertices[1].Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	m_Vertices[1].TexCoord = DirectX::XMFLOAT2{ 1.0f, 0.0f };
 
 	m_Vertices[2].Position = { -0.5f, -0.5f, 0.0f };
-	m_Vertices[2].Normal = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
-	m_Vertices[2].Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-	m_Vertices[2].TexCoord = XMFLOAT2{ 0.0f, 1.0f };
+	m_Vertices[2].Normal = DirectX::XMFLOAT3{ 0.0f, 0.0f, 0.0f };
+	m_Vertices[2].Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	m_Vertices[2].TexCoord = DirectX::XMFLOAT2{ 0.0f, 1.0f };
 
 	m_Vertices[3].Position = { 0.5f, -0.5f, 0.0f };
-	m_Vertices[3].Normal = XMFLOAT3{ 0.0f, 0.0f, 0.0f };
-	m_Vertices[3].Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-	m_Vertices[3].TexCoord = XMFLOAT2{ 1.0f, 1.0f };
+	m_Vertices[3].Normal = DirectX::XMFLOAT3{ 0.0f, 0.0f, 0.0f };
+	m_Vertices[3].Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	m_Vertices[3].TexCoord = DirectX::XMFLOAT2{ 1.0f, 1.0f };
 
 	//頂点バッファ生成
 	D3D11_BUFFER_DESC bd{};

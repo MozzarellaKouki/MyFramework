@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <DirectXMath.h>
 #include "mathUtils.h"
-using namespace DirectX;
 
 //--------------------------------------------------------------
 // Transform（位置・回転・スケール）
@@ -31,5 +30,5 @@ public:
     Vector3 GetRotation() const { return m_Rotation; }
     Vector3 GetScale() const { return m_Scale; }
 
-    XMMATRIX GetWorldMatrix() const;
+    DirectX::XMMATRIX GetWorldMatrix() const;
 };
