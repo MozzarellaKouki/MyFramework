@@ -1,6 +1,6 @@
 ﻿#include "main.h"
 #include "player3D.h"
-#include "modelLoader.h"
+#include "resourceManager.h"
 #include "material.h"
 #include "textureManager.h"
 #include "keyboard.h"
@@ -46,8 +46,9 @@ void Player3D::Init()
 	// OBJ読込
 	//--------------------------------
 
-	auto mesh = (ModelLoader::LoadOBJ("Asset/model/player.obj"));
-	assert(mesh != nullptr);
+	//共有メッシュとして読み込む（何度呼んでも読み込みは1回。シーン終了時に解放）
+	auto mesh = ResourceManager::Load<Mesh>("Asset/model/player.obj");
+	assert(mesh.IsValid());
 	m_renderer->SetMesh(mesh);
 
 	//--------------------------------

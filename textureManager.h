@@ -1,15 +1,17 @@
 ﻿#pragma once
 #include <d3d11.h>
 #include <string>
-#include <map>
 
+//--------------------------------------------------------------
+// TextureManager（互換用）
+//
+// 中身は ResourceManager。読み込んだテクスチャは Global（アプリ終了まで常駐）になる。
+// 既存コードがテクスチャのポインタを保持しているため、移行が済むまでは常駐させている。
+//
+// 新しいコードでは ResourceManager::Load<Texture>() とハンドルを使うこと。
+//--------------------------------------------------------------
 class TextureManager
 {
-private:
-    static std::map<std::wstring, ID3D11ShaderResourceView*> m_TextureMap;
-
 public:
-    static void Init();
-    static void Uninit();
     static ID3D11ShaderResourceView* Load(const std::wstring& fileName);
 };

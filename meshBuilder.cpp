@@ -4,17 +4,14 @@
 #include <limits>
 #include <utility>
 
-Mesh* MeshBuilder::CreateCube()
+std::unique_ptr<Mesh> MeshBuilder::CreateCube()
 {
     std::vector<VERTEX_3D> vertices;
     std::vector<UINT> indices;
 
-    Mesh* mesh = new Mesh();
+    auto mesh = std::make_unique<Mesh>();
     if (!mesh->Create(vertices, indices))
-    {
-        delete mesh;
         return nullptr;
-    }
 
     return mesh;
 }

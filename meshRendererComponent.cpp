@@ -2,6 +2,7 @@
 #include "transform.h"
 #include "gameObject.h"
 #include "renderer.h"
+#include "resourceManager.h"
 
 ID3D11InputLayout* MeshRendererComponent::s_VertexLayout = nullptr;
 ID3D11VertexShader* MeshRendererComponent::s_VertexShader = nullptr;
@@ -61,7 +62,12 @@ void MeshRendererComponent::Uninit()
 
 void MeshRendererComponent::Draw()
 {
-    if (!m_Initialized || !m_Mesh || !GetOwner())
+    if (!m_Initialized || !GetOwner())
+        return;
+
+    //共有メッシュならハンドルから取り出す（シーン切替などで解放済みなら nullptr）
+    const Mesh* mesh = m_MeshHandle.IsValid() ? ResourceManager::Get(m_MeshHandle) : m_Mesh;
+    if (!mesh)
         return;
 
     Transform* transform = m_Transform;
@@ -86,5 +92,5 @@ void MeshRendererComponent::Draw()
     Renderer::SetMaterial(material);
     context->PSSetShaderResources(0, 1, &m_Material.texture);
 
-    m_Mesh->Draw();
+    mesh->Draw();
 }

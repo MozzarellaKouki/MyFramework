@@ -46,6 +46,9 @@
     <Filter Include="Component\Collider">
       <UniqueIdentifier>{c2a0596e-7538-4d2f-9f1c-bd1246db78b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{4e1bf7f7-ca45-455b-b100-49e59c995844}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Graphics\PostEffect">
       <UniqueIdentifier>{6ed3ed68-68bd-41f8-9fa0-eb9f61594503}</UniqueIdentifier>
     </Filter>
@@ -62,6 +65,18 @@
     </ClInclude>
     <ClInclude Include="sprite2DComponent.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="resourceHandle.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="resourcePool.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="resourceManager.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>Resource</Filter>
     </ClInclude>
     <ClInclude Include="transform.h">
       <Filter>GameObject</Filter>
@@ -301,6 +316,12 @@
     </ClCompile>
     <ClCompile Include="sprite2DComponent.cpp">
       <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="resourceManager.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="resourceLoaders.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
     <ClCompile Include="transform.cpp">
       <Filter>GameObject</Filter>

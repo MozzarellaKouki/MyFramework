@@ -1,6 +1,7 @@
 ﻿#include "SceneManager.h"
 #include "renderer.h"
 #include "debugCommands.h"
+#include "resourceManager.h"
 
 
 std::unique_ptr<Scene> SceneManager::currentScene = nullptr;
@@ -64,9 +65,13 @@ void SceneManager::Update()
         if (currentScene)
         {
             currentScene->Uninit();
+            currentScene.reset(); //旧シーンのメンバーも含めて完全に破棄してから
         }
 
         DebugCommands::ClearScene();
+
+        //旧シーンで読み込んだリソースを解放（オブジェクトを全部消した後に行うこと）
+        ResourceManager::ReleaseScope(ResourceScope::Scene);
 
         currentScene = std::move(nextScene);
         currentScene->Init();
@@ -115,4 +120,6 @@ void SceneManager::Uninit()
         currentScene->Uninit();
         currentScene = nullptr;
     }
+
+    ResourceManager::ReleaseScope(ResourceScope::Scene);
 }

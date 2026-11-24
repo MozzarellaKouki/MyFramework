@@ -1,12 +1,13 @@
 ﻿#pragma once
 
 #include "mesh.h"
+#include <memory>
 #include <vector>
 
 class MeshBuilder
 {
 public:
-    static Mesh* CreateCube();
+    static std::unique_ptr<Mesh> CreateCube();
     static bool CreateHeightField(
         int segmentsX,
         int segmentsZ,

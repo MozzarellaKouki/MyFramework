@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 
-Mesh* ModelLoader::LoadOBJ(const char* fileName)
+std::unique_ptr<Mesh> ModelLoader::LoadOBJ(const std::filesystem::path& fileName)
 {
     //OBJの一時保存用
     std::vector<DirectX::XMFLOAT3>positions;
@@ -126,8 +126,9 @@ Mesh* ModelLoader::LoadOBJ(const char* fileName)
     }
 
 
-    Mesh* mesh = new Mesh();
-    mesh->Create(vertices, indices);
+    auto mesh = std::make_unique<Mesh>();
+    if (!mesh->Create(vertices, indices))
+        return nullptr;
 
     return mesh;
 }

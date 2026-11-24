@@ -6,7 +6,7 @@
 #include "audioManager.h"
 #include "audio.h"
 #include "keyboard.h"
-#include "textureManager.h"
+#include "resourceManager.h"
 #include "postEffectManager.h"
 #include "bloom.h"
 #include "grayScale.h"
@@ -29,7 +29,6 @@ void Manager::Init()
 
     Audio::InitMaster();
     AudioManager::Init();
-    TextureManager::Init();
     SceneManager::Init(std::make_unique<TitleScene>());
   
 
@@ -65,7 +64,7 @@ void Manager::Uninit()
     SceneManager::Uninit();
     AudioManager::Uninit();
     Audio::UninitMaster();
-    TextureManager::Uninit();
+    ResourceManager::ReleaseAll(); //Renderer（デバイス）より先に解放する
 
     PostEffectManager::Uninit();
     m_RenderTexture.Uninit();
@@ -98,6 +97,11 @@ void Manager::RegisterDebugCommands()
     DebugCommands::AddTrigger(KK_F2, "当たり判定の状態を表示", []
     {
         CollisionManager::PrintDebugInfo();
+    }, DebugScope::Global);
+
+    DebugCommands::AddTrigger(KK_F3, "読み込み中のリソースを表示", []
+    {
+        ResourceManager::PrintDebugInfo();
     }, DebugScope::Global);
 }
 
