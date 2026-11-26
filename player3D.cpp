@@ -7,6 +7,8 @@
 #include "gameObjectManager.h"
 #include "boxColliderComponent.h"
 #include "explosion.h"
+#include "resourceManager.h"
+#include "texture.h"
 
 #include "sprite3DComponent.h"
 #include "particleEmitterComponent.h"
@@ -14,13 +16,14 @@
 #include "scoreManager.h"
 #include "audioManager.h"
 
+
+
 #include "debugUtils.h"
 
 void Player3D::Init()
 {
 
 	m_transform = GetTransform();
-
 	m_physics = AddComponent<PhysicsComponent>();
 	m_renderer = AddComponent<MeshRendererComponent>();
 
@@ -29,6 +32,7 @@ void Player3D::Init()
 	m_transform->SetScale({ 1,1,1 });
 
 	m_physics->SetMass(1.0f);
+	m_physics->SetUseGravity(true);
 
 	auto* collider = AddComponent<BoxColliderComponent>();
 	collider->SetSize({ 1.0f, 2.0f, 1.0f });
@@ -57,10 +61,8 @@ void Player3D::Init()
 
 	MaterialData mat{};
 
-	mat.color =
-	{ 1,1,1,1 };
-
-	mat.texture = TextureManager::Load(L"Asset/texture/Brick.png");
+	mat.color = { 1,1,1,1 };
+	mat.texture = ResourceManager::Load<Texture>(L"Asset/texture/Brick.png"); 
 
 	m_renderer->SetMaterial(mat);
 

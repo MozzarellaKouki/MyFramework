@@ -1,12 +1,14 @@
 ﻿#pragma once
 #include "mathUtils.h"
+#include "resourceHandle.h"
+#include "texture.h"
 
 
 struct Particle
 {
     bool Alive = false;
 
-    ID3D11ShaderResourceView* Texture = nullptr;
+    Handle<Texture> Texture;
 
     Vector3 Position;
     Vector3 Velocity;

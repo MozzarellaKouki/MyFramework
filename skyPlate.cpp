@@ -3,8 +3,9 @@
 
 #include "camera.h"
 #include "transform.h"
-#include "textureManager.h"
 #include "renderer.h"
+#include "resourceManager.h"
+#include "texture.h"
 
 
 void SkyPlate::Init()
@@ -18,10 +19,7 @@ void SkyPlate::Init()
 
     m_Polygon.Init();
 
-
-
-    auto* texture = TextureManager::Load( L"Asset/texture/Sky.png" );
-    m_Polygon.SetTexture(texture);
+    m_Polygon.SetTexture(ResourceManager::Load<Texture>(L"Asset/texture/Sky.png"));
 }
 
 

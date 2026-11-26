@@ -1,6 +1,6 @@
 ﻿#include "main.h"
 #include "renderer.h"
-#include "textureManager.h"
+#include "resourceManager.h"
 #include "polygon2D.h"
 
 
@@ -85,16 +85,19 @@ void Polygon2D::Draw()
 	Renderer::SetWorldMatrix(world);
 	Renderer::SetBlendMode(m_BlendMode);
 
+	//テクスチャ取得
+	const Texture* texture = ResourceManager::Get(m_Texture);
+	ID3D11ShaderResourceView* srv = texture ? texture->GetSRV() : nullptr;
 
 	//マテリアル設定
 	MATERIAL material{};
 	material.Diffuse = { m_Color.x, m_Color.y, m_Color.z, m_Alpha };
-	material.TextureEnable = m_TextureEnable;
+	material.TextureEnable = (srv != nullptr);
 	Renderer::SetMaterial(material);
 
 
 	//テクスチャ設定
-	Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &m_Texture);
+	Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &srv);
 
 
 	//頂点バッファ設定
@@ -117,12 +120,6 @@ void Polygon2D::Draw()
 
 
 
-
-void  Polygon2D::SetTexture(ID3D11ShaderResourceView* texture)
-{
-	m_Texture = texture;
-	m_TextureEnable = (texture != nullptr);
-}
 
 void  Polygon2D::SetColor(float r, float g, float b)
 {

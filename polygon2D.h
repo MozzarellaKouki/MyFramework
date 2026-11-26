@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "main.h"
 #include "renderer.h"
+#include "resourceHandle.h"
+#include "texture.h"
 
 class Polygon2D
 {
@@ -13,8 +15,7 @@ private:
 
 
 
-	bool m_TextureEnable = true;
-	ID3D11ShaderResourceView* m_Texture; 
+	Handle<Texture> m_Texture;
 	VERTEX_3D m_Vertex[4];
 	BlendMode m_BlendMode = BlendMode::Alpha;
 
@@ -36,7 +37,7 @@ public:
 	void Update();
 	void Draw();
 
-	void SetTexture(ID3D11ShaderResourceView* texture);
+	void SetTexture(Handle<Texture> texture) { m_Texture = texture; }
 	void SetPosition(float x, float y) { m_PosX = x; m_PosY = y; }
 	void SetSize(float width, float height) { m_Width = width; m_Height = height; }
 	void SetAlpha(float alpha) { m_Alpha = alpha; };

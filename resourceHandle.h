@@ -12,8 +12,7 @@
 //
 // ハンドルはただの数値なので、コピーも保存も自由にしてよい。
 //--------------------------------------------------------------
-template<typename T>
-struct Handle
+template<typename T> struct Handle
 {
     static constexpr uint32_t InvalidIndex = 0xFFFFFFFFu;
 

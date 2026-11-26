@@ -6,6 +6,8 @@
 #include "heightFieldSurfaceComponent.h"
 #include "textureManager.h"
 #include "transform.h"
+#include "resourceManager.h"
+#include "texture.h"
 
 #include <utility>
 #include <cmath>
@@ -67,7 +69,7 @@ void Field::Init()
 
     MaterialData material{};
     material.color = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-    material.texture = TextureManager::Load(L"Asset/texture/MoonSurface.png");
+    material.texture = ResourceManager::Load<Texture>(L"Asset/texture/MoonSurface.png");
     m_MeshRenderer->SetMaterial(material);
 
     m_Initialized = true;

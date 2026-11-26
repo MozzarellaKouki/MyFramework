@@ -1,12 +1,13 @@
 ﻿#include "numberRenderer.h"
 #include <string>
 #include "renderer.h"
-#include "textureManager.h"
+#include "resourceManager.h"
+#include "texture.h"
 
 void NumberRenderer::Init()
 {
     m_NumberSprite.Init();
-    m_NumberSprite.SetTexture(TextureManager::Load(L"Asset/Texture/NumberSpriteSheet.png"));
+    m_NumberSprite.SetTexture(ResourceManager::Load<Texture>(L"Asset/Texture/NumberSpriteSheet.png"));
 }
 
 

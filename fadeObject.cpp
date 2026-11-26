@@ -1,5 +1,7 @@
 ﻿#include "fadeObject.h"
 #include "main.h"
+#include "resourceHandle.h"
+#include "texture.h"
 
 void FadeObject::Init()
 {
@@ -8,8 +10,8 @@ void FadeObject::Init()
     m_Polygon.SetPosition(0.0f, 0.0f);
     m_Polygon.SetSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     m_Polygon.SetAlpha(0.0f);
-
-    m_Polygon.SetTexture(nullptr);
+;
+    m_Polygon.SetTexture(Handle<Texture>{});
     m_Polygon.SetColor(0.0f, 0.0f, 0.0f);
 }
 

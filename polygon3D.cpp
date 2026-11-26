@@ -1,6 +1,6 @@
 ﻿#include "main.h"
 #include "renderer.h"
-#include "textureManager.h"
+#include "resourceManager.h"
 #include "polygon3D.h"
 
 
@@ -68,16 +68,19 @@ void Polygon3D::Draw()
 	Renderer::GetDeviceContext()->VSSetShader(m_VertexShader, NULL, 0);
 	Renderer::GetDeviceContext()->PSSetShader(m_PixelShader, NULL, 0);
 
+	//テクスチャ取得
+	const Texture* texture = ResourceManager::Get(m_Texture);
+	ID3D11ShaderResourceView* srv = texture ? texture->GetSRV() : nullptr;
 
 	//マテリアル設定
 	MATERIAL material{};
 	material.Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
-	material.TextureEnable = true;
+	material.TextureEnable = (srv != nullptr);
 	Renderer::SetMaterial(material);
 
 
 	//テクスチャ設定
-	Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &m_Texture);
+	Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &srv);
 
 
 	//頂点バッファ設定

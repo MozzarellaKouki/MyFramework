@@ -62,7 +62,7 @@ public:
         if (handle.IsValid())
         {
             if (scope == ResourceScope::Global)
-                pool.PromoteToGlobal(handle);
+                pool.Globalize(handle);
             return handle;
         }
 

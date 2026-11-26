@@ -32,8 +32,7 @@ public:
 // ・キー（ファイルパスなど）で検索でき、同じキーは1つだけ読み込まれる
 // ・解放したスロットは世代を進めて再利用する
 //--------------------------------------------------------------
-template<typename T>
-class ResourcePool : public IResourcePool
+template<typename T> class ResourcePool : public IResourcePool
 {
 public:
 
@@ -103,7 +102,7 @@ public:
     }
 
     //Scene で読み込んだものを、後から Global として要求された場合に格上げする
-    void PromoteToGlobal(Handle<T> handle)
+    void Globalize(Handle<T> handle)
     {
         if (IsAlive(handle))
             m_Slots[handle.index].scope = ResourceScope::Global;

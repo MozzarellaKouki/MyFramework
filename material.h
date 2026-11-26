@@ -1,8 +1,10 @@
 ﻿#pragma once
 #include "main.h"
+#include "resourceHandle.h"
+#include "texture.h"
 
 struct MaterialData
 {
     DirectX::XMFLOAT4 color = { 1,1,1,1 };
-    ID3D11ShaderResourceView* texture = nullptr;
+    Handle<Texture> texture;
 };

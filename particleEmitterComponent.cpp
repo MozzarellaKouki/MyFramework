@@ -7,6 +7,9 @@
 #include "transform.h"
 #include "transparentRenderManager.h"
 
+#include "resourceManager.h"
+#include "texture.h"
+
 
 std::vector<ParticleEmitterComponent*> ParticleEmitterComponent::s_TransparentEmitters;
 
@@ -26,6 +29,11 @@ void ParticleEmitterComponent::Init()
 void ParticleEmitterComponent::Configure(const ParticleTemper& temper) //生成後に渡す
 {
 	m_Temper = temper;
+	m_Textures.clear();
+	for (const auto& path : m_Temper.TexturePath)
+	{
+		m_Textures.push_back(ResourceManager::Load<Texture>(path));
+	}
 
 	//パーティクル数を確定
 	m_Particles.clear();
@@ -201,48 +209,6 @@ void ParticleEmitterComponent::RenderParticle(Particle& p)
 }
 
 
-//void ParticleEmitterComponent::Render()
-//{
-//	Camera* cam = CameraManager::GetInstance().GetCamera();
-//	if (!cam) return;
-//
-//	//const DirectX::XMMATRIX& B = cam->GetBillboardMatrix();
-//	DirectX::XMMATRIX B;
-//
-//	switch (m_BillboardType)
-//	{
-//	case BillboardType::Full:
-//		B = cam->GetBillboardMatrix();
-//		break;
-//
-//	case BillboardType::Horizontal:
-//		B = DirectX::XMMatrixRotationX(DirectX::XMConvertToRadians(90.0f));
-//		break;
-//	}
-//
-//	for (auto& p : m_Particles)
-//	{
-//		if (!p.Alive)
-//			continue;
-//
-//		DirectX::XMMATRIX S = DirectX::XMMatrixScaling(
-//			p.Scale,
-//			p.Scale,
-//			p.Scale);
-//
-//		DirectX::XMMATRIX T = DirectX::XMMatrixTranslation(
-//			p.Position.x,
-//			p.Position.y,
-//			p.Position.z);
-//
-//		DirectX::XMMATRIX R = DirectX::XMMatrixRotationZ(p.Rotation);
-//
-//		Renderer::SetWorldMatrix(S * R * B * T);
-//
-//		m_Quad.SetTexture(p.Texture);
-//		m_Quad.Draw();
-//	}
-//}
 
 
 void ParticleEmitterComponent::Emit(int count, Vector3 pos)
@@ -289,9 +255,10 @@ void ParticleEmitterComponent::SetParticle(Particle& particle, Vector3 pos)
 	particle.Life = RandomRange(m_Temper.MinLife,m_Temper.MaxLife);
 	particle.LifeLimit = particle.Life;
 
-	if (m_Temper.TexturePath.empty()) { DebugLog("!!! ParticleEmitterComponent : TextyreePath Empty !!!"); return; }
+	/*if (m_Temper.TexturePath.empty()) { DebugLog("!!! ParticleEmitterComponent : TextyreePath Empty !!!"); return; }
 	int index =	rand() % m_Temper.TexturePath.size();
-	particle.Texture = TextureManager::Load( m_Temper.TexturePath[index] );
+	particle.Texture = TextureManager::Load( m_Temper.TexturePath[index] );*/
+	if (!m_Textures.empty()) particle.Texture = m_Textures[rand() % m_Textures.size()];
 
 
 }

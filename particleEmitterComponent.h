@@ -23,7 +23,7 @@ private:
     BillboardType m_BillboardType = BillboardType::Full; 
 
     Polygon3D m_Quad;
-    ID3D11ShaderResourceView* m_Texture{};
+    std::vector<Handle<Texture>> m_Textures;
     float m_EmitTimer = 0.0f;
 
     bool m_Playing = false;

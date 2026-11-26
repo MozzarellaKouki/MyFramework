@@ -9,6 +9,9 @@
 #include "spriteAnimationComponent.h"
 #include "transparentRenderManager.h"
 
+#include "resourceManager.h"
+#include "texture.h"
+
 #include "debugUtils.h"
 
 
@@ -181,7 +184,7 @@ void Sprite3DComponent::SetSprite(const wchar_t* path)
 {
     m_Sprite = std::make_unique<Polygon3D>();
     m_Sprite->Init();
-    auto tex = TextureManager::Load(path);
+    auto tex = ResourceManager::Load<Texture>(path);
     m_Sprite->SetTexture(tex);
 }
 

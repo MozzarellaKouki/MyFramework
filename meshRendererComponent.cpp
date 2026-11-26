@@ -3,6 +3,7 @@
 #include "gameObject.h"
 #include "renderer.h"
 #include "resourceManager.h"
+#include "texture.h"
 
 ID3D11InputLayout* MeshRendererComponent::s_VertexLayout = nullptr;
 ID3D11VertexShader* MeshRendererComponent::s_VertexShader = nullptr;
@@ -88,9 +89,11 @@ void MeshRendererComponent::Draw()
 
     MATERIAL material{};
     material.Diffuse = m_Material.color;
-    material.TextureEnable = (m_Material.texture != nullptr);
+    const Texture* texture = ResourceManager::Get(m_Material.texture);
+    ID3D11ShaderResourceView* srv = texture ? texture->GetSRV() : nullptr;
+    material.TextureEnable = (srv != nullptr);
     Renderer::SetMaterial(material);
-    context->PSSetShaderResources(0, 1, &m_Material.texture);
+    context->PSSetShaderResources(0, 1, &srv);
 
     mesh->Draw();
 }
