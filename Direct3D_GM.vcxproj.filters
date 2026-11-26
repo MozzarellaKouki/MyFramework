@@ -249,6 +249,9 @@
     <ClInclude Include="renderTexture.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="fullscreenQuad.h">
+      <Filter>Graphics\PostEffect</Filter>
+    </ClInclude>
     <ClInclude Include="bloom.h">
       <Filter>Graphics\PostEffect</Filter>
     </ClInclude>
@@ -436,6 +439,9 @@
     </ClCompile>
     <ClCompile Include="renderTexture.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="fullscreenQuad.cpp">
+      <Filter>Graphics\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="bloom.cpp">
       <Filter>Graphics\PostEffect</Filter>

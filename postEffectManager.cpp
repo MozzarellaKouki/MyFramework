@@ -7,7 +7,7 @@ std::vector<std::unique_ptr<PostEffect>> PostEffectManager::m_Effects;
 RenderTexture PostEffectManager::m_Ping;
 RenderTexture PostEffectManager::m_Pong;
 
-Polygon2D PostEffectManager::m_Display;
+FullscreenQuad PostEffectManager::m_Display;
 bool PostEffectManager::m_Initialized = false;
 bool PostEffectManager::m_DisplayInitialized = false;
 
@@ -18,11 +18,6 @@ void PostEffectManager::Init()
     if (!m_DisplayInitialized)
     {
         m_Display.Init();
-        m_Display.SetPosition(0.0f, 0.0f);
-        m_Display.SetSize(static_cast<float>(SCREEN_WIDTH),
-            static_cast<float>(SCREEN_HEIGHT));
-        m_Display.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
-        m_Display.SetBlendMode(BlendMode::Opaque);
         m_DisplayInitialized = true;
     }
 
@@ -88,6 +83,8 @@ void PostEffectManager::Draw(ID3D11ShaderResourceView* source)
         //実際に適用した回数で Ping / Pong を切り替える
         RenderTexture& target = (appliedCount % 2 == 0) ? m_Ping : m_Pong;
 
+        //シーン描画など、ポストエフェクトの外で設定されたテクスチャが残っていても大丈夫なように空にしておく
+        //（エフェクト内のパス同士は FullscreenQuad::Draw が後片付けする）
         ID3D11ShaderResourceView* nullSRV = nullptr;
         context->PSSetShaderResources(0, 1, &nullSRV);
 
@@ -98,14 +95,7 @@ void PostEffectManager::Draw(ID3D11ShaderResourceView* source)
 
 
     Renderer::SetBackBufferRenderTarget();
-    m_Display.SetTexture(currentSource);
-    m_Display.SetBlendMode(BlendMode::Opaque);
-    m_Display.SetColor(1.0f, 1.0f, 1.0f);
-    m_Display.SetAlpha(1.0f);
-    m_Display.Draw();
-
-    ID3D11ShaderResourceView* nullSRV = nullptr;
-    context->PSSetShaderResources(0, 1, &nullSRV);
+    m_Display.Draw(currentSource);
 }
 
 

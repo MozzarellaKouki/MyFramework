@@ -213,6 +213,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="manager.h" />
     <ClInclude Include="mathUtils.h" />
+    <ClInclude Include="fullscreenQuad.h" />
     <ClInclude Include="polygon2D.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="sceneManager.h" />
@@ -276,6 +277,7 @@
     <ClCompile Include="particleTemperSettings.cpp" />
     <ClCompile Include="physicsComponent.cpp" />
     <ClCompile Include="player3D.cpp" />
+    <ClCompile Include="fullscreenQuad.cpp" />
     <ClCompile Include="polygon2D.cpp" />
     <ClCompile Include="polygon3D.cpp" />
     <ClCompile Include="postEffectManager.cpp" />

@@ -2,18 +2,18 @@
 
 #include "PostEffect.h"
 #include "RenderTexture.h"
-#include "Polygon2D.h"
+#include "fullscreenQuad.h"
 
 class Bloom : public PostEffect
 {
 private:
-    Polygon2D m_Display;
+    FullscreenQuad m_Display;
     RenderTexture m_ExtractTexture;
-    Polygon2D m_ExtractQuad;
+    FullscreenQuad m_ExtractQuad;
     RenderTexture m_BlurHorizontalTexture;
-    Polygon2D m_BlurHorizontalQuad;
+    FullscreenQuad m_BlurHorizontalQuad;
     RenderTexture m_BlurVerticalTexture;
-    Polygon2D m_BlurVerticalQuad;
+    FullscreenQuad m_BlurVerticalQuad;
 
 
 public:

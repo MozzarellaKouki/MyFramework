@@ -1,12 +1,12 @@
 ﻿#pragma once
 
 #include "PostEffect.h"
-#include "Polygon2D.h"
+#include "fullscreenQuad.h"
 
 class GrayScale : public PostEffect
 {
 private:
-    Polygon2D m_Display;
+    FullscreenQuad m_Display;
 
 public:
     void Init() override;

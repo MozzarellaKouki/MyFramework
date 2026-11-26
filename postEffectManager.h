@@ -4,7 +4,7 @@
 #include <vector>
 #include "PostEffect.h"
 #include "RenderTexture.h"
-#include "Polygon2D.h"
+#include "fullscreenQuad.h"
 
 class PostEffectManager
 {
@@ -12,7 +12,7 @@ private:
     static std::vector<std::unique_ptr<PostEffect>> m_Effects;
     static RenderTexture m_Ping;
     static RenderTexture m_Pong;
-    static Polygon2D m_Display;
+    static FullscreenQuad m_Display;
     static bool m_Initialized;
     static bool m_DisplayInitialized;
 

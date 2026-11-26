@@ -131,39 +131,6 @@ void Player3D::Update(float deltaTime)
 	}
 
 
-	//デバッグ用　爆発エフェクト
-	//if (Keyboard_IsKeyDownTrigger(KK_F))
-	//{
-	//  /*  auto* exp = GameObjectManager::GetInstance().CreateGameObject<Explosion>();
-	//    exp->GetTransform()->SetPosition(m_transform->GetPosition());*/
-	//    auto* emitter = AddComponent<ParticleEmitterComponent>();
-	//    emitter->Configure(ParticleTemperSettings::ShockWave());
-	//    emitter->SetBillboardType(BillboardType::Horizontal);
-	//    emitter->Play(1.0f);
-
-	//   // m_TestSE.Play(false);
-	//   // AudioManager::PlaySE(SEType::Get);
-
-	//   // ScoreManager::AddScore(0, 100);
-	//}
-
-	////デバッグ用　パーティクル
-	//if (Keyboard_IsKeyDownTrigger(KK_G))
-	//{
-	//    auto* emitter = AddComponent<ParticleEmitterComponent>();
-	//    emitter->Configure(ParticleTemperSettings::Smoke());
-	//    emitter->SetBillboardType(BillboardType::Full);
-	//    emitter->Play(2.5f);
-
-	//    //m_TestSE.Play(false);
-	//    AudioManager::PlaySE(SEType::Enemy);
-
-	//   // ScoreManager::AddScore(0, 800);
-	//}
-  
-
-
-
 	GameObject::Update(deltaTime);
 
 	auto* collider = GetComponent<BoxColliderComponent>();
@@ -203,7 +170,6 @@ void Player3D::Draw()
 
 void Player3D::InputMove()
 {
-  
 
 	Vector3 rot = m_transform->GetRotation();
 	float yaw = rot.y;

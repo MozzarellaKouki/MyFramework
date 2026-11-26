@@ -16,27 +16,9 @@ void Bloom::Init()
     }
 
     m_Display.Init();
-    m_Display.SetPosition(0.0f, 0.0f);
-    m_Display.SetSize(static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT));
-    m_Display.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
-
     m_ExtractQuad.Init("Shader//bloomExtractPS.cso");
-    m_ExtractQuad.SetPosition(0.0f, 0.0f);
-    m_ExtractQuad.SetSize(static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT));
-    m_ExtractQuad.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
-    m_ExtractQuad.SetBlendMode(BlendMode::Opaque);
-
     m_BlurHorizontalQuad.Init("Shader//bloomBlurHorizontalPS.cso");
-    m_BlurHorizontalQuad.SetPosition(0.0f, 0.0f);
-    m_BlurHorizontalQuad.SetSize(static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT));
-    m_BlurHorizontalQuad.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
-    m_BlurHorizontalQuad.SetBlendMode(BlendMode::Opaque);
-
     m_BlurVerticalQuad.Init("Shader//bloomBlurVerticalPS.cso");
-    m_BlurVerticalQuad.SetPosition(0.0f, 0.0f);
-    m_BlurVerticalQuad.SetSize(static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT));
-    m_BlurVerticalQuad.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
-    m_BlurVerticalQuad.SetBlendMode(BlendMode::Opaque);
 
     m_Initialized = true;
 }
@@ -65,44 +47,27 @@ void Bloom::Draw(ID3D11ShaderResourceView* source, RenderTexture& destination)
 {
     if (!m_Initialized || !source) return;
 
-    auto* context = Renderer::GetDeviceContext();
-    ID3D11ShaderResourceView* nullSRV = nullptr;
     SPRITE_ANIMATION animation{};
     animation.Frame = 0;
     animation.Columns = 1;
     animation.Rows = 1;
     Renderer::SetSpriteAnimation(animation);
 
-    context->PSSetShaderResources(0, 1, &nullSRV);
+    //1. 明るい部分を抜き出す
     m_ExtractTexture.SetRenderTarget();
-    m_ExtractQuad.SetTexture(source);
-    m_ExtractQuad.Draw();
+    m_ExtractQuad.Draw(source);
 
-    context->PSSetShaderResources(0, 1, &nullSRV);
+    //2. 横にぼかす
     m_BlurHorizontalTexture.SetRenderTarget();
-    m_BlurHorizontalQuad.SetTexture(
-        m_ExtractTexture.GetShaderResourceView());
-    m_BlurHorizontalQuad.Draw();
+    m_BlurHorizontalQuad.Draw(m_ExtractTexture.GetShaderResourceView());
 
-    context->PSSetShaderResources(0, 1, &nullSRV);
+    //3. 縦にぼかす
     m_BlurVerticalTexture.SetRenderTarget();
-    m_BlurVerticalQuad.SetTexture(
-        m_BlurHorizontalTexture.GetShaderResourceView());
-    m_BlurVerticalQuad.Draw();
+    m_BlurVerticalQuad.Draw(m_BlurHorizontalTexture.GetShaderResourceView());
 
-    context->PSSetShaderResources(0, 1, &nullSRV);
+    //4. 元の画像に、ぼかした光を加算する
     destination.SetRenderTarget();
-
-    m_Display.SetTexture(source);
-    m_Display.SetBlendMode(BlendMode::Opaque);
-    m_Display.SetColor(1.0f, 1.0f, 1.0f);
-    m_Display.SetAlpha(1.0f);
-    m_Display.Draw();
-
-    m_Display.SetTexture(m_BlurVerticalTexture.GetShaderResourceView());
-    m_Display.SetBlendMode(BlendMode::Additive);
-    m_Display.SetColor(m_Intensity, m_Intensity, m_Intensity);
-    m_Display.Draw();
-
-    context->PSSetShaderResources(0, 1, &nullSRV);
+    m_Display.Draw(source);
+    m_Display.Draw(m_BlurVerticalTexture.GetShaderResourceView(), BlendMode::Additive,
+        { m_Intensity, m_Intensity, m_Intensity, 1.0f });
 }
